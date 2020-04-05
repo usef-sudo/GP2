@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'MyDrawer.dart';
@@ -35,6 +38,7 @@ class _AddStoreState extends State<AddStore> {
                     ),
                     TextField(
                       decoration: InputDecoration(
+
                         hintText: 'number',
                         border: InputBorder.none,
                       ),
@@ -132,6 +136,7 @@ class _AddStoreState extends State<AddStore> {
                           width: 100.0,
                           child: RaisedButton(
                             onPressed: () {
+                              getstore();
                               setState(() {});
 
                               Navigator.of(context).pop();
@@ -175,6 +180,23 @@ class _AddStoreState extends State<AddStore> {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+
+
+  getstore () async {
+
+    Firestore.instance
+        .collection('store')
+        .add({
+      "name": _store.text,
+      "phone": _phone.text
+    });
+
+
+    setState(() {
+
+    });
   }
 
   @override

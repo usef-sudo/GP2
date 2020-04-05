@@ -113,7 +113,7 @@ class _MyAppState extends State<MyApp> {
             child: InkWell(
              // onTap: _controller.puse();,
               child: Container(
-                  height: 300,
+                  height: 500,
                   child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
@@ -232,6 +232,8 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ],
                   ),
+
+
                   Row(
                     children: <Widget>[
 
@@ -261,6 +263,10 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ],
                   ),
+
+
+
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[

@@ -4,12 +4,12 @@ import 'page2.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'Sell.dart';
 import 'Refrences.dart';
+import 'package:eczane/models/user.dart';
 import 'AddStore.dart';
 import 'MyMedicine.dart';
 import 'MedicineStore.dart';
 import 'Statistic.dart';
 import 'Employee.dart';
-
 import 'MyDrawer.dart';
 import 'page1.dart';
 

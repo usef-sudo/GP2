@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eczane/%D9%8Dservices/auth.dart';
 import 'package:flutter/material.dart';
 
 import 'MyDrawer.dart';
@@ -8,7 +10,7 @@ class Employee extends StatefulWidget {
 }
 
 class _EmployeeState extends State<Employee> {
-  TextEditingController _employee = TextEditingController();
+  TextEditingController _emppass = TextEditingController();
   TextEditingController _Email = TextEditingController();
   TextEditingController _ID = TextEditingController();
   Future _EnterEmployee() async {
@@ -29,17 +31,17 @@ class _EmployeeState extends State<Employee> {
                   children: [
                     Text(
                       // SCAPE CARACTER INSERT ;'
-                      ' Enter employee\'s name ',
+                      ' Enter employee\'s password ',
                       style: TextStyle(
                         fontSize: 20,
                       ),
                     ),
                     TextField(
                       decoration: InputDecoration(
-                        hintText: 'name',
+                        hintText: 'password',
                         border: InputBorder.none,
                       ),
-                      controller: _employee,
+                      controller: _emppass,
                     ),
                     Text(
                       ' Enter employee\'s  Email ',
@@ -61,6 +63,7 @@ class _EmployeeState extends State<Employee> {
                           width: 100.0,
                           child: RaisedButton(
                             onPressed: () {
+                              getemployee();
                               setState(() {});
 
                               Navigator.of(context).pop();
@@ -76,6 +79,7 @@ class _EmployeeState extends State<Employee> {
                           width: 100.0,
                           child: RaisedButton(
                             onPressed: () {
+
                               Navigator.of(context).pop();
                             },
                             child: Text(
@@ -165,6 +169,21 @@ class _EmployeeState extends State<Employee> {
             ),
           );
         });
+  }
+
+  final authser _auth = authser();
+  getemployee () async {
+
+
+    await _auth.registemployee(_Email.text, _emppass.text);
+
+
+
+
+
+    setState(() {
+
+    });
   }
 
   @override
