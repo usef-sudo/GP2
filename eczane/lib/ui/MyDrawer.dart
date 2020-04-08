@@ -22,24 +22,35 @@ class MyDrawer extends StatefulWidget {
 class _MyDrawerState extends State<MyDrawer> {
   final CollectionReference data = Firestore.instance.collection('data');
   final FirebaseDatabase _database = FirebaseDatabase.instance;
-  String _uname;
-  String _phname;
 
+  static String _uname;
+  static String _phname;
+  @override
+  void initState() {
+
+
+
+    setState(() {
+
+
+    });
+    getCurrentUser ();
+    super.initState();
+  }
   getCurrentUser () async {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
-    DocumentSnapshot names = await Firestore.instance.collection("data").document(mCurrentUser.uid).get(); //If //I delete this line everything works fine but I don't have user name.
+    DocumentSnapshot names = await Firestore.instance.collection("data").document('stAU9AYvtCcGoaRbsMwIhU3C5Yi1').get(); //If //I delete this line everything works fine but I don't have user name.
     _uname = names['name'];
     _phname = names['PharmacyName'];
 
     print(_uname);
-   print(_phname);
+    print(_phname);
 
   }
-
   @override
   Widget build(BuildContext context) {
 
-    getCurrentUser();
+
 
 
     return new Drawer(

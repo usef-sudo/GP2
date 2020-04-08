@@ -7,11 +7,12 @@ class MedicineCards extends StatefulWidget {
 }
 
 class _MedicineCardsState extends State<MedicineCards> {
+
   @override
   Widget build(BuildContext context) {
 
 
-    final medicenee = Provider.of<List<Medicine>>(context);
+  final  medicenee = Provider.of<List<Medicine>>(context);
 
     print('l ${medicenee.length}');//test
     medicenee.forEach((d){
@@ -24,11 +25,13 @@ class _MedicineCardsState extends State<MedicineCards> {
       itemCount:medicenee.length ,
         itemBuilder: (context, index) {
           child:
-          Padding(
+          return Padding(
             padding: const EdgeInsets.only(top: 4,bottom: 4),
             child: Card(
 
-              child: Text(medicenee[index].name),
+              child: Container(
+                  height: 50,
+                  child: Center(child: Text(medicenee[index].name))),
 
 
 

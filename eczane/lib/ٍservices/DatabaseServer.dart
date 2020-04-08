@@ -5,9 +5,10 @@ import 'package:eczane/models/User.dart';
 
 import 'package:eczane/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 class DatabaseServer {
-  final String uid;
+    String uid;
 
   DatabaseServer({this.uid});
 
@@ -83,7 +84,7 @@ class DatabaseServer {
 
   Stream<List<Store>> get stores {
     return data
-        .document(uid)
+        .document('stAU9AYvtCcGoaRbsMwIhU3C5Yi1')
         .collection('store')
         .snapshots()
         .map(_storelist);
@@ -91,7 +92,7 @@ class DatabaseServer {
 
   Stream<List<Medicine>> get medicines {
     return data
-        .document(uid)
+        .document('stAU9AYvtCcGoaRbsMwIhU3C5Yi1')
         .collection('medicines')
         .snapshots()
         .map(_medicinelist);
