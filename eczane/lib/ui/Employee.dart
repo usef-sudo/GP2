@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
 import 'package:eczane/%D9%8Dservices/auth.dart';
+import 'package:eczane/bodies/EmpCards.dart';
+import 'package:eczane/models/Employee.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'MyDrawer.dart';
 
@@ -30,6 +34,20 @@ class _EmployeeState extends State<Employee> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
+                    Text(
+                      ' Enter employee\'s  Email ',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'email',
+                        border: InputBorder.none,
+                      ),
+                      controller: _Email,
+                    ),
                     Text(
                       // SCAPE CARACTER INSERT ;'
                       ' Enter employee\'s password ',
@@ -43,19 +61,6 @@ class _EmployeeState extends State<Employee> {
                         border: InputBorder.none,
                       ),
                       controller: _emppass,
-                    ),
-                    Text(
-                      ' Enter employee\'s  Email ',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'email',
-                        border: InputBorder.none,
-                      ),
-                      controller: _Email,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -193,74 +198,48 @@ class _EmployeeState extends State<Employee> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(  backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back
-        appBar: AppBar(
-          backgroundColor: Color.fromRGBO(66  ,160, 206, 1),//up
-          title: new Text("Employee"),
-        ),
-        drawer: MyDrawer(),
-        body:
 
-           Card(
-             shape: RoundedRectangleBorder(
-                 borderRadius: new BorderRadius.circular(18.0),
-                 side: BorderSide(color: Colors.black)),
-             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
 
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Text(
-                    'name :',
-                    style: TextStyle(color: Colors.black, fontSize: 20.0),
-                  ),
-                  Expanded(
-                    child: Text(
-                      'yousef',
-                      style: TextStyle(color: Colors.black, fontSize: 20.0),
-                    ),
-                  ),
-                  Text(
-                    'ID:',
-                    style: TextStyle(color: Colors.black, fontSize: 20.0),
-                  ),
-                  Expanded(
-                    child: new Text(
-                      '201710444',
-                      style: TextStyle(color: Colors.black, fontSize: 20.0),
-                    ),
-                  ),
-                ],
-              ),
+    return StreamProvider<List<MEmployee>>.value(
+    value: DatabaseServer().emploies,
+      child: Scaffold(  backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back
+          appBar: AppBar(
+            backgroundColor: Color.fromRGBO(66  ,160, 206, 1),//up
+            title: new Text("Employee"),
           ),
-           ),
-
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FloatingActionButton(
-                heroTag: "btn1",
-                backgroundColor: Colors.green,
-                onPressed: () {
-                  _EnterEmployee();
-                },
-                child: Icon(Icons.add),
-              ),
-              FloatingActionButton(
-                heroTag: "btn2",
-                backgroundColor: Colors.red,
-                onPressed: () {
-                  _RemoveEmployee();
-                },
-                child: Icon(Icons.remove),
-              )
-            ],
+          drawer: MyDrawer(),
+          body: SingleChildScrollView(
+            child: Container(
+                height: 420,
+                child: EmpCards()),
           ),
-        ));
+
+
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FloatingActionButton(
+                  heroTag: "btn1",
+                  backgroundColor: Colors.green,
+                  onPressed: () {
+                    _EnterEmployee();
+                  },
+                  child: Icon(Icons.add),
+                ),
+                FloatingActionButton(
+                  heroTag: "btn2",
+                  backgroundColor: Colors.red,
+                  onPressed: () {
+                    _RemoveEmployee();
+                  },
+                  child: Icon(Icons.remove),
+                )
+              ],
+            ),
+          )),
+    );
   }
 }

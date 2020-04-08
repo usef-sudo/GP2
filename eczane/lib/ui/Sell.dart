@@ -221,7 +221,7 @@ Future _EnterId() async{
                 fabColor: Colors.black,
                 child: SingleChildScrollView(
                   child: Container(
-                    height:  MediaQuery.of(context).size.height,
+                    height:  MediaQuery.of(context).size.height-150,
           // color: Color.fromRGBO(222, 234, 247, 1),
            //
                     //color: Colors.amberAccent,

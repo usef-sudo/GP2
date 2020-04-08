@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eczane/models/Employee.dart';
 import 'package:eczane/models/Medicine.dart';
 import 'package:eczane/models/Store.dart';
 import 'package:eczane/models/User.dart';
@@ -89,7 +90,24 @@ class DatabaseServer {
         .snapshots()
         .map(_storelist);
   }
+  ///////////////////////////////////////////////////////////////////////////////
 
+  List<MEmployee> _emplist(QuerySnapshot snap) {
+    return snap.documents.map((doc) {
+      return MEmployee(
+          pass: doc.data['password'] ?? '0', email: doc.data['email'] ?? '');
+    }).toList();
+  }
+
+  Stream<List<MEmployee>> get emploies {
+    return data
+        .document('stAU9AYvtCcGoaRbsMwIhU3C5Yi1')
+        .collection('employee')
+        .snapshots()
+        .map(_emplist);
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////
   Stream<List<Medicine>> get medicines {
     return data
         .document('stAU9AYvtCcGoaRbsMwIhU3C5Yi1')
@@ -104,6 +122,7 @@ class DatabaseServer {
     return data.document((uid)).snapshots()
         .map(_fromsnap);
   }
-
+//
 */
 }
+//stAU9AYvtCcGoaRbsMwIhU3C5Yi1

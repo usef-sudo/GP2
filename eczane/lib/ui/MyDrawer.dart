@@ -11,9 +11,6 @@ import 'Statistic.dart';
 import 'Employee.dart';
 import 'main.dart';
 
-
-
-
 class MyDrawer extends StatefulWidget {
   @override
   _MyDrawerState createState() => _MyDrawerState();
@@ -27,32 +24,26 @@ class _MyDrawerState extends State<MyDrawer> {
   static String _phname;
   @override
   void initState() {
-
-
-
-    setState(() {
-
-
-    });
-    getCurrentUser ();
+    setState(() {});
+    getCurrentUser();
     super.initState();
   }
-  getCurrentUser () async {
+
+  getCurrentUser() async {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
-    DocumentSnapshot names = await Firestore.instance.collection("data").document('stAU9AYvtCcGoaRbsMwIhU3C5Yi1').get(); //If //I delete this line everything works fine but I don't have user name.
+    DocumentSnapshot names = await Firestore.instance
+        .collection("data")
+        .document('stAU9AYvtCcGoaRbsMwIhU3C5Yi1')
+        .get(); //If //I delete this line everything works fine but I don't have user name.
     _uname = names['name'];
     _phname = names['PharmacyName'];
 
     print(_uname);
     print(_phname);
-
   }
+
   @override
   Widget build(BuildContext context) {
-
-
-
-
     return new Drawer(
       child: ListView(
         children: <Widget>[
@@ -61,8 +52,8 @@ class _MyDrawerState extends State<MyDrawer> {
             child: new UserAccountsDrawerHeader(
               // those account attripute must be returned from db.........
 
-              accountName:  Text(_uname??"....."),
-              accountEmail: Text(_phname??"....."),
+              accountName: Text(_uname ?? "....."),
+              accountEmail: Text(_phname ?? "....."),
               currentAccountPicture: GestureDetector(
                 child: new CircleAvatar(
                   backgroundColor: Colors.white,
@@ -72,7 +63,8 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                 ),
               ),
-              decoration: new BoxDecoration(color: Color.fromRGBO(66  ,160, 206, 1)),
+              decoration:
+                  new BoxDecoration(color: Color.fromRGBO(66, 160, 206, 1)),
             ),
           ),
           Divider(),
@@ -131,18 +123,6 @@ class _MyDrawerState extends State<MyDrawer> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 
