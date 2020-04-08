@@ -32,10 +32,8 @@ class _MyDrawerState extends State<MyDrawer> {
     _phname = names['PharmacyName'];
 
     print(_uname);
-    print(_phname);
-    setState(() {
+   print(_phname);
 
-    });
   }
 
   @override

@@ -42,7 +42,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 Future employ(String uid,String name,String phone)async {
 
 
-   await DatabaseServer(uid: uid).addEmployee( name, phone);
+   await DatabaseServer(uid: uid).addEmployee( uid,name, phone);
 
   }
 
@@ -71,14 +71,14 @@ Future employ(String uid,String name,String phone)async {
 
   }
 
-Future registemployee(String email,String pass)async {
+Future registemployee(String Admin,String email,String pass)async {
     try{
 
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: pass);
       FirebaseUser user =result.user;
       //create a doc for user with his uid
 
-      await DatabaseServer(uid: user.uid).addEmployee( email,pass);
+      await DatabaseServer(uid: user.uid).addEmployee(Admin, email,pass);
 
 
 

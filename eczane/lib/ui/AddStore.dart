@@ -1,10 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
+import 'package:eczane/%D9%8Dservices/auth.dart';
+import 'package:eczane/models/Store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'MyDrawer.dart';
+import 'package:eczane/bodies/StoreCards.dart';
 
+import 'package:provider/provider.dart';
 class AddStore extends StatefulWidget {
   @override
   _AddStoreState createState() => _AddStoreState();
@@ -173,21 +178,17 @@ class _AddStoreState extends State<AddStore> {
         });
   }
 
-  _launchCaller() async {
-    const url = "tel:0797215306";
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
 
 
   getstore () async {
 
+
+    final FirebaseAuth _auth=FirebaseAuth.instance;
+    FirebaseUser _result =  await _auth.currentUser();
+
     Firestore.instance
-        .collection('store')
+        .collection('data').document(_result.uid).collection('store')
         .add({
       "name": _store.text,
       "phone": _phone.text
@@ -201,69 +202,51 @@ class _AddStoreState extends State<AddStore> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return StreamProvider<List<Store>>.value(
+      value: DatabaseServer().stores,
+      child: Scaffold(
 
-        backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back
-        appBar: AppBar(
-          backgroundColor: Color.fromRGBO(66  ,160, 206, 1),//up
-          title: new Text("AddStore"),
-        ),
-        drawer: MyDrawer(),
-        body: Card(
-          shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(18.0),
-              side: BorderSide(color: Colors.black)),
+          backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back
+          appBar: AppBar(
+            backgroundColor: Color.fromRGBO(66  ,160, 206, 1),//up
+            title: new Text("AddStore"),
+          ),
+          drawer: MyDrawer(),
+          body: SingleChildScrollView(
+            child: Container(
+                height: 420,
+                child: StoreCards()),
+          ),
 
 
-          child: Padding(
+          // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
-            padding: const EdgeInsets.all(8.0),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.all(30.0),
             child: Row(
-
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Expanded(
-                  child: Text(
-                    'yousef',
-                    style: TextStyle(color: Colors.black, fontSize: 30.0),
-                  ),
+                FloatingActionButton(
+                  heroTag: "btn1",
+                  backgroundColor: Colors.green,
+                  onPressed: () {
+                    _EnterStore();
+                  },
+                  child: Icon(Icons.add),
                 ),
-                new FlatButton(
-                    color: Colors.green,
-                    onPressed: () => _launchCaller(),
-                    child: new Text("Call ")),
+                FloatingActionButton(
+                  heroTag: "btn2",
+                  backgroundColor: Colors.red,
+                  onPressed: () {
+                    _RemoveStore();
+                  },
+                  child: Icon(Icons.remove),
+                )
               ],
             ),
-          ),
-        ),
-
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FloatingActionButton(
-                heroTag: "btn1",
-                backgroundColor: Colors.green,
-                onPressed: () {
-                  _EnterStore();
-                },
-                child: Icon(Icons.add),
-              ),
-              FloatingActionButton(
-                heroTag: "btn2",
-                backgroundColor: Colors.red,
-                onPressed: () {
-                  _RemoveStore();
-                },
-                child: Icon(Icons.remove),
-              )
-            ],
-          ),
-        ));
+          )),
+    );
   }
 }
+

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eczane/%D9%8Dservices/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'MyDrawer.dart';
@@ -175,7 +176,11 @@ class _EmployeeState extends State<Employee> {
   getemployee () async {
 
 
-    await _auth.registemployee(_Email.text, _emppass.text);
+    final FirebaseAuth fa=FirebaseAuth.instance;
+    FirebaseUser _result =  await fa.currentUser();
+
+
+    await _auth.registemployee(_result.uid,_Email.text, _emppass.text);
 
 
 

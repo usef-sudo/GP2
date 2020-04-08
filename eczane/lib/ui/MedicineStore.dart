@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Remove.dart';
 import 'MyDrawer.dart';
@@ -184,8 +185,23 @@ class _MedicineStoreState extends State<MedicineStore> {
   String e="";
   String pr="";
 
+
+
+
+
+
+
+
+
+
+
+
   getpackage() async {
-    Firestore.instance.collection('medicines').add({
+
+    final FirebaseAuth _auth=FirebaseAuth.instance;
+    FirebaseUser _result =  await _auth.currentUser();
+
+    Firestore.instance.collection('data').document(_result.uid).collection('medicines').add({
       'name': n,
       'price': p,
       'quantity': q,
@@ -194,7 +210,7 @@ class _MedicineStoreState extends State<MedicineStore> {
       'earnings': pr,
     });
     _formkey.currentState.reset();
-    print('mohanad');
+
     setState(() {});
   }
 
@@ -204,7 +220,13 @@ class _MedicineStoreState extends State<MedicineStore> {
   @override
   Widget build(BuildContext context) {
     return Form(
+
+
+
       key: _formkey,
+
+
+
       child: Scaffold(
         backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
         appBar: AppBar(
