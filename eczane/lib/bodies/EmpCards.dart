@@ -27,35 +27,53 @@ class _EmpCardsState extends State<EmpCards> {
             side: BorderSide(color: Colors.black)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(
+          child: Column(
             mainAxisSize: MainAxisSize.max,
 
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Text(
-                'Email: ',
-                style: TextStyle(color: Colors.black, fontSize: 20.0),
+
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Row(
+                  children: <Widget>[
+            Text(
+            'Email: ',
+            style: TextStyle(color: Colors.black, fontSize: 20.0),
+          ),
+
+        Text(
+          employ[index].email,
+          style: TextStyle(color: Colors.black, fontSize: 20.0),
+        ),
+
+        ],
+    ),
               ),
-              Expanded(
-                child: Text(
-                 employ[index].email,
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Row(
+                   children: <Widget>[
+
+                  Text(
+                  'Password:',
                   style: TextStyle(color: Colors.black, fontSize: 20.0),
                 ),
-              ),
-              Text(
-                'Password:',
-                style: TextStyle(color: Colors.black, fontSize: 20.0),
-              ),
-              Expanded(
-                child: new Text(
-               employ[index].pass,
-                  style: TextStyle(color: Colors.black, fontSize: 20.0),
-                ),
-              ),
+
+
+        new Text(
+          employ[index].pass,
+          style: TextStyle(color: Colors.black, fontSize: 20.0),
+        ),
+
+
             ],
           ),
+              ),
+          ]
         ),
       ),
+    )
       );
   }
     );

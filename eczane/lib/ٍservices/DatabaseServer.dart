@@ -31,8 +31,8 @@ class DatabaseServer {
 
   Future addEmployee(String admin, String name, String phone) async {
     return await data.document(admin).collection('employee').add({
-      'name': name,
-      'phon': phone,
+      'email': name,
+      'pass': phone,
     });
   }
 
@@ -95,7 +95,7 @@ class DatabaseServer {
   List<MEmployee> _emplist(QuerySnapshot snap) {
     return snap.documents.map((doc) {
       return MEmployee(
-          pass: doc.data['password'] ?? '0', email: doc.data['email'] ?? '');
+          pass: doc.data['phon'] ?? '0', email: doc.data['name'] ?? '');
     }).toList();
   }
 
