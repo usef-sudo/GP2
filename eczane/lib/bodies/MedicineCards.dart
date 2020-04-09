@@ -12,7 +12,7 @@ class _MedicineCardsState extends State<MedicineCards> {
   Widget build(BuildContext context) {
 
 
-  final  medicenee = Provider.of<List<Medicine>>(context);
+    final  medicenee = Provider.of<List<Medicine>>(context);
 
     print('l ${medicenee.length}');//test
     medicenee.forEach((d){
@@ -24,19 +24,30 @@ class _MedicineCardsState extends State<MedicineCards> {
     return ListView.builder(
       itemCount:medicenee.length ,
         itemBuilder: (context, index) {
-          child:
+
+
           return Padding(
             padding: const EdgeInsets.only(top: 4,bottom: 4),
             child: Card(
+              margin: EdgeInsets.fromLTRB(20  , 6, 20,0 ),
+              child:ListTile(
+                leading: CircleAvatar
+                  (
+                  radius: 25,
+                  backgroundColor: Colors.green[100],
 
-              child: Container(
-                  height: 50,
-                  child: Center(child: Text(medicenee[index].name))),
+                ),
+                title: Text(medicenee[index].name),
+                subtitle: Text('sell price is  ${medicenee[index].price} Dinar'),
 
+
+              ),
 
 
             ),
           );
+
+
         }
 
     );

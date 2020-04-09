@@ -204,11 +204,12 @@ class _MedicineStoreState extends State<MedicineStore> {
     Firestore.instance.collection('data').document(_result.uid).collection('medicines').add({
       'name': n,
       'price': p,
-      'quantity': q,
+      'quantity':q ,
       'code': i,
       'date': e,
       'earnings': pr,
     });
+
     _formkey.currentState.reset();
 
     setState(() {});

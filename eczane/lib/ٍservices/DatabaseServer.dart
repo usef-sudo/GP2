@@ -85,7 +85,7 @@ class DatabaseServer {
 
   Stream<List<Store>> get stores {
     return data
-        .document('stAU9AYvtCcGoaRbsMwIhU3C5Yi1')
+        .document('o0l8mtWKTWRQ75JZy3aguUbX0do1')
         .collection('store')
         .snapshots()
         .map(_storelist);
@@ -101,7 +101,7 @@ class DatabaseServer {
 
   Stream<List<MEmployee>> get emploies {
     return data
-        .document('stAU9AYvtCcGoaRbsMwIhU3C5Yi1')
+        .document('o0l8mtWKTWRQ75JZy3aguUbX0do1')
         .collection('employee')
         .snapshots()
         .map(_emplist);
@@ -110,7 +110,7 @@ class DatabaseServer {
   ///////////////////////////////////////////////////////////////////////////////
   Stream<List<Medicine>> get medicines {
     return data
-        .document('stAU9AYvtCcGoaRbsMwIhU3C5Yi1')
+        .document('o0l8mtWKTWRQ75JZy3aguUbX0do1')
         .collection('medicines')
         .snapshots()
         .map(_medicinelist);

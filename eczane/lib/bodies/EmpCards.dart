@@ -33,10 +33,8 @@ class _EmpCardsState extends State<EmpCards> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
 
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Row(
-                  children: <Widget>[
+              Row(
+                children: <Widget>[
             Text(
             'Email: ',
             style: TextStyle(color: Colors.black, fontSize: 20.0),
@@ -49,7 +47,6 @@ class _EmpCardsState extends State<EmpCards> {
 
         ],
     ),
-              ),
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
