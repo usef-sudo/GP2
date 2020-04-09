@@ -95,7 +95,7 @@ class DatabaseServer {
   List<MEmployee> _emplist(QuerySnapshot snap) {
     return snap.documents.map((doc) {
       return MEmployee(
-          pass: doc.data['phon'] ?? '0', email: doc.data['name'] ?? '');
+          pass: doc.data['pass'] ?? '0', email: doc.data['email'] ?? '');
     }).toList();
   }
 
