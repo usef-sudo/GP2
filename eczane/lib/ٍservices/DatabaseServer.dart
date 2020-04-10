@@ -22,6 +22,10 @@ class DatabaseServer {
 
   DatabaseServer(this.uid);
 
+
+
+
+
   final CollectionReference data = Firestore.instance.collection('data');
 
 
