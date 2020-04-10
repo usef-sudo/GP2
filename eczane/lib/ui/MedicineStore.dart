@@ -206,7 +206,7 @@ class _MedicineStoreState extends State<MedicineStore> {
     FirebaseUser _result =  await _auth.currentUser();
 
 
-    Medicine post = new Medicine( name: n,Exp: e,ID: i,price: p,profits: pr, quantity: q);
+    Medicine post = new Medicine( name: n,Exp: e,ID: i,price: p,profits: pr, quantity: q );
     Map<String, dynamic> postData = post.toJson();
 
 
