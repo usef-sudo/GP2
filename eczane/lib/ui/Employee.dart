@@ -201,7 +201,7 @@ class _EmployeeState extends State<Employee> {
 
 
     return StreamProvider<List<MEmployee>>.value(
-    value: DatabaseServer().emploies,
+    value: DatabaseServer.get("").emploies,
       child: Scaffold(  backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back
           appBar: AppBar(
             backgroundColor: Color.fromRGBO(66  ,160, 206, 1),//up

@@ -11,9 +11,20 @@ import 'package:flutter/cupertino.dart';
 class DatabaseServer {
     String uid;
 
-  DatabaseServer({this.uid});
+    static DatabaseServer instance;
+
+    static DatabaseServer get(String uu){
+      if(instance == null){
+        instance = DatabaseServer(uu);
+      }
+      return instance;
+    }
+
+  DatabaseServer(this.uid);
 
   final CollectionReference data = Firestore.instance.collection('data');
+
+
 
   Future updatedata(String name, String pharmacy) async {
     return await data.document(uid).setData({
@@ -86,7 +97,7 @@ class DatabaseServer {
 
   Stream<List<Store>> get stores {
     return data
-        .document('o0l8mtWKTWRQ75JZy3aguUbX0do1')
+        .document(uid)
         .collection('store')
         .snapshots()
         .map(_storelist);
@@ -102,7 +113,7 @@ class DatabaseServer {
 
   Stream<List<MEmployee>> get emploies {
     return data
-        .document('o0l8mtWKTWRQ75JZy3aguUbX0do1')
+        .document(uid)
         .collection('employee')
         .snapshots()
         .map(_emplist);
@@ -111,7 +122,7 @@ class DatabaseServer {
   ///////////////////////////////////////////////////////////////////////////////
   Stream<List<Medicine>> get medicines {
     return data
-        .document('o0l8mtWKTWRQ75JZy3aguUbX0do1')
+        .document(uid)
         .collection('medicines')
         .snapshots()
         .map(_medicinelist);

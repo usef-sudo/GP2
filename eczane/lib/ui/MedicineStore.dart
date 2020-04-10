@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eczane/models/Medicine.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'Remove.dart';
+
 import 'MyDrawer.dart';
 
 class MedicineStore extends StatefulWidget {
@@ -96,7 +96,7 @@ class _MedicineStoreState extends State<MedicineStore> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)), //this right here
             child: Container(
-              height: 300,
+              height: 150,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
@@ -110,25 +110,19 @@ class _MedicineStoreState extends State<MedicineStore> {
                       ),
                     ),
                     TextField(
+                      onChanged: (val){
+                        setState(() {
+                          ID=val;
+                        });
+
+                      },
                       decoration: InputDecoration(
                         hintText: 'ID',
                         border: InputBorder.none,
                       ),
                       controller: _ID,
                     ),
-                    Text(
-                      ' Enter product quantity to remove ',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'number',
-                        border: InputBorder.none,
-                      ),
-                      controller: _Count,
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -137,6 +131,8 @@ class _MedicineStoreState extends State<MedicineStore> {
                           child: RaisedButton(
                             onPressed: () {
                               setState(() {});
+                              UpdateMedicine();
+_ID.clear();
 
                               Navigator.of(context).pop();
                             },
@@ -177,7 +173,7 @@ class _MedicineStoreState extends State<MedicineStore> {
   TextEditingController _EXcontroller = TextEditingController();
   TextEditingController _PROcontroller = TextEditingController();
   TextEditingController _ID = TextEditingController();
-  TextEditingController _Count = TextEditingController();
+
 
   String n="";
   String p="";
@@ -185,6 +181,8 @@ class _MedicineStoreState extends State<MedicineStore> {
   String i="";
   String e="";
   String pr="";
+  String ID="";
+
 
 
 
@@ -206,7 +204,7 @@ class _MedicineStoreState extends State<MedicineStore> {
     FirebaseUser _result =  await _auth.currentUser();
 
 
-    Medicine post = new Medicine( name: n,Exp: e,ID: i,price: p,profits: pr, quantity: q );
+    Medicine post = new Medicine( name: n,Exp: e,ID: i,price: p,profits: pr, quantity: int.parse(q) );
     Map<String, dynamic> postData = post.toJson();
 
 
@@ -219,6 +217,15 @@ class _MedicineStoreState extends State<MedicineStore> {
     setState(() {
 
     });
+  }
+  UpdateMedicine() async {
+
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    FirebaseUser _result = await _auth.currentUser();
+
+    Firestore.instance.collection('data').document(_result.uid).collection('medicines').document(ID).delete();
+
+
   }
 
 

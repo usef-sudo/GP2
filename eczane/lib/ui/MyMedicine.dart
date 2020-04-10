@@ -17,13 +17,12 @@ class _MyMedicineState extends State<MyMedicine> {
   Widget build(BuildContext context) {
 
     return StreamProvider<List<Medicine>>.value(
-      value: DatabaseServer().medicines,
+      value: DatabaseServer.get("asd").medicines,
 
       child: Scaffold(
         backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back
 
         appBar: AppBar(
-
 
           backgroundColor: Color.fromRGBO(66  ,160, 206, 1),
           title: new Text("MyMedicine"),

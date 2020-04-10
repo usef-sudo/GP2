@@ -1,3 +1,5 @@
+import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'page2.dart';
@@ -20,6 +22,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _scaffoldKey2 = GlobalKey<ScaffoldState>();
+  Future _getUser() async {
+    FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
+    DatabaseServer.get(mCurrentUser.uid);
+    print("THIS IS USER ID ");
+    print(mCurrentUser.uid);
+  }
+
+  initState(){
+    _getUser();
+  }
+
   Future _log() async {
     showDialog(
         context: context,

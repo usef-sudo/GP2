@@ -19,6 +19,7 @@ class _AddStoreState extends State<AddStore> {
   TextEditingController _store = TextEditingController();
   TextEditingController _phone = TextEditingController();
   TextEditingController _Number = TextEditingController();
+  final FK = GlobalKey<FormState>();
   Future _RemoveStore() async {
     showDialog(
         context: context,
@@ -42,6 +43,9 @@ class _AddStoreState extends State<AddStore> {
                       ),
                     ),
                     TextField(
+                      onChanged: (val) {
+                        setState(() => {num = val});
+                      },
                       decoration: InputDecoration(
 
                         hintText: 'number',
@@ -56,6 +60,12 @@ class _AddStoreState extends State<AddStore> {
                           width: 100.0,
                           child: RaisedButton(
                             onPressed: () {
+
+
+                              _Number.clear();
+
+                             DeleteStore();
+
                               setState(() {});
 
                               Navigator.of(context).pop();
@@ -99,78 +109,93 @@ class _AddStoreState extends State<AddStore> {
             backgroundColor: Colors.white.withOpacity(0.80),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)), //this right here
-            child: Container(
-              height: 300,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      ' Enter store name ',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'name',
-                        border: InputBorder.none,
-                      ),
-                      controller: _store,
-                    ),
-                    Text(
-                      ' Enter phone number ',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'number',
-                        border: InputBorder.none,
-                      ),
-                      controller: _phone,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-
-                        SizedBox(
-                          width: 100.0,
-                          child: RaisedButton(
-                            onPressed: () {
-                              getstore();
-                              setState(() {});
-
-                              Navigator.of(context).pop();
-                            },
-                            child: Text(
-                              "Add",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            color: const Color(0xFF1BC0C5),
-                          ),
+            child: Form(
+              key: FK,
+              child: Container(
+                height: 300,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        ' Enter store name ',
+                        style: TextStyle(
+                          fontSize: 20,
                         ),
-                        SizedBox(
-                          width: 100.0,
-                          child: RaisedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text(
-                              "Back",
-                              style: TextStyle(color: Colors.white),
+                      ),
+                      TextField(
+
+                        onChanged: (val) {
+                          setState(() => {n = val});
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'name',
+                          border: InputBorder.none,
+                        ),
+                        controller: _store,
+                      ),
+                      Text(
+                        ' Enter phone number ',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      TextField(
+                        onChanged: (val) {
+                          setState(() => {p = val});
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'number',
+                          border: InputBorder.none,
+                        ),
+                        controller: _phone,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+
+                          SizedBox(
+                            width: 100.0,
+                            child: RaisedButton(
+                              onPressed: () {
+                                getStore();
+                                setState(() {
+                                  FK.currentState.reset();
+                                  _phone.clear();
+                                    _store.clear();
+
+                                });
+
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                "Add",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              color: const Color(0xFF1BC0C5),
                             ),
-                            color: const Color(0xFF1BC0C5),
                           ),
-                        )
+                          SizedBox(
+                            width: 100.0,
+                            child: RaisedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                "Back",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              color: const Color(0xFF1BC0C5),
+                            ),
+                          )
 
-                      ],
-                    )
+                        ],
+                      )
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -178,21 +203,27 @@ class _AddStoreState extends State<AddStore> {
         });
   }
 
+String n = "";
+String p = "";
+String num = "";
 
 
+  getStore() async {
+    /*
+    final CollectionReference postsRef = Firestore.instance.collection('/posts');
 
-  getstore () async {
 
-
+    await postsRef.document(postID).setData(postData);
+*/
     final FirebaseAuth _auth=FirebaseAuth.instance;
     FirebaseUser _result =  await _auth.currentUser();
 
-    Firestore.instance
-        .collection('data').document(_result.uid).collection('store')
-        .add({
-      "name": _store.text,
-      "phone": _phone.text
-    });
+
+    Store post = new Store( name: n,phone: p );
+    Map<String, dynamic> postData = post.toJson();
+
+
+    Firestore.instance.collection('data').document(_result.uid).collection('store').document(p).setData(postData);
 
 
     setState(() {
@@ -200,10 +231,21 @@ class _AddStoreState extends State<AddStore> {
     });
   }
 
+DeleteStore() async{
+  final FirebaseAuth _auth=FirebaseAuth.instance;
+  FirebaseUser _result =  await _auth.currentUser();
+
+
+  Firestore.instance.collection('data').document(_result.uid).collection('store').document(num).delete();
+
+
+}
+
+
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Store>>.value(
-      value: DatabaseServer().stores,
+      value: DatabaseServer.get("").stores,
       child: Scaffold(
 
           backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back

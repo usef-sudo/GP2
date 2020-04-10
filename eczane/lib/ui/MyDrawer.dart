@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -24,20 +25,22 @@ class _MyDrawerState extends State<MyDrawer> {
   static String _phname;
   @override
   void initState() {
-    setState(() {});
+    setState(() { });
     getCurrentUser();
     super.initState();
   }
 
   getCurrentUser() async {
-    FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     DocumentSnapshot names = await Firestore.instance
         .collection("data")
-        .document('o0l8mtWKTWRQ75JZy3aguUbX0do1')
+        .document(DatabaseServer.get("").uid)
         .get(); //If //I delete this line everything works fine but I don't have user name.
     _uname = names['name'];
-    _phname = names['PharmacyName'];
 
+    _phname = names['PharmacyName'];
+setState(() {
+
+});
     print(_uname);
     print(_phname);
   }

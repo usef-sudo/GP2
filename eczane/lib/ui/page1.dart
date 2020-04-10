@@ -2,8 +2,10 @@
 
 
 
+import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
 import 'package:eczane/%D9%8Dservices/auth.dart'; //give error
 import 'package:eczane/shared/Loading.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'Home.dart';
@@ -16,9 +18,16 @@ class Page1 extends StatefulWidget {
 
 class _Page1State extends State<Page1> {
   final authser _auth = authser();
-  bool loading=false;
-  final _formkey = GlobalKey<FormState>();
 
+  void initState() {
+
+    setState(() { bool loading=false; });
+
+  }
+
+
+  final _formkey = GlobalKey<FormState>();
+  bool loading=false;
   String email = "";
   String password = "";
   String error = "";

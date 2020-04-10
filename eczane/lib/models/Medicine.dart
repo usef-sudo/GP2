@@ -1,11 +1,11 @@
 
 class Medicine{
-  final String name;
-  final String price;
-  final String quantity;
-  final String Exp;
-  final String ID;
-  final String profits;
+   String name;
+   String price;
+   int quantity;
+   String Exp;
+   String ID;
+   String profits;
 
 
   Medicine({this.name,this.price,this.Exp,this.ID,this.profits,this.quantity});
@@ -18,7 +18,6 @@ class Medicine{
         'profits': profits,
         'Exp': Exp,
         'ID': ID,
-
       };
 
 

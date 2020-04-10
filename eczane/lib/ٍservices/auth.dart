@@ -36,13 +36,13 @@ import 'package:firebase_auth/firebase_auth.dart';
  Future store(String uid,String name,String phone)async {
 
 
-   await DatabaseServer(uid: uid).addStore( name, phone);
+   await DatabaseServer.get("").addStore( name, phone);
 
   }
 Future employ(String uid,String name,String phone)async {
 
 
-   await DatabaseServer(uid: uid).addEmployee( uid,name, phone);
+   await DatabaseServer.get("").addEmployee( uid,name, phone);
 
   }
 
@@ -58,7 +58,7 @@ Future employ(String uid,String name,String phone)async {
       FirebaseUser user =result.user;
       //create a doc for user with his uid
 
-      await DatabaseServer(uid: user.uid).updatedata( name, PharmacyName);
+      await DatabaseServer.get("").updatedata( name, PharmacyName);
 
 
 
@@ -78,10 +78,7 @@ Future registemployee(String Admin,String email,String pass)async {
       FirebaseUser user =result.user;
       //create a doc for user with his uid
 
-      await DatabaseServer(uid: user.uid).addEmployee(Admin, email,pass);
-
-
-
+      await DatabaseServer.get("").addEmployee(Admin, email,pass);
 
       return _userfromfirebase(user);
     }catch(e){
