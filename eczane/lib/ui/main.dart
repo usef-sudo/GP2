@@ -32,7 +32,7 @@ class _splashState extends State<splash> {
 
                 child: new SplashScreen(
 
-                    seconds: 10,
+                    seconds: 3,
                     navigateAfterSeconds: MyApp(),
 
                     image: new Image.asset('images/splash.gif',

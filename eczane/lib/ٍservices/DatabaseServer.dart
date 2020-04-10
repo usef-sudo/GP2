@@ -67,11 +67,12 @@ class DatabaseServer {
   List<Medicine> _medicinelist(QuerySnapshot snap) {
     return snap.documents.map((doc) {
       return Medicine(
-          quantity: doc.data['quntatity'] ?? '',
+
+          quantity: doc.data['quantity'] ?? '',
           profits: doc.data['profits'] ?? '',
           price: doc.data['price'] ?? '0',
           ID: doc.data['ID'] ?? '',
-          Exp: doc.data['EXP'],
+          Exp: doc.data['Exp']??'unknow',
           name: doc.data['name'] ?? '');
     }).toList();
   }
@@ -125,4 +126,4 @@ class DatabaseServer {
 //
 */
 }
-//stAU9AYvtCcGoaRbsMwIhU3C5Yi1
+//o0l8mtWKTWRQ75JZy3aguUbX0do1

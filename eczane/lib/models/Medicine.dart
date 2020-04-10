@@ -10,6 +10,17 @@ class Medicine{
 
   Medicine({this.name,this.price,this.Exp,this.ID,this.profits,this.quantity});
 
+  Map<String, dynamic> toJson() =>
+      {
+        'name': name,
+        'price': price,
+        'quantity': quantity,
+        'profits': profits,
+        'Exp': Exp,
+        'ID': ID,
+
+      };
+
 
 
 }

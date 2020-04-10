@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eczane/models/Medicine.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Remove.dart';
@@ -194,25 +195,30 @@ class _MedicineStoreState extends State<MedicineStore> {
 
 
 
-
-
   getpackage() async {
+    /*
+    final CollectionReference postsRef = Firestore.instance.collection('/posts');
 
+
+    await postsRef.document(postID).setData(postData);
+*/
     final FirebaseAuth _auth=FirebaseAuth.instance;
     FirebaseUser _result =  await _auth.currentUser();
 
-    Firestore.instance.collection('data').document(_result.uid).collection('medicines').add({
-      'name': n,
-      'price': p,
-      'quantity':q ,
-      'code': i,
-      'date': e,
-      'earnings': pr,
-    });
+
+    Medicine post = new Medicine( name: n,Exp: e,ID: i,price: p,profits: pr, quantity: q);
+    Map<String, dynamic> postData = post.toJson();
+
+
+    Firestore.instance.collection('data').document(_result.uid).collection('medicines').document(i).setData(postData);
+
+
 
     _formkey.currentState.reset();
 
-    setState(() {});
+    setState(() {
+
+    });
   }
 
 

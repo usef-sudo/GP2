@@ -1,4 +1,5 @@
 import 'package:eczane/models/Medicine.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class MedicineCards extends StatefulWidget {
@@ -17,7 +18,11 @@ class _MedicineCardsState extends State<MedicineCards> {
     print('l ${medicenee.length}');//test
     medicenee.forEach((d){
       print('n ${d.name}');
-
+      print('p ${d.price}');
+      print('e ${d.Exp}');
+      print('p ${d.profits}');
+      print('i ${d.ID}');
+      print('q ${d.quantity}');
 
     });//iii
 
@@ -26,24 +31,33 @@ class _MedicineCardsState extends State<MedicineCards> {
         itemBuilder: (context, index) {
 
 
+
           return Padding(
             padding: const EdgeInsets.only(top: 4,bottom: 4),
-            child: Card(
-              margin: EdgeInsets.fromLTRB(20  , 6, 20,0 ),
-              child:ListTile(
-                leading: CircleAvatar
-                  (
-                  radius: 25,
-                  backgroundColor: Colors.green[100],
+            child: InkWell(
+              child: Card(
+                margin: EdgeInsets.fromLTRB(20  , 6, 20,0 ),
+                child:ListTile(
+                  leading: CircleAvatar
+                    (
+                    child:Text( medicenee[index].quantity),
+                    radius: 25,
+
+                    backgroundColor: Colors.green[(int.parse(medicenee[index].quantity)%9)*100],
+
+                  ),
+                  title: Text(medicenee[index].name),
+                  subtitle: Text('sell price is  ${medicenee[index].price} Dinar'),
+
 
                 ),
-                title: Text(medicenee[index].name),
-                subtitle: Text('sell price is  ${medicenee[index].price} Dinar'),
 
 
               ),
+              onTap: (){
 
-
+                INFO(medicenee[index].Exp);
+              },
             ),
           );
 
@@ -63,4 +77,25 @@ class _MedicineCardsState extends State<MedicineCards> {
 
 
   }
+
+  void INFO(String date) {
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context)
+    {
+      return Dialog(
+
+        backgroundColor: Colors.white.withOpacity(0.80),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0)),
+    child: Container( height: 100,width: 100,
+    child: Center(child: Text('this product is valid tell ${date}')),)
+      );
+    }
+    );
+  }
+
+
+
 }
