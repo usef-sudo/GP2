@@ -24,11 +24,9 @@ class _MedicineCardsState extends State<MedicineCards> {
 
     setState(() {});
   }
-
+  String abood="";
   TextEditingController _Count = TextEditingController();
   String next = "";
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,29 +40,33 @@ class _MedicineCardsState extends State<MedicineCards> {
       List<Medicine> TempList = new List<Medicine>();
 
       if (val.isNotEmpty) {
+
         medicenee.forEach((item) {
           if (item.name.contains(val)) {
             TempList.add(item);
           }
         });
 
-        setState(() {
+
           medicenee.clear();
           medicenee.addAll(TempList);
-        });
-        return;
+
+
       } else {
-        setState(() {
+
           medicenee.clear();
           medicenee.addAll(items);
-        });
+
       }
-      return;
+
+    // medicenee=medicenee.where(medicenee[0].name.contains(val));
     }
+
+    TextEditingController editingController = TextEditingController();
     List<String> _locations = ['A-Z', 'QTY']; // Option 2
     String _selectedLocation; // Option 2
 
-    TextEditingController editingController = TextEditingController();
+
     print('l ${medicenee.length}'); //test
     medicenee.forEach((d) {
       print('n ${d.name}');
@@ -82,58 +84,85 @@ class _MedicineCardsState extends State<MedicineCards> {
             padding: const EdgeInsets.all(8.0),
             child: Material(
               color: Colors.white.withOpacity(0.7),
-              child: Row( children: <Widget>[
+              child: Row(
+                children: <Widget>[
+                  SizedBox(
+                    width: 255,
 
-                 SizedBox(
-                   width:255,
-                   child: TextField(
 
-                    onChanged: (val) {
+                    child: TextField(
+
+                      controller: editingController,
+                      decoration: InputDecoration(
+                          labelText: "Search",
+                          hintText: abood,
+
+                          prefixIcon: Icon(Icons.search),
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0.0)))),
+                      onChanged: (val) {
+                        abood=val;
                       filterSearchResults(val);
+                      setState(() {
+
+                      });
                     },
-                    controller: editingController,
-                    decoration: InputDecoration(
-
-                         labelText: "Search",
-                         hintText: "Search",
-                        prefixIcon: Icon(Icons.search),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(0.0)))),
-                ),
-                 ),
-
-SizedBox(width: 10,),
-                DropdownButtonHideUnderline(
-
-                  child: SizedBox(
-                       width:75,
-                    height: 40,
+                    ),
 
 
-                    child: new ButtonTheme(
-                      alignedDropdown: true,
-                      child: DropdownButton(
-
-                        hint: Text('Sort'), // Not necessary for Option 1
-                        value: _selectedLocation,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedLocation = newValue;
-                          });
-                        },
-                        items: _locations.map((location) {
-                          return DropdownMenuItem(
 
 
-                            child: new Text(location),
-                            value: location,
-                          );
-                        }).toList(),
+
+
+
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  DropdownButtonHideUnderline(
+                    child: SizedBox(
+                      width: 75,
+                      height: 30,
+                      child: new ButtonTheme(
+                        alignedDropdown: true,
+                        child: DropdownButton(
+                          hint: Text('Sort'), // Not necessary for Option 1
+                          value: _selectedLocation,
+                          onChanged: (newValue) {
+                            setState(() {
+                              //List<Medicine>l=new List<Medicine>();
+                              if (newValue == 'QTY')
+                                setState(() {
+                                  medicenee.clear();
+                                  medicenee.addAll(items);
+//someObjects.sort((a, b) => a.someProperty.compareTo(b.someProperty));
+                                  medicenee.sort((a, b) =>
+                                      a.quantity.compareTo(b.quantity));
+                                });
+                              if (newValue == 'A-Z')
+                                setState(() {
+                                  medicenee.clear();
+                                  medicenee.addAll(items);
+//someObjects.sort((a, b) => a.someProperty.compareTo(b.someProperty));
+                                  medicenee
+                                      .sort((a, b) => a.name.compareTo(b.name));
+                                });
+                              print(newValue);
+                              _selectedLocation = newValue;
+                            });
+                          },
+                          items: _locations.map((location) {
+                            return DropdownMenuItem(
+                              child: new Text(location),
+                              value: location,
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                   ),
-                ),
-      ],
+                ],
               ),
             ),
           ),
