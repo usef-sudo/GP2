@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'MyDrawer.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 
-import 'cartcomponent.dart';
+import '../bodies/cartcomponent.dart';
 
 class Sell extends StatefulWidget {
   @override
@@ -129,8 +130,27 @@ Future _EnterId() async{
                     width: 320.0,
                     child: RaisedButton(
                       onPressed: () {
-                        String alert =_id.text;
-                      result.add(alert);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     // result.add(_id.text);
+
+
+
+
                       setState(() {
 
                       });
@@ -205,14 +225,16 @@ Future _EnterId() async{
 
 
       body:
+
      SingleChildScrollView(
+
        child: Column(
 
             //mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
             /*  Text(
                 'you Scaned:',
-              ),
+              ), build((context) =>  cartproduct())
               Text(
                 result,
 
@@ -234,11 +256,16 @@ Future _EnterId() async{
                               Text(
                                 'you Scaned:',
                               ),
-                              Text(
+                              Divider(),
+
+
+
+                              /*Text(
                                  "\r\n"+ result.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: Colors.white, fontSize: 30.0)
-                              ),
+                              ),*/
+
 
                             ],
                           )

@@ -245,7 +245,7 @@ DeleteStore() async{
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Store>>.value(
-      value: DatabaseServer.get("").stores,
+      value: DatabaseServer.get(1).stores,
       child: Scaffold(
 
           backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back

@@ -13,13 +13,16 @@ class DatabaseServer {
 
     static DatabaseServer instance;
 
-    static DatabaseServer get(String uu){
+    static DatabaseServer get(var uu){
       if(instance == null){
         instance = DatabaseServer(uu);
       }
       return instance;
     }
 
+    static DatabaseServer set(){
+      instance=null;
+    }
   DatabaseServer(this.uid);
 
 

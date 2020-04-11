@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
   final _scaffoldKey2 = GlobalKey<ScaffoldState>();
   Future _getUser() async {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
-    DatabaseServer.get(mCurrentUser.uid);
+    DatabaseServer.get(  mCurrentUser.uid);
     print("THIS IS USER ID ");
     print(mCurrentUser.uid);
   }
@@ -65,6 +65,9 @@ class _HomeState extends State<Home> {
                         width: 100.0,
                         child: RaisedButton(
                           onPressed: () {
+                            setState(() {
+                              DatabaseServer.set();
+                            });
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(builder: (context) => MyApp()),
