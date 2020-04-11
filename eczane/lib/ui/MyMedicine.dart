@@ -16,6 +16,7 @@ class _MyMedicineState extends State<MyMedicine> {
   @override
   Widget build(BuildContext context) {
 
+
     return StreamProvider<List<Medicine>>.value(
       value: DatabaseServer.get(1).medicines,
 
@@ -31,7 +32,7 @@ class _MyMedicineState extends State<MyMedicine> {
 
          //********************************//To-DO//**********************************
 
-        body:MedicineCards(),
+        body: MedicineCards(),
 
 
 
@@ -45,10 +46,6 @@ class _MyMedicineState extends State<MyMedicine> {
 
 
 
-
-
-
-      ),
-    );
+    ),);
   }
 }
