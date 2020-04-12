@@ -24,7 +24,7 @@ class _MedicineCardsState extends State<MedicineCards> {
 
     setState(() {});
   }
-  String abood="";
+
   TextEditingController _Count = TextEditingController();
   String next = "";
 
@@ -36,36 +36,34 @@ class _MedicineCardsState extends State<MedicineCards> {
 
     items.addAll(medicenee);
 
-    void filterSearchResults(String val) {
+    void filter(String val) {
       List<Medicine> TempList = new List<Medicine>();
 
       if (val.isNotEmpty) {
-
-        medicenee.forEach((item) {
+        items.forEach((item) {
           if (item.name.contains(val)) {
             TempList.add(item);
           }
         });
 
-
-          medicenee.clear();
-          medicenee.addAll(TempList);
-
-
+        items.clear();
+        items.addAll(TempList);
       } else {
-
-          medicenee.clear();
-          medicenee.addAll(items);
-
+        items.clear();
+        items.addAll(medicenee);
       }
 
-    // medicenee=medicenee.where(medicenee[0].name.contains(val));
+      setState(() {
+        medicenee.clear();
+        medicenee.addAll(items);
+      });
+
+      // medicenee=medicenee.where(medicenee[0].name.contains(val));
     }
 
     TextEditingController editingController = TextEditingController();
     List<String> _locations = ['A-Z', 'QTY']; // Option 2
     String _selectedLocation; // Option 2
-
 
     print('l ${medicenee.length}'); //test
     medicenee.forEach((d) {
@@ -88,34 +86,19 @@ class _MedicineCardsState extends State<MedicineCards> {
                 children: <Widget>[
                   SizedBox(
                     width: 255,
-
-
                     child: TextField(
-
                       controller: editingController,
                       decoration: InputDecoration(
                           labelText: "Search",
-                          hintText: abood,
-
-                          prefixIcon: Icon(Icons.search),
+                          hintText: "Search",
+                          prefixIcon: InkWell(
+                              onTap: () => filter(editingController.text),
+                              child: Icon(Icons.search)),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(0.0)))),
-                      onChanged: (val) {
-                        abood=val;
-                      filterSearchResults(val);
-                      setState(() {
-
-                      });
-                    },
+                      onChanged: (val) {},
                     ),
-
-
-
-
-
-
-
                   ),
                   SizedBox(
                     width: 10,
