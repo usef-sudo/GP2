@@ -31,6 +31,8 @@ class _MyDrawerState extends State<MyDrawer> {
   }
 
   getCurrentUser() async {
+
+
     DocumentSnapshot names = await Firestore.instance
         .collection("data")
         .document(DatabaseServer.get(1).uid)

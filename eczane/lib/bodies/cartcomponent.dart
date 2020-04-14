@@ -6,6 +6,7 @@ class cartproduct extends StatefulWidget {
 }
 
 class _cartproductState extends State<cartproduct> {
+
   var productsincart = [
 
     {"name": "panadol", "price": 30, "qantity":1},
@@ -14,6 +15,9 @@ class _cartproductState extends State<cartproduct> {
     {"name": "yousef", "price": 200, "qantity":1},
 
   ];
+
+
+
   @override
   Widget build(BuildContext context) {
     return new ListView.builder(
