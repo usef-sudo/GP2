@@ -5,7 +5,7 @@ import 'main.dart';
 import 'page2.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'Sell.dart';
-import 'Refrences.dart';
+
 import 'package:eczane/models/user.dart';
 import 'AddStore.dart';
 import 'MyMedicine.dart';
@@ -24,12 +24,12 @@ class _HomeState extends State<Home> {
   final _scaffoldKey2 = GlobalKey<ScaffoldState>();
   Future _getUser() async {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
-    DatabaseServer.get(  mCurrentUser.uid);
+    DatabaseServer.get(mCurrentUser.uid);
     print("THIS IS USER ID ");
     print(mCurrentUser.uid);
   }
 
-  initState(){
+  initState() {
     _getUser();
   }
 
@@ -58,8 +58,6 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-
-
                     Center(
                       child: SizedBox(
                         width: 100.0,
@@ -81,8 +79,6 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-
-
                   ],
                 ),
               ),
@@ -90,23 +86,21 @@ class _HomeState extends State<Home> {
           );
         });
   }
+
   @override
   Widget build(BuildContext context) {
     final controller = FabCircularMenuController();
 
     return Scaffold(
-
       backgroundColor: Color.fromRGBO(222, 234, 247, 1),
       appBar: AppBar(
-      //  backgroundColor: Color.fromRGBO(123, 189, 221, 1),
-       backgroundColor: Color.fromRGBO(66  ,160, 206, 1),
+        //  backgroundColor: Color.fromRGBO(123, 189, 221, 1),
+        backgroundColor: Color.fromRGBO(66, 160, 206, 1),
         //backgroundColor: Colors.lightBlueAccent,
         title: new Text("Home"),
       ),
       drawer: MyDrawer(),
-
       body: Stack(
-
         children: <Widget>[
           Image.asset(
             'images/m.jpg',
@@ -114,115 +108,101 @@ class _HomeState extends State<Home> {
             width: double.infinity,
             height: double.infinity,
           ),
-        Center(
-
-          child: FabCircularMenu(
-            fabColor: Colors.black,
-
+          Center(
+            child: FabCircularMenu(
+              fabColor: Colors.black,
               child: Center(
-
-                  child:
-                  SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
+                  child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
                     Padding(
-                    padding: const EdgeInsets.only(bottom: 3.0),
-                child: Text('How can Eczane help you ?',
-
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black, fontSize: 36.0)),
-              ),
-
-                       Padding(
-                         padding: const EdgeInsets.all(20.0),
-                         child:   Image.asset('images/arrow.gif')
-
-                       ),
-
-
-                      ],
+                      padding: const EdgeInsets.only(bottom: 3.0),
+                      child: Text('How can Eczane help you ?',
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(color: Colors.black, fontSize: 36.0)),
                     ),
-                  )
-
-
-              ),
-
-            ringColor: Colors.black,
-            controller: controller,
-            options: <Widget>[
-              //IconButton(icon: Icon(Icons.widgets), onPressed: () { controller.isOpen = false;}, iconSize: 48.0, color: Colors.black),
-              IconButton(
-                  tooltip: 'Medicine Store',
-                  icon: Icon(
-                    Icons.store,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
+                    Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Image.asset('images/arrow.gif')),
+                  ],
+                ),
+              )),
+              ringColor: Colors.black,
+              controller: controller,
+              options: <Widget>[
+                //IconButton(icon: Icon(Icons.widgets), onPressed: () { controller.isOpen = false;}, iconSize: 48.0, color: Colors.black),
+                IconButton(
+                    tooltip: 'Medicine Store',
+                    icon: Icon(
+                      Icons.store,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => new MedicineStore()));
+                    },
+                    iconSize: 48.0,
+                    color: Colors.white),
+                IconButton(
+                    tooltip: 'SEll',
+                    icon: Icon(
+                      Icons.attach_money,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => new MedicineStore()));
-                  },
-                  iconSize: 48.0,
-                  color: Colors.white),
-              IconButton(
-                  tooltip: 'SEll',
-                  icon: Icon(
-                    Icons.attach_money,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Sell()),
-                    );
-                  },
-                  iconSize: 48.0,
-                  color: Colors.white),
-              IconButton(
-                  tooltip: 'Add Store',
-                  icon: Icon(
-                    Icons.call,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddStore()),
-                    );
-                  },
-                  iconSize: 48.0,
-                  color: Colors.white),
-              IconButton(
-                  tooltip: 'My Medicine',
-                  icon: Icon(
-                    Icons.local_pharmacy,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyMedicine()),
-                    );
-                  },
-                  iconSize: 48.0,
-                  color: Colors.white),
-              IconButton(
-                  tooltip: 'Log Out',
-                  icon: Icon(
-                    Icons.lock,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-
-                    _log();
-                  },
-                  iconSize: 48.0,
-                  color: Colors.white),
-            ],
+                        MaterialPageRoute(builder: (context) => Sell()),
+                      );
+                    },
+                    iconSize: 48.0,
+                    color: Colors.white),
+                IconButton(
+                    tooltip: 'Add Store',
+                    icon: Icon(
+                      Icons.call,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddStore()),
+                      );
+                    },
+                    iconSize: 48.0,
+                    color: Colors.white),
+                IconButton(
+                    tooltip: 'My Medicine',
+                    icon: Icon(
+                      Icons.local_pharmacy,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyMedicine()),
+                      );
+                    },
+                    iconSize: 48.0,
+                    color: Colors.white),
+                IconButton(
+                    tooltip: 'Log Out',
+                    icon: Icon(
+                      Icons.lock,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      _log();
+                    },
+                    iconSize: 48.0,
+                    color: Colors.white),
+              ],
+            ),
           ),
-        ),
-    ],
+        ],
       ),
     );
   }

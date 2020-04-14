@@ -34,7 +34,6 @@ class _EmployeeState extends State<Employee> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Text(
                       ' Enter employee\'s  Email ',
                       style: TextStyle(
@@ -85,7 +84,6 @@ class _EmployeeState extends State<Employee> {
                           width: 100.0,
                           child: RaisedButton(
                             onPressed: () {
-
                               Navigator.of(context).pop();
                             },
                             child: Text(
@@ -97,7 +95,6 @@ class _EmployeeState extends State<Employee> {
                         )
                       ],
                     )
-
                   ],
                 ),
               ),
@@ -168,7 +165,6 @@ class _EmployeeState extends State<Employee> {
                         )
                       ],
                     )
-
                   ],
                 ),
               ),
@@ -178,44 +174,31 @@ class _EmployeeState extends State<Employee> {
   }
 
   final authser _auth = authser();
-  getemployee () async {
+  getemployee() async {
+    final FirebaseAuth fa = FirebaseAuth.instance;
+    FirebaseUser _result = await fa.currentUser();
 
+    await _auth.registemployee(_result.uid, _Email.text, _emppass.text);
 
-    final FirebaseAuth fa=FirebaseAuth.instance;
-    FirebaseUser _result =  await fa.currentUser();
-
-
-    await _auth.registemployee(_result.uid,_Email.text, _emppass.text);
-
-
-
-
-
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     return StreamProvider<List<MEmployee>>.value(
-    value: DatabaseServer.get(1).emploies,
-      child: Scaffold(  backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back
+      value: DatabaseServer.get(1).emploies,
+      child: Scaffold(
+          backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
           appBar: AppBar(
-            backgroundColor: Color.fromRGBO(66  ,160, 206, 1),//up
+            backgroundColor: Color.fromRGBO(66, 160, 206, 1), //up
             title: new Text("Employee"),
           ),
           drawer: MyDrawer(),
           body: SingleChildScrollView(
-            child: Container(
-                height: 420,
-                child: EmpCards()),
+            child: Container(height: 420, child: EmpCards()),
           ),
-
-
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: Padding(
             padding: const EdgeInsets.all(30.0),
             child: Row(

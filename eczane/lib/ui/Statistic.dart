@@ -35,124 +35,116 @@ class _statisState extends State<statis> {
   Widget build(BuildContext context) {
     return new Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back
+        backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
         appBar: AppBar(
-
-          backgroundColor: Color.fromRGBO(66  ,160, 206, 1),
+          backgroundColor: Color.fromRGBO(66, 160, 206, 1),
           title: new Text("Statistics"),
         ),
         drawer: MyDrawer(),
         body: SingleChildScrollView(
           child: Container(
-
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Daily:',
-                        style: TextStyle(fontSize: 30.0),
-                      ),
-                    ),
-                    InkWell(
-
-                      child: Card(
-
-                        child: Container(
-                          height: MediaQuery.of(context).size.width/2,
-
-                          width: MediaQuery.of(context).size.width,
-                         // height: double.infinity,
-                          child: new Sparkline(
-
-
-                            data: data,
-                            lineColor: Colors.black,
-                            fillMode: FillMode.below,
-                            fillColor: Colors.black12,
-                            pointsMode: PointsMode.all,
-                            pointSize: 5.0,
-                            pointColor: Colors.red,
-                          ),
-                        ),
-                      ),
-                      onTap: () => setState(() {
-                        _Details(data);
-                      }),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Weekly:',
-                        style: TextStyle(fontSize: 30.0),
-                      ),
-                    ),
-                    InkWell(
-                      child: Card(
-                        child: new Container(
-                          height: MediaQuery.of(context).size.width/2,
-                          width: MediaQuery.of(context).size.width,
-                     //   height: double.infinity,
-                          child: new Sparkline(
-                            data: data2,
-                            lineColor: Colors.black,
-                            fillMode: FillMode.below,
-                            fillColor: Colors.black12,
-                            pointsMode: PointsMode.all,
-                            pointSize: 5.0,
-                            pointColor: Colors.red,
-                          ),
-                        ),
-                      ),
-                      onTap: () => setState(() {
-                        _Details(data2);
-                      }),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Monthly:',
-                        style: TextStyle(fontSize: 30.0),
-                      ),
-                    ),
-                    InkWell(
-                      
-                      child: Card(
-                        child: Container(
-
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.width/2,
-
-                          child: new Sparkline(
-                            data: data3,
-                            lineColor: Colors.black,
-                            fillMode: FillMode.below,
-                            fillColor: Colors.black12,
-                            pointsMode: PointsMode.all,
-                            pointSize: 5.0,
-                            pointColor: Colors.red,
-                          ),
-                        ),
-                      ),
-                      onTap: () => setState(() {
-                        _Details(data3);
-                      }),
-                    ),
-                    RaisedButton(
-                        onPressed: () => f = true, child: Text('Show details'),
-                      color: Colors.white,
-                      textColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(8.0),
-                          side: BorderSide(color: Colors.black38)),
-                    ),
-                    if (result.toString() != data3.toString() || f)
-                      new Text(result.toString()),
-                  ],
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Daily:',
+                    style: TextStyle(fontSize: 30.0),
+                  ),
                 ),
-              )),
+                InkWell(
+                  child: Card(
+                    child: Container(
+                      height: MediaQuery.of(context).size.width / 2,
+
+                      width: MediaQuery.of(context).size.width,
+                      // height: double.infinity,
+                      child: new Sparkline(
+                        data: data,
+                        lineColor: Colors.black,
+                        fillMode: FillMode.below,
+                        fillColor: Colors.black12,
+                        pointsMode: PointsMode.all,
+                        pointSize: 5.0,
+                        pointColor: Colors.red,
+                      ),
+                    ),
+                  ),
+                  onTap: () => setState(() {
+                    _Details(data);
+                  }),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Weekly:',
+                    style: TextStyle(fontSize: 30.0),
+                  ),
+                ),
+                InkWell(
+                  child: Card(
+                    child: new Container(
+                      height: MediaQuery.of(context).size.width / 2,
+                      width: MediaQuery.of(context).size.width,
+                      //   height: double.infinity,
+                      child: new Sparkline(
+                        data: data2,
+                        lineColor: Colors.black,
+                        fillMode: FillMode.below,
+                        fillColor: Colors.black12,
+                        pointsMode: PointsMode.all,
+                        pointSize: 5.0,
+                        pointColor: Colors.red,
+                      ),
+                    ),
+                  ),
+                  onTap: () => setState(() {
+                    _Details(data2);
+                  }),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Monthly:',
+                    style: TextStyle(fontSize: 30.0),
+                  ),
+                ),
+                InkWell(
+                  child: Card(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.width / 2,
+                      child: new Sparkline(
+                        data: data3,
+                        lineColor: Colors.black,
+                        fillMode: FillMode.below,
+                        fillColor: Colors.black12,
+                        pointsMode: PointsMode.all,
+                        pointSize: 5.0,
+                        pointColor: Colors.red,
+                      ),
+                    ),
+                  ),
+                  onTap: () => setState(() {
+                    _Details(data3);
+                  }),
+                ),
+                RaisedButton(
+                  onPressed: () => f = true,
+                  child: Text('Show details'),
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(8.0),
+                      side: BorderSide(color: Colors.black38)),
+                ),
+                if (result.toString() != data3.toString() || f)
+                  new Text(result.toString()),
+              ],
+            ),
+          )),
         ));
   }
 }

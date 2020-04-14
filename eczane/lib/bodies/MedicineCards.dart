@@ -35,16 +35,10 @@ class _MedicineCardsState extends State<MedicineCards> {
     var items = List<Medicine>();
 
     medicenee.forEach((i) {
-
-        items.add(i);
-
+      items.add(i);
     });
 
-
-
     void filter(String val) {
-
-
       List<Medicine> TempList = new List<Medicine>();
 
       if (val.isNotEmpty) {
@@ -52,8 +46,7 @@ class _MedicineCardsState extends State<MedicineCards> {
           if (item.name.contains(val)) {
             TempList.add(item);
           }
-        }
-        );
+        });
 
         medicenee.clear();
         medicenee.addAll(TempList);
@@ -64,9 +57,8 @@ class _MedicineCardsState extends State<MedicineCards> {
       }
 
       setState(() {
-
-      // medicenee.clear();
-      //  medicenee.addAll(items);
+        // medicenee.clear();
+        //  medicenee.addAll(items);
       });
 
       // medicenee=medicenee.where(medicenee[0].name.contains(val));

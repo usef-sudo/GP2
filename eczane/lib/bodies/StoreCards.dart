@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:eczane/models/Store.dart';
+
 class StoreCards extends StatefulWidget {
   @override
   _StoreCardsState createState() => _StoreCardsState();
@@ -14,9 +15,7 @@ class StoreCards extends StatefulWidget {
 class _StoreCardsState extends State<StoreCards> {
   @override
   Widget build(BuildContext context) {
-
     _launchCaller(String num) async {
-
       String url = "tel:${num}";
       if (await canLaunch(url)) {
         await launch(url);
@@ -27,23 +26,18 @@ class _StoreCardsState extends State<StoreCards> {
 
     final Storee = Provider.of<List<Store>>(context);
 
-    print('l ${Storee.length}');//test
-    Storee.forEach((d){
+    print('l ${Storee.length}'); //test
+    Storee.forEach((d) {
       print('n ${d.name}');
-
-
-    });//iiiiiiiiiiiiiiiiiiiiiiiiitest
+    }); //iiiiiiiiiiiiiiiiiiiiiiiiitest
 
     return ListView.builder(
       itemCount: Storee.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.only(top:8.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: Card(
-
-
             color: null,
-
             margin: EdgeInsets.fromLTRB(6, 4, 6, 0),
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(18.0),
@@ -56,13 +50,14 @@ class _StoreCardsState extends State<StoreCards> {
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                     Storee[index].name,//name only
+                      Storee[index].name, //name only
                       style: TextStyle(color: Colors.black, fontSize: 30.0),
                     ),
                   ),
                   new FlatButton(
                       color: Colors.green,
-                      onPressed: () => _launchCaller(Storee[index].phone),//phone only
+                      onPressed: () =>
+                          _launchCaller(Storee[index].phone), //phone only
                       child: new Text("Call ")),
                 ],
               ),

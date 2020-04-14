@@ -19,6 +19,7 @@ class Sell extends StatefulWidget {
   _SellState createState() => _SellState();
 }
 
+//thtfhfdgtrdg
 class _SellState extends State<Sell> {
   int total = 100;
   TextEditingController _id = TextEditingController();
@@ -196,7 +197,7 @@ class _SellState extends State<Sell> {
 
   @override
   void initState() {
-  l.add(m);
+    l.add(m);
     litems.add(m);
 
     super.initState();
@@ -209,8 +210,6 @@ class _SellState extends State<Sell> {
         .document("${DatabaseServer.get("uu")}")
         .collection('medicines');
 
-
-
     return Scaffold(
       backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
 
@@ -220,136 +219,120 @@ class _SellState extends State<Sell> {
       ),
       drawer: MyDrawer(),
 
-      body:
-         ListView(
-
-          //mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 10),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 1.65,
-
-              child: new ListView.builder(
-
-                itemCount: l.length,
-                itemBuilder: (_,  index) {
-
-                  return SizedBox(
-
-
-                    child: Card(
-
-                        margin: EdgeInsets.all(10),
-
-                        child:ListTile(
-
-                          title: Text(l[index].name),
-                          subtitle: new Column(
+      body: ListView(
+        //mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(height: 10),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 1.65,
+            child: new ListView.builder(
+              itemCount: l.length,
+              itemBuilder: (_, index) {
+                return SizedBox(
+                  child: Card(
+                    margin: EdgeInsets.all(10),
+                    child: ListTile(
+                      title: Text(l[index].name),
+                      subtitle: new Column(
+                        children: <Widget>[
+                          new Row(
                             children: <Widget>[
-                              new Row(
-                                children: <Widget>[
-
-                                  Expanded(
-                                    child: Text("price=" + "\$${l[index].price}"),
-                                  ),
-                                  Expanded(
-                                    child: new Column(
-                                      children: <Widget>[
-                                        new IconButton(
-                                            icon: Icon(
-                                              Icons.arrow_drop_up,
-                                              color: Colors.green,
-                                            ),
-                                            onPressed: () {
-
-                                              /* setState(() {
+                              Expanded(
+                                child: Text("price=" + "\$${l[index].price}"),
+                              ),
+                              Expanded(
+                                child: new Column(
+                                  children: <Widget>[
+                                    new IconButton(
+                                        icon: Icon(
+                                          Icons.arrow_drop_up,
+                                          color: Colors.green,
+                                        ),
+                                        onPressed: () {
+                                          /* setState(() {
 
                               });*/
-
-                                            }),
-                                        new Text("${l[index].quantity}"),
-                                        new IconButton(
-                                            icon: Icon(
-                                              Icons.arrow_drop_down,
-                                              color: Colors.red,
-                                            ),
-                                            onPressed: () {
-
-                                              /*  setState(() {
+                                        }),
+                                    new Text("${l[index].quantity}"),
+                                    new IconButton(
+                                        icon: Icon(
+                                          Icons.arrow_drop_down,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: () {
+                                          /*  setState(() {
 
                                });
                                */
-                                            }),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              )
+                                        }),
+                                  ],
+                                ),
+                              ),
                             ],
-                          ),
-                        ),),
-                  );
-                },
-              ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
-
-
+          ),
 
 //Text('Scan more:'),
-            /*build((context) =>  cartproduct())
+          /*build((context) =>  cartproduct())
               Text(
                 result,
 
               ),*/
-            FabCircularMenu(
-              fabColor: Colors.black,
-              child: SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 1.65,
-                  // color: Color.fromRGBO(222, 234, 247, 1),
-                  //
-                  //color: Colors.amberAccent,
-                  child: Center(
-                      child: Padding(
-                    padding: const EdgeInsets.only(bottom: 300.0),
-                  )),
-                ),
+          FabCircularMenu(
+            fabColor: Colors.black,
+            child: SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height / 1.65,
+                // color: Color.fromRGBO(222, 234, 247, 1),
+                //
+                //color: Colors.amberAccent,
+                child: Center(
+                    child: Padding(
+                  padding: const EdgeInsets.only(bottom: 300.0),
+                )),
               ),
-              ringColor: Colors.black,
-              controller: _controller,
-              options: <Widget>[
-                IconButton(
-                    tooltip: 'test',
-                    icon: Icon(Icons.widgets),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => cartproduct()),
-                      );
-                    },
-                    iconSize: 30.0,
-                    color: Colors.white),
-                IconButton(
-                    tooltip: 'Scan ID',
-                    icon: Icon(Icons.settings_overscan),
-                    onPressed: () {
-                      _scan();
-                    },
-                    iconSize: 40.0,
-                    color: Colors.white),
-                IconButton(
-                    tooltip: 'Add manuel',
-                    icon: Icon(Icons.keyboard),
-                    onPressed: (() => {
-                          _EnterId(),
-                        }),
-                    iconSize: 40.0,
-                    color: Colors.white),
-                //  IconButton(icon: Icon(Icons.done_outline), onPressed: () {_bye();}, iconSize: 40.0, color: Colors.black),
-              ],
             ),
-          ],
-
+            ringColor: Colors.black,
+            controller: _controller,
+            options: <Widget>[
+              IconButton(
+                  tooltip: 'test',
+                  icon: Icon(Icons.widgets),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => cartproduct()),
+                    );
+                  },
+                  iconSize: 30.0,
+                  color: Colors.white),
+              IconButton(
+                  tooltip: 'Scan ID',
+                  icon: Icon(Icons.settings_overscan),
+                  onPressed: () {
+                    _scan();
+                  },
+                  iconSize: 40.0,
+                  color: Colors.white),
+              IconButton(
+                  tooltip: 'Add manuel',
+                  icon: Icon(Icons.keyboard),
+                  onPressed: (() => {
+                        _EnterId(),
+                      }),
+                  iconSize: 40.0,
+                  color: Colors.white),
+              //  IconButton(icon: Icon(Icons.done_outline), onPressed: () {_bye();}, iconSize: 40.0, color: Colors.black),
+            ],
+          ),
+        ],
       ),
 
       bottomNavigationBar: BottomAppBar(
@@ -396,13 +379,11 @@ Widget HI(Medicine data) {
     color: Colors.black38,
     child: Card(
       child: ListTile(
-
         title: Text(data.name),
         subtitle: new Column(
           children: <Widget>[
             new Row(
               children: <Widget>[
-
                 Expanded(
                   child: Text("price=" + "\$${data.price}"),
                 ),
@@ -419,7 +400,6 @@ Widget HI(Medicine data) {
                             /* setState(() {
 
                               });*/
-
                           }),
                       new Text("${data.quantity}"),
                       new IconButton(
@@ -445,4 +425,3 @@ Widget HI(Medicine data) {
     ),
   );
 }
-

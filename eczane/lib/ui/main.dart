@@ -24,27 +24,24 @@ class _splashState extends State<splash> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: new Scaffold(
-
           body: Stack(
             children: <Widget>[
-
               Center(
-
                 child: new SplashScreen(
-
                     seconds: 3,
                     navigateAfterSeconds: MyApp(),
-
-                    image: new Image.asset('images/splash.gif',
-                     ),
+                    image: new Image.asset(
+                      'images/splash.gif',
+                    ),
                     backgroundColor: Color.fromRGBO(61, 136, 221, 1),
-
-                    photoSize:180,
-                    loadingText:Text('Welcome to Eczane',style: TextStyle(fontSize: 30), ) ,
+                    photoSize: 180,
+                    loadingText: Text(
+                      'Welcome to Eczane',
+                      style: TextStyle(fontSize: 30),
+                    ),
                     loaderColor: Colors.white),
               ),
             ],
-
           ),
         ));
   }
@@ -56,7 +53,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-
     super.initState();
     _controller = VideoPlayerController.network(
         'http://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4')
@@ -65,6 +61,7 @@ class _MyAppState extends State<MyApp> {
         setState(() {});
       });
   }
+
   @override
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String dropdownValue = 'English';
@@ -93,7 +90,6 @@ class _MyAppState extends State<MyApp> {
                         fontSize: 15,
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -111,25 +107,23 @@ class _MyAppState extends State<MyApp> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)), //this right here
             child: InkWell(
-             // onTap: _controller.puse();,
+              // onTap: _controller.puse();,
               child: Container(
-                  height: 500,
-                  child: Padding(
+                height: 500,
+                child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
-
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: Center(
-
                           child: _controller.value.initialized
                               ? AspectRatio(
-                            aspectRatio: _controller.value.aspectRatio,
-                            child: VideoPlayer(_controller),
-                          )
+                                  aspectRatio: _controller.value.aspectRatio,
+                                  child: VideoPlayer(_controller),
+                                )
                               : Container(),
                         ),
                       ),
@@ -152,7 +146,9 @@ class _MyAppState extends State<MyApp> {
                             },
                             // Display the correct icon depending on the state of the player.
                             child: Icon(
-                              _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                              _controller.value.isPlaying
+                                  ? Icons.pause
+                                  : Icons.play_arrow,
                             ),
                           ),
                         ),
@@ -166,43 +162,23 @@ class _MyAppState extends State<MyApp> {
         });
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
   Widget build(BuildContext context) {
-
-
-
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: new Scaffold(
-
         key: _scaffoldKey,
         endDrawer: new Drawer(
-
             child: Container(
-              color: Color.fromRGBO(222, 234, 247, 1),
-              child: ListView(
-
-          children: <Widget>[
+          color: Color.fromRGBO(222, 234, 247, 1),
+          child: ListView(
+            children: <Widget>[
               Container(
                   height: 50,
                   child: DrawerHeader(
                       decoration: BoxDecoration(
-                    color: Color.fromRGBO(66  ,160, 206, 1),
+                    color: Color.fromRGBO(66, 160, 206, 1),
                   ))),
               Column(
-
                 children: <Widget>[
                   Row(
                     children: <Widget>[
@@ -232,11 +208,8 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ],
                   ),
-
-
                   Row(
                     children: <Widget>[
-
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: new Text('Theme'),
@@ -263,10 +236,6 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ],
                   ),
-
-
-
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -274,7 +243,9 @@ class _MyAppState extends State<MyApp> {
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           child: new Icon(Icons.info),
-                          onTap: () {_info();},
+                          onTap: () {
+                            _info();
+                          },
                         ),
                       ),
                       Padding(
@@ -292,21 +263,19 @@ class _MyAppState extends State<MyApp> {
                               }
                             });
 
-
                             _show();
-
-                            },
+                          },
                         ),
                       ),
                     ],
                   )
                 ],
               ),
-          ],
-        ),
-            )),
+            ],
+          ),
+        )),
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(66  ,160, 206, 1),
+          backgroundColor: Color.fromRGBO(66, 160, 206, 1),
           title: Center(
               child: Text(
             "Eczane",
@@ -319,7 +288,7 @@ class _MyAppState extends State<MyApp> {
             )
           ],
         ),
-        backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back
+        backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
 
         body: Page1(),
         //Center(child: new Image.asset("images/ph.png"))
@@ -333,4 +302,3 @@ class _MyAppState extends State<MyApp> {
     _controller.dispose();
   }
 }
-

@@ -1,4 +1,3 @@
-
 import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
 import 'package:eczane/bodies/MedicineCards.dart';
 import 'package:eczane/models/Medicine.dart';
@@ -15,37 +14,21 @@ class MyMedicine extends StatefulWidget {
 class _MyMedicineState extends State<MyMedicine> {
   @override
   Widget build(BuildContext context) {
-
-
     return StreamProvider<List<Medicine>>.value(
       value: DatabaseServer.get(1).medicines,
-
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back
+        backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
 
         appBar: AppBar(
-
-          backgroundColor: Color.fromRGBO(66  ,160, 206, 1),
+          backgroundColor: Color.fromRGBO(66, 160, 206, 1),
           title: new Text("MyMedicine"),
         ),
-        drawer:MyDrawer(),
+        drawer: MyDrawer(),
 
-         //********************************//To-DO//**********************************
+        //********************************//To-DO//**********************************
 
         body: MedicineCards(),
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ),);
+      ),
+    );
   }
 }

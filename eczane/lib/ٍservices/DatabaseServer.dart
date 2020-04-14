@@ -9,29 +9,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class DatabaseServer {
-    String uid;
+  String uid;
 
-    static DatabaseServer instance;
+  static DatabaseServer instance;
 
-    static DatabaseServer get(var uu){
-      if(instance == null){
-        instance = DatabaseServer(uu);
-      }
-      return instance;
+  static DatabaseServer get(var uu) {
+    if (instance == null) {
+      instance = DatabaseServer(uu);
     }
+    return instance;
+  }
 
-    static DatabaseServer set(){
-      instance=null;
-    }
+  static DatabaseServer set() {
+    instance = null;
+  }
+
   DatabaseServer(this.uid);
 
-
-
-
-
   final CollectionReference data = Firestore.instance.collection('data');
-
-
 
   Future updatedata(String name, String pharmacy) async {
     return await data.document(uid).setData({
@@ -81,16 +76,14 @@ class DatabaseServer {
   }
 */
 
-
   List<Medicine> _medicinelist(QuerySnapshot snap) {
     return snap.documents.map((doc) {
       return Medicine(
-
           quantity: doc.data['quantity'] ?? '',
           profits: doc.data['profits'] ?? '',
           price: doc.data['price'] ?? '0',
           ID: doc.data['ID'] ?? '',
-          Exp: doc.data['Exp']??'unknow',
+          Exp: doc.data['Exp'] ?? 'unknow',
           name: doc.data['name'] ?? '');
     }).toList();
   }
@@ -103,11 +96,7 @@ class DatabaseServer {
   }
 
   Stream<List<Store>> get stores {
-    return data
-        .document(uid)
-        .collection('store')
-        .snapshots()
-        .map(_storelist);
+    return data.document(uid).collection('store').snapshots().map(_storelist);
   }
   ///////////////////////////////////////////////////////////////////////////////
 
@@ -119,11 +108,7 @@ class DatabaseServer {
   }
 
   Stream<List<MEmployee>> get emploies {
-    return data
-        .document(uid)
-        .collection('employee')
-        .snapshots()
-        .map(_emplist);
+    return data.document(uid).collection('employee').snapshots().map(_emplist);
   }
 
   ///////////////////////////////////////////////////////////////////////////////

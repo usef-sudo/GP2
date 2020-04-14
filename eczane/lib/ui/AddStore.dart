@@ -10,6 +10,7 @@ import 'MyDrawer.dart';
 import 'package:eczane/bodies/StoreCards.dart';
 
 import 'package:provider/provider.dart';
+
 class AddStore extends StatefulWidget {
   @override
   _AddStoreState createState() => _AddStoreState();
@@ -47,7 +48,6 @@ class _AddStoreState extends State<AddStore> {
                         setState(() => {num = val});
                       },
                       decoration: InputDecoration(
-
                         hintText: 'number',
                         border: InputBorder.none,
                       ),
@@ -60,11 +60,9 @@ class _AddStoreState extends State<AddStore> {
                           width: 100.0,
                           child: RaisedButton(
                             onPressed: () {
-
-
                               _Number.clear();
 
-                             DeleteStore();
+                              DeleteStore();
 
                               setState(() {});
 
@@ -92,7 +90,6 @@ class _AddStoreState extends State<AddStore> {
                         )
                       ],
                     )
-
                   ],
                 ),
               ),
@@ -126,7 +123,6 @@ class _AddStoreState extends State<AddStore> {
                         ),
                       ),
                       TextField(
-
                         onChanged: (val) {
                           setState(() => {n = val});
                         },
@@ -155,7 +151,6 @@ class _AddStoreState extends State<AddStore> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-
                           SizedBox(
                             width: 100.0,
                             child: RaisedButton(
@@ -164,8 +159,7 @@ class _AddStoreState extends State<AddStore> {
                                 setState(() {
                                   FK.currentState.reset();
                                   _phone.clear();
-                                    _store.clear();
-
+                                  _store.clear();
                                 });
 
                                 Navigator.of(context).pop();
@@ -190,10 +184,8 @@ class _AddStoreState extends State<AddStore> {
                               color: const Color(0xFF1BC0C5),
                             ),
                           )
-
                         ],
                       )
-
                     ],
                   ),
                 ),
@@ -203,10 +195,9 @@ class _AddStoreState extends State<AddStore> {
         });
   }
 
-String n = "";
-String p = "";
-String num = "";
-
+  String n = "";
+  String p = "";
+  String num = "";
 
   getStore() async {
     /*
@@ -215,55 +206,53 @@ String num = "";
 
     await postsRef.document(postID).setData(postData);
 */
-    final FirebaseAuth _auth=FirebaseAuth.instance;
-    FirebaseUser _result =  await _auth.currentUser();
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    FirebaseUser _result = await _auth.currentUser();
 
-
-    Store post = new Store( name: n,phone: p );
+    Store post = new Store(name: n, phone: p);
     Map<String, dynamic> postData = post.toJson();
 
+    Firestore.instance
+        .collection('data')
+        .document(_result.uid)
+        .collection('store')
+        .document(p)
+        .setData(postData);
 
-    Firestore.instance.collection('data').document(_result.uid).collection('store').document(p).setData(postData);
-
-
-    setState(() {
-
-    });
+    setState(() {});
   }
 
-DeleteStore() async{
-  final FirebaseAuth _auth=FirebaseAuth.instance;
-  FirebaseUser _result =  await _auth.currentUser();
+  DeleteStore() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    FirebaseUser _result = await _auth.currentUser();
 
-
-  Firestore.instance.collection('data').document(_result.uid).collection('store').document(num).delete();
-
-
-}
-
+    Firestore.instance
+        .collection('data')
+        .document(_result.uid)
+        .collection('store')
+        .document(num)
+        .delete();
+  }
 
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Store>>.value(
       value: DatabaseServer.get(1).stores,
       child: Scaffold(
-
-          backgroundColor: Color.fromRGBO(123, 189, 221, 1),//back
+          backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
           appBar: AppBar(
-            backgroundColor: Color.fromRGBO(66  ,160, 206, 1),//up
+            backgroundColor: Color.fromRGBO(66, 160, 206, 1), //up
             title: new Text("AddStore"),
           ),
           drawer: MyDrawer(),
           body: SingleChildScrollView(
-            child: Container(
-                height: 420,
-                child: StoreCards()),
+            child: Container(height: 420, child: StoreCards()),
           ),
-
 
           // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: Padding(
             padding: const EdgeInsets.all(30.0),
             child: Row(
@@ -291,4 +280,3 @@ DeleteStore() async{
     );
   }
 }
-

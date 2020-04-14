@@ -11,8 +11,6 @@ class MedicineStore extends StatefulWidget {
 }
 
 class _MedicineStoreState extends State<MedicineStore> {
-
-
   Future _ADD() async {
     showDialog(
         context: context,
@@ -46,16 +44,12 @@ class _MedicineStoreState extends State<MedicineStore> {
                         SizedBox(
                           width: 100.0,
                           child: RaisedButton(
-                            onPressed: ()  {
-
+                            onPressed: () {
                               getpackage();
 
-                                setState(() {
+                              setState(() {});
 
-                                });
-
-                                Navigator.of(context).pop();
-
+                              Navigator.of(context).pop();
                             },
                             child: Text(
                               "Add",
@@ -110,11 +104,10 @@ class _MedicineStoreState extends State<MedicineStore> {
                       ),
                     ),
                     TextField(
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
-                          ID=val;
+                          ID = val;
                         });
-
                       },
                       decoration: InputDecoration(
                         hintText: 'ID',
@@ -122,7 +115,6 @@ class _MedicineStoreState extends State<MedicineStore> {
                       ),
                       controller: _ID,
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -132,7 +124,7 @@ class _MedicineStoreState extends State<MedicineStore> {
                             onPressed: () {
                               setState(() {});
                               UpdateMedicine();
-_ID.clear();
+                              _ID.clear();
 
                               Navigator.of(context).pop();
                             },
@@ -165,6 +157,7 @@ _ID.clear();
           );
         });
   }
+
   final _formkey = GlobalKey<FormState>();
   TextEditingController _NAMEcontroller = TextEditingController();
   TextEditingController _PRIcontroller = TextEditingController();
@@ -174,24 +167,13 @@ _ID.clear();
   TextEditingController _PROcontroller = TextEditingController();
   TextEditingController _ID = TextEditingController();
 
-
-  String n="";
-  String p="";
-  String q="";
-  String i="";
-  String e="";
-  String pr="";
-  String ID="";
-
-
-
-
-
-
-
-
-
-
+  String n = "";
+  String p = "";
+  String q = "";
+  String i = "";
+  String e = "";
+  String pr = "";
+  String ID = "";
 
   getpackage() async {
     /*
@@ -200,47 +182,41 @@ _ID.clear();
 
     await postsRef.document(postID).setData(postData);
 */
-    final FirebaseAuth _auth=FirebaseAuth.instance;
-    FirebaseUser _result =  await _auth.currentUser();
-
-
-    Medicine post = new Medicine( name: n,Exp: e,ID: i,price: p,profits: pr, quantity: int.parse(q) );
-    Map<String, dynamic> postData = post.toJson();
-
-
-    Firestore.instance.collection('data').document(_result.uid).collection('medicines').document(i).setData(postData);
-
-
-
-    _formkey.currentState.reset();
-
-    setState(() {
-
-    });
-  }
-  UpdateMedicine() async {
-
     final FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseUser _result = await _auth.currentUser();
 
-    Firestore.instance.collection('data').document(_result.uid).collection('medicines').document(ID).delete();
+    Medicine post = new Medicine(
+        name: n, Exp: e, ID: i, price: p, profits: pr, quantity: int.parse(q));
+    Map<String, dynamic> postData = post.toJson();
 
+    Firestore.instance
+        .collection('data')
+        .document(_result.uid)
+        .collection('medicines')
+        .document(i)
+        .setData(postData);
 
+    _formkey.currentState.reset();
+
+    setState(() {});
   }
 
+  UpdateMedicine() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    FirebaseUser _result = await _auth.currentUser();
 
-
+    Firestore.instance
+        .collection('data')
+        .document(_result.uid)
+        .collection('medicines')
+        .document(ID)
+        .delete();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-
-
-
       key: _formkey,
-
-
-
       child: Scaffold(
         backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
         appBar: AppBar(
@@ -313,7 +289,7 @@ _ID.clear();
                           padding: const EdgeInsets.only(left: 12.0),
                           child: TextFormField(
                             onChanged: (val) {
-                              setState(() => {p= val});
+                              setState(() => {p = val});
                             },
                             controller: _PRIcontroller,
                             validator: (value) {
@@ -352,7 +328,6 @@ _ID.clear();
                             onChanged: (val) {
                               setState(() => {q = val});
                             },
-
                             controller: _Qcontroller,
                             validator: (value) {
                               if (value.isEmpty)
@@ -507,20 +482,20 @@ _ID.clear();
                               width: MediaQuery.of(context).size.width / 2 - 16,
                               child: RaisedButton.icon(
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: new BorderRadius.circular(8.0),
+                                    borderRadius:
+                                        new BorderRadius.circular(8.0),
                                     side: BorderSide(color: Colors.black38)),
                                 onPressed: () async {
-                             if (_formkey.currentState.validate()) {
-                               _formkey.currentState.reset();
-                               _NAMEcontroller.clear();
-                               _Qcontroller.clear();
-                                _EXcontroller.clear();
-                               _IDcontroller.clear();
-                               _PRIcontroller.clear();
-                               _PROcontroller.clear();
-                               _ADD();
-
-                             }
+                                  if (_formkey.currentState.validate()) {
+                                    _formkey.currentState.reset();
+                                    _NAMEcontroller.clear();
+                                    _Qcontroller.clear();
+                                    _EXcontroller.clear();
+                                    _IDcontroller.clear();
+                                    _PRIcontroller.clear();
+                                    _PROcontroller.clear();
+                                    _ADD();
+                                  }
                                 },
                                 label: Text(
                                   "ADD",

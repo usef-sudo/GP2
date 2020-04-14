@@ -25,14 +25,12 @@ class _MyDrawerState extends State<MyDrawer> {
   static String _phname;
   @override
   void initState() {
-    setState(() { });
+    setState(() {});
     getCurrentUser();
     super.initState();
   }
 
   getCurrentUser() async {
-
-
     DocumentSnapshot names = await Firestore.instance
         .collection("data")
         .document(DatabaseServer.get(1).uid)
@@ -40,9 +38,7 @@ class _MyDrawerState extends State<MyDrawer> {
     _uname = names['name'];
 
     _phname = names['PharmacyName'];
-setState(() {
-
-});
+    setState(() {});
     print(_uname);
     print(_phname);
   }

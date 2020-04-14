@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
 import 'package:eczane/%D9%8Dservices/auth.dart'; //give error
 import 'package:eczane/shared/Loading.dart';
@@ -20,37 +16,37 @@ class _Page1State extends State<Page1> {
   final authser _auth = authser();
 
   void initState() {
-
-    setState(() { bool loading=false; });
-
+    setState(() {
+      bool loading = false;
+    });
   }
 
-
   final _formkey = GlobalKey<FormState>();
-  bool loading=false;
+  bool loading = false;
   String email = "";
   String password = "";
   String error = "";
 
   @override
   Widget build(BuildContext context) {
-
-    return loading ? Loading() :Scaffold(
-      //  backgroundColor: Color.fromRGBO(66  ,160, 206, 1),
-        backgroundColor: Color.fromRGBO(123, 189, 221, 1),
-        //  backgroundColor: Color.fromRGBO(222, 234, 247, 1),
-        body: Stack(
-          children: <Widget>[
-            /*  Image.asset(
+    return loading
+        ? Loading()
+        : Scaffold(
+            //  backgroundColor: Color.fromRGBO(66  ,160, 206, 1),
+            backgroundColor: Color.fromRGBO(123, 189, 221, 1),
+            //  backgroundColor: Color.fromRGBO(222, 234, 247, 1),
+            body: Stack(
+              children: <Widget>[
+                /*  Image.asset(
               'images/m.jpg',
               fit: BoxFit.fill,
               width: double.infinity,
               height: double.infinity,
             ),*/
-            new Form(
-                key: _formkey,
-                child: SingleChildScrollView(
-                    child: Column(children: <Widget>[
+                new Form(
+                    key: _formkey,
+                    child: SingleChildScrollView(
+                        child: Column(children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(30.0),
                         child: Center(
@@ -61,7 +57,8 @@ class _Page1State extends State<Page1> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                          padding:
+                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(20.0),
                             color: Colors.white.withOpacity(0.7),
@@ -97,9 +94,9 @@ class _Page1State extends State<Page1> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                          padding:
+                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
-
                             borderRadius: BorderRadius.circular(20.0),
                             color: Colors.white.withOpacity(0.7),
                             elevation: 0.0,
@@ -143,27 +140,34 @@ class _Page1State extends State<Page1> {
                                   onPressed: () async {
                                     if (_formkey.currentState.validate()) {
                                       setState(() {
-                                        loading=true;
+                                        loading = true;
                                       });
-                                     dynamic result = await _auth.signemail(email, password);
+                                      dynamic result = await _auth.signemail(
+                                          email, password);
                                       if (result == null) {
-                                        setState(() {  error = 'wrong email or password'; loading=false; });
-
+                                        setState(() {
+                                          error = 'wrong email or password';
+                                          loading = false;
+                                        });
                                       } else {
-                                        Navigator.push(context, MaterialPageRoute(
-                                            builder: (context) => Home()));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Home()));
                                       }
                                     }
                                   },
                                   color: Colors.white,
                                   textColor: Colors.black,
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: new BorderRadius.circular(8.0),
+                                      borderRadius:
+                                          new BorderRadius.circular(8.0),
                                       side: BorderSide(color: Colors.black38)),
                                 ),
                                 RaisedButton(
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: new BorderRadius.circular(8.0),
+                                      borderRadius:
+                                          new BorderRadius.circular(8.0),
                                       side: BorderSide(color: Colors.black38)),
                                   onPressed: () {
                                     _formkey.currentState.reset();
@@ -181,23 +185,7 @@ class _Page1State extends State<Page1> {
                         ),
                       ),
                     ]))),
-          ],
-        ));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+              ],
+            ));
   }
 }
