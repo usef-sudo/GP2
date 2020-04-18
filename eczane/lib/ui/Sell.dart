@@ -139,6 +139,7 @@ class _SellState extends State<Sell> {
                         onPressed: () {
                           // result.add(_id.text);
 
+
                           setState(() {});
 
                           Navigator.of(context).pop();
@@ -192,23 +193,61 @@ class _SellState extends State<Sell> {
 //List<Medicine> litems = new List<Medicine>();
   Medicine m = new Medicine(
       quantity: 1, profits: "m", price: "k", ID: "j", Exp: "j", name: "kjh");
-  List<Medicine> litems = new List<Medicine>();
+
+ List<Medicine> litems = new List<Medicine>();
+
+
+  Future<List<Medicine>> getUserTaskList() async {
+
+    QuerySnapshot   r = await Firestore.instance
+        .collection('data')
+        .document("${DatabaseServer.get("uu")}")
+        .collection('medicines').getDocuments();
+    print("بروووح عليييهااا....");
+    return r.documents.map(
+            (doc) => Medicine(
+              ID: doc.data['ID'],
+              name:  doc.data['name'],
+              price:  doc.data['price'],
+              Exp:  doc.data['Exp'],
+              profits: doc.data['profits'],
+              quantity: doc.data['quantity'],
+
+           )
+    ).toList();
+
+  }
+/*
+  main() async {
+    l = await getUserTaskList();
+    useTasklist(tasks); // yay, the list is here
+  }
+  */
+
   List<Medicine> l = new List<Medicine>();
 
   @override
-  void initState() {
-    l.add(m);
-    litems.add(m);
+  void initState()  {
+    print("init");
+    mohanad();
 
+    l.add(m);
     super.initState();
+  }
+
+  void mohanad()async{
+    print('mohanad');
+    print("yala nroooh");
+    List<Medicine> l = await getUserTaskList();
+    setState(() {
+
+    });
   }
 
   final _controller = FabCircularMenuController();
   Widget build(BuildContext context) {
-    CollectionReference r = Firestore.instance
-        .collection('data')
-        .document("${DatabaseServer.get("uu")}")
-        .collection('medicines');
+
+
 
     return Scaffold(
       backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
