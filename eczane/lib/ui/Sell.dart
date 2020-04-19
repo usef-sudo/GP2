@@ -164,7 +164,7 @@ class _SellState extends State<Sell> {
       // result.removeAt(0);
       t++;
     try {
-      String qrResult = await BarcodeScanner.scan();
+      String qrResult = await BarcodeScanner.scan();////////////////////////////////////////////////////////////////////////////////////
       setState(() {
         // result.add(qrResult);
       });
