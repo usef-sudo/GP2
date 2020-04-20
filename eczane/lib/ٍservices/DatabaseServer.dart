@@ -76,7 +76,7 @@ class DatabaseServer {
   }
 */
 
-  List<Medicine> _medicinelist(QuerySnapshot snap) {
+  List<Medicine> medicinelist(QuerySnapshot snap) {
     return snap.documents.map((doc) {
       return Medicine(
           quantity: doc.data['quantity'] ?? '',
@@ -117,7 +117,7 @@ class DatabaseServer {
         .document(uid)
         .collection('medicines')
         .snapshots()
-        .map(_medicinelist);
+        .map(medicinelist);
   }
 
 /*

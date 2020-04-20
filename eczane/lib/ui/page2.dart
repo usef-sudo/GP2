@@ -191,9 +191,7 @@ class _Page2State extends State<Page2> {
                                   child: new Text('Done'),
                                   onPressed: () async {
                                     if (_formkey.currentState.validate()) {
-                                      setState(() {
-                                        //   loading=true;
-                                      });
+
                                       dynamic result = await _auth.registemail(
                                           email, password, name, Pharmacyname);
                                       if (result == null) {

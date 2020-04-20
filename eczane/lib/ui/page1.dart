@@ -16,6 +16,8 @@ class _Page1State extends State<Page1> {
   final authser _auth = authser();
 
   void initState() {
+
+
     setState(() {
       bool loading = false;
     });
@@ -25,13 +27,12 @@ class _Page1State extends State<Page1> {
   bool loading = false;
   String email = "";
   String password = "";
+
   String error = "";
 
   @override
   Widget build(BuildContext context) {
-    return loading
-        ? Loading()
-        : Scaffold(
+    return loading ? Loading() : Scaffold(
             //  backgroundColor: Color.fromRGBO(66  ,160, 206, 1),
             backgroundColor: Color.fromRGBO(123, 189, 221, 1),
             //  backgroundColor: Color.fromRGBO(222, 234, 247, 1),
@@ -181,10 +182,15 @@ class _Page1State extends State<Page1> {
                                   color: Colors.white,
                                   textColor: Colors.black,
                                 ),
-                              ]),
-                        ),
+
+                              ]
+                          ),
+                             ),
                       ),
-                    ]))),
+                          Text(error , style: TextStyle(color: Colors.redAccent),)
+                    ]
+                        )
+                    )),
               ],
             ));
   }

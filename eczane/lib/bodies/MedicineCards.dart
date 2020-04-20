@@ -68,15 +68,7 @@ class _MedicineCardsState extends State<MedicineCards> {
     List<String> _locations = ['A-Z', 'QTY']; // Option 2
     String _selectedLocation; // Option 2
 
-    print('l ${medicenee.length}'); //test
-    medicenee.forEach((d) {
-      print('n ${d.name}');
-      print('p ${d.price}');
-      print('e ${d.Exp}');
-      print('p ${d.profits}');
-      print('i ${d.ID}');
-      print('q ${d.quantity}');
-    }); //iii
+   ; //iii
 
     return Container(
       child: Column(

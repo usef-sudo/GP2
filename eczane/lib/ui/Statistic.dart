@@ -10,9 +10,27 @@ List<double> result;
 List<double> _generateRandomData(int count) {
   result = <double>[];
   result.clear();
+
+
+
+
   for (int i = 0; i < count; i++) {
     result.add((random.nextInt(100) + 0.0));
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return result;
 }
 

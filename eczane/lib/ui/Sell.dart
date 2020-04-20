@@ -138,7 +138,7 @@ class _SellState extends State<Sell> {
                       child: RaisedButton(
                         onPressed: () {
                           // result.add(_id.text);
-
+                  getUserTaskList(_id.text);
 
                           setState(() {});
 
@@ -192,19 +192,46 @@ class _SellState extends State<Sell> {
 
 //List<Medicine> litems = new List<Medicine>();
   Medicine m = new Medicine(
-      quantity: 1, profits: "m", price: "k", ID: "j", Exp: "j", name: "kjh");
+      quantity: 1, profits: "1", price: "10", ID: "12345679", Exp: "23/2", name: "dawa");
 
  List<Medicine> litems = new List<Medicine>();
 
 
-  Future<List<Medicine>> getUserTaskList() async {
+  getUserTaskList(String id) async {
 
-    QuerySnapshot   r = await Firestore.instance
-        .collection('data')
-        .document("${DatabaseServer.get("uu")}")
-        .collection('medicines').getDocuments();
-    print("بروووح عليييهااا....");
-    return r.documents.map(
+
+      DocumentSnapshot snapshot = await Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('medicines')
+    .document(id).get();
+
+
+
+      await Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('SellMdes')
+          .document(id).setData({
+
+              "name" : snapshot.data["name"] ,
+             
+
+
+      });
+
+
+//       r = await Firestore.instance
+//        .collection('data')
+//       .document(DatabaseServer.get("uu").toString()).collection('medicines')
+//    .document(_id.text).get();
+
+
+        //l.add(newMed);
+       setState(() {
+
+       });
+
+      // print(r.data["name"]);
+     //  print(r.data);
+     //  print(r.toString());
+   // print("بروووح عليييهااا....");
+
+    /*return r.documents.map(
             (doc) => Medicine(
               ID: doc.data['ID'],
               name:  doc.data['name'],
@@ -214,8 +241,21 @@ class _SellState extends State<Sell> {
               quantity: doc.data['quantity'],
 
            )
-    ).toList();
+    ).toList();*/
 
+
+
+   // List<Medicine> l =  DatabaseServer.get("haneen").medicinelist(r) ;
+   // print(l.length);
+   // print(l);
+//       print('gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaag');
+//       print(r['name']);
+//       print(r.data['name']);
+
+      // l.add(r.data);
+    setState(() {
+
+    });
   }
 /*
   main() async {
@@ -225,20 +265,23 @@ class _SellState extends State<Sell> {
   */
 
   List<Medicine> l = new List<Medicine>();
-
+  DocumentSnapshot   r;
   @override
   void initState()  {
+    print(DatabaseServer.get(1).toString());
     print("init");
-    mohanad();
-
+    //mohanad();
+    //getUserTaskList();
     l.add(m);
+    //print(l.length);
+    //print(l);
     super.initState();
   }
 
-  void mohanad()async{
-    print('mohanad');
-    print("yala nroooh");
-    List<Medicine> l = await getUserTaskList();
+  void mohanad(){
+
+    //List<Medicine> l = await getUserTaskList();
+
     setState(() {
 
     });
@@ -258,13 +301,41 @@ class _SellState extends State<Sell> {
       ),
       drawer: MyDrawer(),
 
-      body: ListView(
+      body:
+      ListView(
         //mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(height: 10),
           SizedBox(
             height: MediaQuery.of(context).size.height / 1.65,
-            child: new ListView.builder(
+
+
+            child:StreamBuilder(
+              stream: Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection("SellMeds")
+                .snapshots() ,
+              builder: (BuildContext context , AsyncSnapshot snapshot){
+
+              if(!snapshot.hasData){
+                return CupertinoActivityIndicator();
+              }
+              else
+{
+  print(snapshot.data.documents.length);
+               return ListView.builder(
+
+                 itemCount: snapshot.data.documents.length,
+               itemBuilder: (_,index){
+                    return Card(
+                     child: Text(snapshot.data.documents[index].name),
+                   );
+                 },
+               );
+              }
+              },
+            )
+
+            /*
+            new ListView.builder(
               itemCount: l.length,
               itemBuilder: (_, index) {
                 return SizedBox(
@@ -316,6 +387,8 @@ class _SellState extends State<Sell> {
                 );
               },
             ),
+            */
+
           ),
 
 //Text('Scan more:'),
