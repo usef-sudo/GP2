@@ -186,7 +186,7 @@ class _EmployeeState extends State<Employee> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<MEmployee>>.value(
-      value: DatabaseServer.get(1).emploies,
+      value: DatabaseServer.instance.emploies,
       child: Scaffold(
           backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
           appBar: AppBar(

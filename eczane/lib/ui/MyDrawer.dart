@@ -35,12 +35,14 @@ class _MyDrawerState extends State<MyDrawer> {
 
     DocumentSnapshot names = await Firestore.instance
         .collection("data")
-        .document(DatabaseServer.get(mCurrentUser.uid).toString())
+        .document(DatabaseServer.get("cvLM57EPwYeYoiOGycxHF6WyWlC2"))
         .get(); //If //I delete this line everything works fine but I don't have user name.
+    print(DatabaseServer.instance);
     _uname = names['name'];
 
     _phname = names['PharmacyName'];
     setState(() {});
+
     print(_uname);
     print(_phname);
   }

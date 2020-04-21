@@ -21,7 +21,7 @@ class Sell extends StatefulWidget {
 
 //thtfhfdgtrdg
 class _SellState extends State<Sell> {
-  int total = 100;
+  int total = 0;
   TextEditingController _id = TextEditingController();
   TextEditingController _cash = TextEditingController(text: '0');
 
@@ -200,6 +200,23 @@ class _SellState extends State<Sell> {
   getUserTaskList(String id) async {
 
 
+
+    DocumentSnapshot snapshot = await Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('medicines')
+        .document(id).get();
+
+
+    Medicine obj= new Medicine(
+        quantity:snapshot["quantity"] , profits:snapshot["profits"] , price:snapshot["price"] , ID:snapshot["ID"] , Exp:snapshot["Exp"] , name:snapshot["name"] );
+
+    l.add(obj);
+
+    total=0;
+    l.forEach((i) {
+
+      total+=int.parse(i.price);
+    });
+
+/*
       DocumentSnapshot snapshot = await Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('medicines')
     .document(id).get();
 
@@ -213,7 +230,7 @@ class _SellState extends State<Sell> {
 
 
       });
-
+*/
 
 //       r = await Firestore.instance
 //        .collection('data')
@@ -253,9 +270,7 @@ class _SellState extends State<Sell> {
 //       print(r.data['name']);
 
       // l.add(r.data);
-    setState(() {
 
-    });
   }
 /*
   main() async {
@@ -265,27 +280,18 @@ class _SellState extends State<Sell> {
   */
 
   List<Medicine> l = new List<Medicine>();
-  DocumentSnapshot   r;
+  //DocumentSnapshot   r;
   @override
   void initState()  {
-    print(DatabaseServer.get(1).toString());
-    print("init");
-    //mohanad();
-    //getUserTaskList();
+
+
     l.add(m);
     //print(l.length);
     //print(l);
     super.initState();
   }
 
-  void mohanad(){
 
-    //List<Medicine> l = await getUserTaskList();
-
-    setState(() {
-
-    });
-  }
 
   final _controller = FabCircularMenuController();
   Widget build(BuildContext context) {
@@ -307,9 +313,10 @@ class _SellState extends State<Sell> {
         children: <Widget>[
           SizedBox(height: 10),
           SizedBox(
+
             height: MediaQuery.of(context).size.height / 1.65,
 
-
+/*
             child:StreamBuilder(
               stream: Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection("SellMeds")
                 .snapshots() ,
@@ -333,9 +340,8 @@ class _SellState extends State<Sell> {
               }
               },
             )
-
-            /*
-            new ListView.builder(
+*/
+            child:  ListView.builder(
               itemCount: l.length,
               itemBuilder: (_, index) {
                 return SizedBox(
@@ -387,7 +393,7 @@ class _SellState extends State<Sell> {
                 );
               },
             ),
-            */
+
 
           ),
 

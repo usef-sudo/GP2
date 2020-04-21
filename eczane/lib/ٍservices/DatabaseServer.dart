@@ -12,16 +12,17 @@ class DatabaseServer {
   String uid;
 
   static DatabaseServer instance;
+  static String ins;
 
-  static DatabaseServer get(var uu) {
-    if (instance == null) {
-      instance = DatabaseServer(uu);
+  static String get(var uu) {
+    if (ins == null) {
+      ins =uu;
     }
-    return instance;
+    return uu;
   }
 
   static DatabaseServer set() {
-    instance = null;
+    ins = null;
   }
 
   DatabaseServer(this.uid);

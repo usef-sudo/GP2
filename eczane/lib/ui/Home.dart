@@ -27,6 +27,8 @@ class _HomeState extends State<Home> {
     DatabaseServer.get(mCurrentUser.uid);
     print("THIS IS USER ID ");
     print(mCurrentUser.uid);
+    print(DatabaseServer.get(1));
+
   }
 
   initState() {

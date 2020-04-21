@@ -15,7 +15,7 @@ class _MyMedicineState extends State<MyMedicine> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Medicine>>.value(
-      value: DatabaseServer.get(1).medicines,
+      value: DatabaseServer.instance.medicines,
       child: Scaffold(
         backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
 

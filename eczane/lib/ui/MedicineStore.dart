@@ -191,7 +191,7 @@ class _MedicineStoreState extends State<MedicineStore> {
 
     Firestore.instance
         .collection('data')
-        .document(_result.uid)
+        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
         .collection('medicines')
         .document(i)
         .setData(postData);
@@ -207,7 +207,7 @@ class _MedicineStoreState extends State<MedicineStore> {
 
     Firestore.instance
         .collection('data')
-        .document(_result.uid)
+        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
         .collection('medicines')
         .document(ID)
         .delete();

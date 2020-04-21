@@ -32,11 +32,11 @@ class authser {
   }
 
   Future store(String uid, String name, String phone) async {
-    await DatabaseServer.get(1).addStore(name, phone);
+    await DatabaseServer.instance.addStore(name, phone);
   }
 
   Future employ(String uid, String name, String phone) async {
-    await DatabaseServer.get(1).addEmployee(uid, name, phone);
+    await DatabaseServer.instance.addEmployee(uid, name, phone);
   }
 
   //regist with email and pass
@@ -48,7 +48,7 @@ class authser {
       FirebaseUser user = result.user;
       //create a doc for user with his uid
 
-      await DatabaseServer.get(1).updatedata(name, PharmacyName);
+      await DatabaseServer.instance.updatedata(name, PharmacyName);
 
       return _userfromfirebase(user);
     } catch (e) {
@@ -64,7 +64,7 @@ class authser {
       FirebaseUser user = result.user;
       //create a doc for user with his uid
 
-      await DatabaseServer.get(1).addEmployee(Admin, email, pass);
+      await DatabaseServer.instance.addEmployee(Admin, email, pass);
 
       return _userfromfirebase(user);
     } catch (e) {

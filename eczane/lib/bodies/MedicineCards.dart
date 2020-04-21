@@ -17,7 +17,7 @@ class _MedicineCardsState extends State<MedicineCards> {
 
     Firestore.instance
         .collection('data')
-        .document(_result.uid)
+        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
         .collection('medicines')
         .document(od)
         .updateData({'quantity': (x - int.parse(next))});

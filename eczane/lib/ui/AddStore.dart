@@ -211,10 +211,10 @@ class _AddStoreState extends State<AddStore> {
 
     Store post = new Store(name: n, phone: p);
     Map<String, dynamic> postData = post.toJson();
-
+    print(_result.uid);
     Firestore.instance
         .collection('data')
-        .document(_result.uid)
+        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
         .collection('store')
         .document(p)
         .setData(postData);
@@ -228,7 +228,7 @@ class _AddStoreState extends State<AddStore> {
 
     Firestore.instance
         .collection('data')
-        .document(_result.uid)
+        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
         .collection('store')
         .document(num)
         .delete();
@@ -237,7 +237,7 @@ class _AddStoreState extends State<AddStore> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Store>>.value(
-      value: DatabaseServer.get(1).stores,
+      value: DatabaseServer.instance.stores,
       child: Scaffold(
           backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
           appBar: AppBar(
