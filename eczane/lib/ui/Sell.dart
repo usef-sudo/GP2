@@ -360,14 +360,14 @@ class _SellState extends State<Sell> {
                   child: Card(
                     margin: EdgeInsets.all(10),
                     child: ListTile(
-                      title: Text(l[index].name),
+                      title: Text(l[index].name, style: TextStyle(fontWeight: FontWeight.bold),),
 
                       subtitle: new Column(
                         children: <Widget>[
                           new Row(
                             children: <Widget>[
                               Expanded(
-                                child: Text("price=" + "\$${l[index].price}"),
+                                child: Text("price=" + "\$${l[index].price}" , style: TextStyle(fontWeight: FontWeight.bold),),
                               ),
                               Expanded(
                                 /*
@@ -408,7 +408,7 @@ class _SellState extends State<Sell> {
     maxValue: 100,
     step: 1,
     decimalPlaces: 0,
-    color: Colors.redAccent,
+    color: Colors.blueGrey,
     onChanged: (value) {
       setState(() {
 
