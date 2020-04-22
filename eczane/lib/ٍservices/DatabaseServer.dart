@@ -12,17 +12,17 @@ class DatabaseServer {
   String uid;
 
   static DatabaseServer instance;
-  static String ins;
 
-  static String get(var uu) {
-    if (ins == null) {
-      ins =uu;
+
+  static DatabaseServer get(var uu) {
+    if (instance == null) {
+      instance =DatabaseServer(uu);
     }
-    return uu;
+    return instance;
   }
 
   static DatabaseServer set() {
-    ins = null;
+    instance = null;
   }
 
   DatabaseServer(this.uid);
@@ -37,7 +37,7 @@ class DatabaseServer {
   }
 
   Future addStore(String name, String phone) async {
-    return await data.document(uid).setData({
+    return await data.document("iEB5rRlXZpdEfwahBJNBCfATQci2").setData({
       'name': name,
       'phon': phone,
     });
@@ -97,7 +97,7 @@ class DatabaseServer {
   }
 
   Stream<List<Store>> get stores {
-    return data.document(uid).collection('store').snapshots().map(_storelist);
+    return data.document("iEB5rRlXZpdEfwahBJNBCfATQci2").collection('store').snapshots().map(_storelist);
   }
   ///////////////////////////////////////////////////////////////////////////////
 
@@ -109,13 +109,13 @@ class DatabaseServer {
   }
 
   Stream<List<MEmployee>> get emploies {
-    return data.document(uid).collection('employee').snapshots().map(_emplist);
+    return data.document("iEB5rRlXZpdEfwahBJNBCfATQci2").collection('employee').snapshots().map(_emplist);
   }
 
   ///////////////////////////////////////////////////////////////////////////////
   Stream<List<Medicine>> get medicines {
     return data
-        .document(uid)
+        .document("iEB5rRlXZpdEfwahBJNBCfATQci2")
         .collection('medicines')
         .snapshots()
         .map(medicinelist);

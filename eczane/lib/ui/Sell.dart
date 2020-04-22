@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter_counter/flutter_counter.dart';
 import 'package:provider/provider.dart';
 import 'MyDrawer.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
@@ -82,6 +83,7 @@ class _SellState extends State<Sell> {
                           Navigator.of(context).pop();
 
                           _bye();
+
                         },
                         child: Text(
                           "calculate",
@@ -199,8 +201,8 @@ class _SellState extends State<Sell> {
 
   getUserTaskList(String id) async {
 
-
-
+//cvLM57EPwYeYoiOGycxHF6WyWlC2   iEB5rRlXZpdEfwahBJNBCfATQci2
+/**/
     DocumentSnapshot snapshot = await Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('medicines')
         .document(id).get();
 
@@ -215,7 +217,9 @@ class _SellState extends State<Sell> {
 
       total+=int.parse(i.price);
     });
-
+    print('bad mood');
+    print(l.length);
+    print(snapshot["name"]);
 /*
       DocumentSnapshot snapshot = await Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('medicines')
     .document(id).get();
@@ -285,17 +289,18 @@ class _SellState extends State<Sell> {
   void initState()  {
 
 
-    l.add(m);
+   // l.add(m);
     //print(l.length);
     //print(l);
     super.initState();
   }
 
 
+  num _counter = 0;
+  num _defaultValue = 1;
 
   final _controller = FabCircularMenuController();
   Widget build(BuildContext context) {
-
 
 
     return Scaffold(
@@ -304,8 +309,14 @@ class _SellState extends State<Sell> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(66, 160, 206, 1),
         title: new Text("Sell"),
+        actions: <Widget>[
+          Center(child: Text("reset all")),
+          InkWell(child: Icon(Icons.refresh),onTap: ()=>rest()),
+
+        ],
       ),
       drawer: MyDrawer(),
+
 
       body:
       ListView(
@@ -314,7 +325,7 @@ class _SellState extends State<Sell> {
           SizedBox(height: 10),
           SizedBox(
 
-            height: MediaQuery.of(context).size.height / 1.65,
+            height: MediaQuery.of(context).size.height / 1.55,
 
 /*
             child:StreamBuilder(
@@ -344,11 +355,13 @@ class _SellState extends State<Sell> {
             child:  ListView.builder(
               itemCount: l.length,
               itemBuilder: (_, index) {
+
                 return SizedBox(
                   child: Card(
                     margin: EdgeInsets.all(10),
                     child: ListTile(
                       title: Text(l[index].name),
+
                       subtitle: new Column(
                         children: <Widget>[
                           new Row(
@@ -357,7 +370,8 @@ class _SellState extends State<Sell> {
                                 child: Text("price=" + "\$${l[index].price}"),
                               ),
                               Expanded(
-                                child: new Column(
+                                /*
+                                child: new Row(
                                   children: <Widget>[
                                     new IconButton(
                                         icon: Icon(
@@ -369,7 +383,8 @@ class _SellState extends State<Sell> {
 
                               });*/
                                         }),
-                                    new Text("${l[index].quantity}"),
+                                //    new Text("${l[index].quantity}"),
+                                    new Text("1"),
                                     new IconButton(
                                         icon: Icon(
                                           Icons.arrow_drop_down,
@@ -383,11 +398,32 @@ class _SellState extends State<Sell> {
                                         }),
                                   ],
                                 ),
+
+                                 */
+  child:
+
+  Counter(
+    initialValue: _defaultValue,
+    minValue: 0,
+    maxValue: 100,
+    step: 1,
+    decimalPlaces: 0,
+    color: Colors.redAccent,
+    onChanged: (value) {
+      setState(() {
+
+        _defaultValue = value;
+        print(_defaultValue);
+      });
+    }                     ),
+
+
                               ),
                             ],
                           )
                         ],
                       ),
+
                     ),
                   ),
                 );
@@ -403,6 +439,60 @@ class _SellState extends State<Sell> {
                 result,
 
               ),*/
+          Padding(
+            padding: const EdgeInsets.only( left: 10),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height / 15,
+                  width: MediaQuery.of(context).size.width / 2 - 16,
+                  child: RaisedButton.icon(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(8.0),
+                        side: BorderSide(color: Colors.black38)),
+                    onPressed: () {
+                      _bye();
+                    },
+                    label: Text(
+                      "Scan Barcode",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    icon: Icon(
+                      Icons.settings_overscan,
+                      color: Colors.black,
+                    ),
+                    color: Colors.white,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height / 15,
+                    width: MediaQuery.of(context).size.width / 2 - 16,
+                    child: RaisedButton.icon(
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                          new BorderRadius.circular(8.0),
+                          side: BorderSide(color: Colors.black38)),
+                      onPressed: () async {
+                        _EnterId();
+                      },
+                      label: Text(
+                        "ADD Manuel",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      icon: Icon(
+                        Icons.keyboard,
+                        color: Colors.black,
+                      ),
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          /*
           FabCircularMenu(
             fabColor: Colors.black,
             child: SingleChildScrollView(
@@ -450,6 +540,8 @@ class _SellState extends State<Sell> {
               //  IconButton(icon: Icon(Icons.done_outline), onPressed: () {_bye();}, iconSize: 40.0, color: Colors.black),
             ],
           ),
+
+           */
         ],
       ),
 
@@ -484,13 +576,23 @@ class _SellState extends State<Sell> {
       ),
 
       /*floatingActionButton: FloatingActionButton(
+
         onPressed: _scan,
         tooltip: 'scan',
         child: Icon(Icons.settings_overscan),
       ),*/
     );
   }
+
+  rest() {
+    total=0;
+    l.clear();
+    setState(() {
+
+    });
+  }
 }
+/*
 
 Widget HI(Medicine data) {
   return Container(
@@ -500,17 +602,17 @@ Widget HI(Medicine data) {
         title: Text(data.name),
         subtitle: new Column(
           children: <Widget>[
+
             new Row(
               children: <Widget>[
                 Expanded(
                   child: Text("price=" + "\$${data.price}"),
                 ),
-                Expanded(
-                  child: new Column(
-                    children: <Widget>[
+
+
                       new IconButton(
                           icon: Icon(
-                            Icons.arrow_drop_up,
+                            Icons.add_circle_outline,
                             color: Colors.green,
                           ),
                           onPressed: () {
@@ -522,7 +624,7 @@ Widget HI(Medicine data) {
                       new Text("${data.quantity}"),
                       new IconButton(
                           icon: Icon(
-                            Icons.arrow_drop_down,
+                            Icons.remove_circle_outline,
                             color: Colors.red,
                           ),
                           onPressed: () {
@@ -534,12 +636,15 @@ Widget HI(Medicine data) {
                           }),
                     ],
                   ),
-                ),
-              ],
-            )
-          ],
+
+
+                ]
+
+            ),
+
         ),
       ),
-    ),
-  );
+    );
+
 }
+*/

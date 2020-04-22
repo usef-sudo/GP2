@@ -214,7 +214,7 @@ class _AddStoreState extends State<AddStore> {
     print(_result.uid);
     Firestore.instance
         .collection('data')
-        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+        .document("iEB5rRlXZpdEfwahBJNBCfATQci2")
         .collection('store')
         .document(p)
         .setData(postData);
@@ -228,7 +228,7 @@ class _AddStoreState extends State<AddStore> {
 
     Firestore.instance
         .collection('data')
-        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+        .document("iEB5rRlXZpdEfwahBJNBCfATQci2")
         .collection('store')
         .document(num)
         .delete();
@@ -236,6 +236,7 @@ class _AddStoreState extends State<AddStore> {
 
   @override
   Widget build(BuildContext context) {
+
     return StreamProvider<List<Store>>.value(
       value: DatabaseServer.instance.stores,
       child: Scaffold(
@@ -278,5 +279,7 @@ class _AddStoreState extends State<AddStore> {
             ),
           )),
     );
+
+
   }
 }
