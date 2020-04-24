@@ -54,7 +54,7 @@ class SellState extends State<Sell> {
                           ),
                         ),
                         Text(
-                          total.toString(),
+                          (total).toString(),
                           style: TextStyle(
                             fontSize: 20,
                           ),
@@ -75,7 +75,7 @@ class SellState extends State<Sell> {
                     Row(
                       children: <Widget>[
                         Text('change: '),
-                        Text((total - (int.parse(_cash.text))).toString()),
+                        Text(( (int.parse(_cash.text)-total)).toString()),
                       ],
                     ),
                     SizedBox(
@@ -85,6 +85,8 @@ class SellState extends State<Sell> {
                           Navigator.of(context).pop();
 
                           _bye();
+
+                          updateqantiti();
 
                         },
                         child: Text(
@@ -199,6 +201,26 @@ class SellState extends State<Sell> {
       quantity: 1, profits: "1", price: "10", ID: "12345679", Exp: "23/2", name: "dawa");
   static List<Medicine> s = new List<Medicine>();
 
+  updateqantiti() async {
+
+//cvLM57EPwYeYoiOGycxHF6WyWlC2   iEB5rRlXZpdEfwahBJNBCfATQci2
+/**/
+
+    t=0;
+    l.forEach((i) {
+
+      Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('medicines')
+          .document(i.ID).updateData({"quantity":i.quantity-defaultValue[t]});
+      t++;
+
+    });
+
+
+
+
+
+
+  }
 
   getUserTaskList(String id) async {
 
@@ -210,9 +232,20 @@ class SellState extends State<Sell> {
 
     Medicine obj= new Medicine(
         quantity:snapshot["quantity"] , profits:snapshot["profits"] , price:snapshot["price"] , ID:snapshot["ID"] , Exp:snapshot["Exp"] , name:snapshot["name"] );
-
-    l.add(obj);
-    total+=(int.parse(obj.price));
+if(snapshot["quantity"]<=0) {
+   obj = new Medicine(
+      quantity: snapshot["quantity"],
+      profits: snapshot["profits"],
+      price: snapshot["price"],
+      ID: snapshot["ID"],
+      Exp: snapshot["Exp"],
+      name: "This product is not available for now");
+   l.add(obj);
+}
+else {
+  l.add(obj);
+  total += (int.parse(obj.price));
+}
     /*
     total=0;
 
@@ -305,6 +338,7 @@ class SellState extends State<Sell> {
 
   num _counter = 0;
    var defaultValue =[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+
   //var bb =defaultValue;
   //[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
@@ -609,6 +643,7 @@ if( defaultValue[index] > value)
      print('jod');
     l.clear();
     total=0;
+      defaultValue =[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
     setState(() {
 
     });
