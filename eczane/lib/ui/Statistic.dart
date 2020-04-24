@@ -1,3 +1,4 @@
+import 'package:eczane/ui/Sell.dart';
 import 'package:flutter/material.dart';
 import 'MyDrawer.dart';
 import 'dart:math' as math;
@@ -63,7 +64,77 @@ class _statisState extends State<statis> {
           child: Container(
               child: Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Column(
+            child:
+
+                ListView.builder(
+                  itemCount: SellState.s.length,
+                  itemBuilder: (_, index) {
+
+                    return SizedBox(
+                      height: 300,
+                      width: 300,
+                      child: Card(
+                        margin: EdgeInsets.all(10),
+                        child: ListTile(
+                          title: Text(SellState.s[index].name, style: TextStyle(fontWeight: FontWeight.bold),),
+
+                          subtitle: new Column(
+                            children: <Widget>[
+                              new Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text("price=" + "\$${SellState.s[index].price}" , style: TextStyle(fontWeight: FontWeight.bold),),
+                                  ),
+                                  Expanded(
+                                    /*
+                                child: new Row(
+                                  children: <Widget>[
+                                    new IconButton(
+                                        icon: Icon(
+                                          Icons.arrow_drop_up,
+                                          color: Colors.green,
+                                        ),
+                                        onPressed: () {
+                                          /* setState(() {
+
+                              });*/
+                                        }),
+                                //    new Text("${l[index].quantity}"),
+                                    new Text("1"),
+                                    new IconButton(
+                                        icon: Icon(
+                                          Icons.arrow_drop_down,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: () {
+                                          /*  setState(() {
+
+                               });
+                               */
+                                        }),
+                                  ],
+                                ),
+
+                                 */
+                                    child:
+
+                                 Text("${1}")
+
+
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+
+          /*  Column(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -160,8 +231,11 @@ class _statisState extends State<statis> {
                 ),
                 if (result.toString() != data3.toString() || f)
                   new Text(result.toString()),
+
+
               ],
-            ),
+            ),*/
+
           )),
         ));
   }

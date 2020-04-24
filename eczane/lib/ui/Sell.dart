@@ -16,12 +16,14 @@ import 'package:fab_circular_menu/fab_circular_menu.dart';
 import '../bodies/cartcomponent.dart';
 
 class Sell extends StatefulWidget {
+
   @override
-  _SellState createState() => _SellState();
+  SellState createState() => SellState();
 }
 
 //thtfhfdgtrdg
-class _SellState extends State<Sell> {
+class SellState extends State<Sell> {
+
   int total = 0;
   TextEditingController _id = TextEditingController();
   TextEditingController _cash = TextEditingController(text: '0');
@@ -102,7 +104,7 @@ class _SellState extends State<Sell> {
 
   // String result = "'choose different sell method',";
   int t = 1;
-
+  String qrResult;
   Future _EnterId() async {
     if (t == 1)
       //result.removeAt(0);
@@ -166,7 +168,7 @@ class _SellState extends State<Sell> {
       // result.removeAt(0);
       t++;
     try {
-      String qrResult = await BarcodeScanner.scan();////////////////////////////////////////////////////////////////////////////////////
+       qrResult = await BarcodeScanner.scan();////////////////////////////////////////////////////////////////////////////////////
       setState(() {
         // result.add(qrResult);
       });
@@ -195,8 +197,7 @@ class _SellState extends State<Sell> {
 //List<Medicine> litems = new List<Medicine>();
   Medicine m = new Medicine(
       quantity: 1, profits: "1", price: "10", ID: "12345679", Exp: "23/2", name: "dawa");
-
- List<Medicine> litems = new List<Medicine>();
+  static List<Medicine> s = new List<Medicine>();
 
 
   getUserTaskList(String id) async {
@@ -211,15 +212,16 @@ class _SellState extends State<Sell> {
         quantity:snapshot["quantity"] , profits:snapshot["profits"] , price:snapshot["price"] , ID:snapshot["ID"] , Exp:snapshot["Exp"] , name:snapshot["name"] );
 
     l.add(obj);
-
+    total+=(int.parse(obj.price));
+    /*
     total=0;
+
     l.forEach((i) {
 
-      total+=int.parse(i.price);
-    });
-    print('bad mood');
-    print(l.length);
-    print(snapshot["name"]);
+      total+=(int.parse(i.price));
+
+    });*/
+
 /*
       DocumentSnapshot snapshot = await Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('medicines')
     .document(id).get();
@@ -276,6 +278,11 @@ class _SellState extends State<Sell> {
       // l.add(r.data);
 
   }
+  rest(){
+    print('good');
+  s=l;
+    clear();
+  }
 /*
   main() async {
     l = await getUserTaskList();
@@ -283,7 +290,7 @@ class _SellState extends State<Sell> {
   }
   */
 
-  List<Medicine> l = new List<Medicine>();
+   List<Medicine> l = new List<Medicine>();
   //DocumentSnapshot   r;
   @override
   void initState()  {
@@ -297,7 +304,9 @@ class _SellState extends State<Sell> {
 
 
   num _counter = 0;
-  num _defaultValue = 1;
+   var defaultValue =[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+  //var bb =defaultValue;
+  //[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
   final _controller = FabCircularMenuController();
   Widget build(BuildContext context) {
@@ -367,7 +376,7 @@ class _SellState extends State<Sell> {
                           new Row(
                             children: <Widget>[
                               Expanded(
-                                child: Text("price=" + "\$${l[index].price}" , style: TextStyle(fontWeight: FontWeight.bold),),
+                                child: Text("price=" + "\$${int.parse(l[index].price)*defaultValue[index]}" , style: TextStyle(fontWeight: FontWeight.bold),),
                               ),
                               Expanded(
                                 /*
@@ -403,17 +412,26 @@ class _SellState extends State<Sell> {
   child:
 
   Counter(
-    initialValue: _defaultValue,
+    initialValue: defaultValue[index],
     minValue: 0,
     maxValue: 100,
     step: 1,
     decimalPlaces: 0,
     color: Colors.blueGrey,
     onChanged: (value) {
+
       setState(() {
 
-        _defaultValue = value;
-        print(_defaultValue);
+if( defaultValue[index] < value)
+  total+=int.parse(l[index].price);
+if( defaultValue[index] > value)
+  total-=int.parse(l[index].price);
+
+
+
+        defaultValue[index] = value;
+        print(defaultValue[index]);
+
       });
     }                     ),
 
@@ -451,7 +469,8 @@ class _SellState extends State<Sell> {
                         borderRadius: new BorderRadius.circular(8.0),
                         side: BorderSide(color: Colors.black38)),
                     onPressed: () {
-                      _bye();
+                     _scan();
+                      getUserTaskList(qrResult);
                     },
                     label: Text(
                       "Scan Barcode",
@@ -584,9 +603,12 @@ class _SellState extends State<Sell> {
     );
   }
 
-  rest() {
-    total=0;
+
+
+   clear() {
+     print('jod');
     l.clear();
+    total=0;
     setState(() {
 
     });
