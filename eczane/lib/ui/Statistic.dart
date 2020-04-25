@@ -42,12 +42,21 @@ class statis extends StatefulWidget {
 
 class _statisState extends State<statis> {
   @override
-  var data = _generateRandomData(24);
-  var data2 = _generateRandomData(7);
-  var data3 = _generateRandomData(30);
+  var data = _generateRandomData(24);/// not outo generate but get
+  //var data2 = _generateRandomData(7);
+  //var data3 = _generateRandomData(30);
 
   void _Details(var d) {
-    result = d;
+    //result = d;// show stream builder
+
+
+
+
+
+
+
+
+
   }
 
   @override
@@ -66,80 +75,15 @@ class _statisState extends State<statis> {
             padding: const EdgeInsets.all(12.0),
             child:
 
-                ListView.builder(
-                  itemCount: SellState.s.length,
-                  itemBuilder: (_, index) {
-
-                    return SizedBox(
-                      height: 300,
-                      width: 300,
-                      child: Card(
-                        margin: EdgeInsets.all(10),
-                        child: ListTile(
-                          title: Text(SellState.s[index].name, style: TextStyle(fontWeight: FontWeight.bold),),
-
-                          subtitle: new Column(
-                            children: <Widget>[
-                              new Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Text("price=" + "\$${SellState.s[index].price}" , style: TextStyle(fontWeight: FontWeight.bold),),
-                                  ),
-                                  Expanded(
-                                    /*
-                                child: new Row(
-                                  children: <Widget>[
-                                    new IconButton(
-                                        icon: Icon(
-                                          Icons.arrow_drop_up,
-                                          color: Colors.green,
-                                        ),
-                                        onPressed: () {
-                                          /* setState(() {
-
-                              });*/
-                                        }),
-                                //    new Text("${l[index].quantity}"),
-                                    new Text("1"),
-                                    new IconButton(
-                                        icon: Icon(
-                                          Icons.arrow_drop_down,
-                                          color: Colors.red,
-                                        ),
-                                        onPressed: () {
-                                          /*  setState(() {
-
-                               });
-                               */
-                                        }),
-                                  ],
-                                ),
-
-                                 */
-                                    child:
-
-                                 Text("${1}")
 
 
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
 
-                        ),
-                      ),
-                    );
-                  },
-                ),
-
-
-          /*  Column(
+            Column(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Daily:',
+                    'Statistics:',
                     style: TextStyle(fontSize: 30.0),
                   ),
                 ),
@@ -165,6 +109,7 @@ class _statisState extends State<statis> {
                     _Details(data);
                   }),
                 ),
+                /*
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -220,6 +165,7 @@ class _statisState extends State<statis> {
                     _Details(data3);
                   }),
                 ),
+                */
                 RaisedButton(
                   onPressed: () => f = true,
                   child: Text('Show details'),
@@ -229,12 +175,13 @@ class _statisState extends State<statis> {
                       borderRadius: new BorderRadius.circular(8.0),
                       side: BorderSide(color: Colors.black38)),
                 ),
-                if (result.toString() != data3.toString() || f)
-                  new Text(result.toString()),
+
+               // if (result.toString() != data3.toString() || f)
+                  //new Text(result.toString()),
 
 
               ],
-            ),*/
+            ),
 
           )),
         ));

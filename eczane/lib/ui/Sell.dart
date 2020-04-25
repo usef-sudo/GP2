@@ -16,14 +16,12 @@ import 'package:fab_circular_menu/fab_circular_menu.dart';
 import '../bodies/cartcomponent.dart';
 
 class Sell extends StatefulWidget {
-
   @override
   SellState createState() => SellState();
 }
 
 //thtfhfdgtrdg
 class SellState extends State<Sell> {
-
   int total = 0;
   TextEditingController _id = TextEditingController();
   TextEditingController _cash = TextEditingController(text: '0');
@@ -75,7 +73,7 @@ class SellState extends State<Sell> {
                     Row(
                       children: <Widget>[
                         Text('change: '),
-                        Text(( (int.parse(_cash.text)-total)).toString()),
+                        Text(((int.parse(_cash.text) - total)).toString()),
                       ],
                     ),
                     SizedBox(
@@ -88,6 +86,7 @@ class SellState extends State<Sell> {
 
                           updateqantiti();
 
+                          SetSoldMed();
                         },
                         child: Text(
                           "calculate",
@@ -106,6 +105,7 @@ class SellState extends State<Sell> {
 
   // String result = "'choose different sell method',";
   int t = 1;
+  int x = 1;
   String qrResult;
   Future _EnterId() async {
     if (t == 1)
@@ -144,7 +144,7 @@ class SellState extends State<Sell> {
                       child: RaisedButton(
                         onPressed: () {
                           // result.add(_id.text);
-                  getUserTaskList(_id.text);
+                          getUserTaskList(_id.text);
 
                           setState(() {});
 
@@ -170,7 +170,8 @@ class SellState extends State<Sell> {
       // result.removeAt(0);
       t++;
     try {
-       qrResult = await BarcodeScanner.scan();////////////////////////////////////////////////////////////////////////////////////
+      qrResult = await BarcodeScanner
+          .scan(); ////////////////////////////////////////////////////////////////////////////////////
       setState(() {
         // result.add(qrResult);
       });
@@ -198,54 +199,144 @@ class SellState extends State<Sell> {
 
 //List<Medicine> litems = new List<Medicine>();
   Medicine m = new Medicine(
-      quantity: 1, profits: "1", price: "10", ID: "12345679", Exp: "23/2", name: "dawa");
+      quantity: 1,
+      profits: "1",
+      price: "10",
+      ID: "12345679",
+      Exp: "23/2",
+      name: "dawa");
   static List<Medicine> s = new List<Medicine>();
+  SetSoldMed()async {
+      x=0;
+      bool flag;
+    l.forEach((i) async {
+
+
+      Medicine post = new Medicine(
+         // quantity:i.quantity, name: i.name, profits:  i.profits ,ID: i.ID );
+         quantity: defaultValue[x], name: i.name, profits:" ${ int.parse(i.profits)*defaultValue[x] }",ID: i.ID );
+
+
+      Map<String, dynamic> postData = post.toJson();
+
+
+
+      DocumentSnapshot snapshot = await Firestore.instance
+          .collection('data')
+          .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+          .collection('SoldMed')
+          .document(i.ID)
+          .get();
+
+      Medicine obj = new Medicine(
+          quantity: snapshot["quantity"]+postData["quantity"],
+          profits: snapshot["profits"]+postData["profits"],
+          );
+
+      Map<String, dynamic> dada = obj.toJson();
+
+
+ Firestore.instance
+    .collection('data')
+    .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+    .collection('SoldMed').getDocuments().then((snapshot){
+
+      snapshot.documents.forEach((f)async{
+      if(f.data.keys==i.ID)
+
+  flag=true;
+
+
+      });
+
+
+
+});
+
+
+
+
+
+if(false) {
+  Firestore.instance
+      .collection('data')
+      .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+      .collection('SoldMed')
+      .document(i.ID)
+      .updateData(dada);
+}
+        //  {  "QTY":post.quantity/*+obj.quantity*/,"Profit":"${int.parse(post.profits)/*+int.parse(obj.profits)*/}",});}
+      else{
+      Firestore.instance
+          .collection('data')
+          .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+          .collection('SoldMed')
+          .document(i.ID)
+          .setData(postData);}
+
+
+
+
+
+
+
+
+
+
+      x++;
+    });
+  }
+
+
 
   updateqantiti() async {
-
 //cvLM57EPwYeYoiOGycxHF6WyWlC2   iEB5rRlXZpdEfwahBJNBCfATQci2
 /**/
 
-    t=0;
+    t = 0;
+
     l.forEach((i) {
-
-      Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('medicines')
-          .document(i.ID).updateData({"quantity":i.quantity-defaultValue[t]});
+      Firestore.instance
+          .collection('data')
+          .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+          .collection('medicines')
+          .document(i.ID)
+          .updateData({"quantity": i.quantity - defaultValue[t]});
       t++;
-
     });
-
-
-
-
-
-
   }
 
   getUserTaskList(String id) async {
-
 //cvLM57EPwYeYoiOGycxHF6WyWlC2   iEB5rRlXZpdEfwahBJNBCfATQci2
 /**/
-    DocumentSnapshot snapshot = await Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('medicines')
-        .document(id).get();
+    DocumentSnapshot snapshot = await Firestore.instance
+        .collection('data')
+        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+        .collection('medicines')
+        .document(id)
+        .get();
 
+    Medicine obj = new Medicine(
+        quantity: snapshot["quantity"],
+        profits: snapshot["profits"],
+        price: snapshot["price"],
+        ID: snapshot["ID"],
+        Exp: snapshot["Exp"],
+        name: snapshot["name"]);
 
-    Medicine obj= new Medicine(
-        quantity:snapshot["quantity"] , profits:snapshot["profits"] , price:snapshot["price"] , ID:snapshot["ID"] , Exp:snapshot["Exp"] , name:snapshot["name"] );
-if(snapshot["quantity"]<=0) {
-   obj = new Medicine(
-      quantity: snapshot["quantity"],
-      profits: snapshot["profits"],
-      price: snapshot["price"],
-      ID: snapshot["ID"],
-      Exp: snapshot["Exp"],
-      name: "This product is not available for now");
-   l.add(obj);
-}
-else {
-  l.add(obj);
-  total += (int.parse(obj.price));
-}
+    if (snapshot["quantity"] <= 0) {
+      obj = new Medicine(
+          quantity: snapshot["quantity"],
+          profits: snapshot["profits"],
+          price: snapshot["price"],
+          ID: snapshot["ID"],
+          Exp: snapshot["Exp"],
+          name: "This product is not available for now");
+      l.add(obj);
+    } else {
+      l.add(obj);
+      total += (int.parse(obj.price));
+    }
     /*
     total=0;
 
@@ -265,7 +356,7 @@ else {
           .document(id).setData({
 
               "name" : snapshot.data["name"] ,
-             
+
 
 
       });
@@ -276,16 +367,13 @@ else {
 //       .document(DatabaseServer.get("uu").toString()).collection('medicines')
 //    .document(_id.text).get();
 
+    //l.add(newMed);
+    setState(() {});
 
-        //l.add(newMed);
-       setState(() {
-
-       });
-
-      // print(r.data["name"]);
-     //  print(r.data);
-     //  print(r.toString());
-   // print("بروووح عليييهااا....");
+    // print(r.data["name"]);
+    //  print(r.data);
+    //  print(r.toString());
+    // print("بروووح عليييهااا....");
 
     /*return r.documents.map(
             (doc) => Medicine(
@@ -299,21 +387,19 @@ else {
            )
     ).toList();*/
 
-
-
-   // List<Medicine> l =  DatabaseServer.get("haneen").medicinelist(r) ;
-   // print(l.length);
-   // print(l);
+    // List<Medicine> l =  DatabaseServer.get("haneen").medicinelist(r) ;
+    // print(l.length);
+    // print(l);
 //       print('gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaag');
 //       print(r['name']);
 //       print(r.data['name']);
 
-      // l.add(r.data);
-
+    // l.add(r.data);
   }
-  rest(){
+
+  rest() {
     print('good');
-  s=l;
+    s = l;
     clear();
   }
 /*
@@ -323,29 +409,73 @@ else {
   }
   */
 
-   List<Medicine> l = new List<Medicine>();
+  List<Medicine> l = new List<Medicine>();
   //DocumentSnapshot   r;
   @override
-  void initState()  {
-
-
-   // l.add(m);
+  void initState() {
+    // l.add(m);
     //print(l.length);
     //print(l);
     super.initState();
   }
 
-
   num _counter = 0;
-   var defaultValue =[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+  var defaultValue = [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ];
 
   //var bb =defaultValue;
   //[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
   final _controller = FabCircularMenuController();
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
 
@@ -354,20 +484,16 @@ else {
         title: new Text("Sell"),
         actions: <Widget>[
           Center(child: Text("reset all")),
-          InkWell(child: Icon(Icons.refresh),onTap: ()=>rest()),
-
+          InkWell(child: Icon(Icons.refresh), onTap: () => rest()),
         ],
       ),
       drawer: MyDrawer(),
 
-
-      body:
-      ListView(
+      body: ListView(
         //mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(height: 10),
           SizedBox(
-
             height: MediaQuery.of(context).size.height / 1.55,
 
 /*
@@ -395,22 +521,27 @@ else {
               },
             )
 */
-            child:  ListView.builder(
+            child: ListView.builder(
               itemCount: l.length,
               itemBuilder: (_, index) {
-
                 return SizedBox(
                   child: Card(
                     margin: EdgeInsets.all(10),
                     child: ListTile(
-                      title: Text(l[index].name, style: TextStyle(fontWeight: FontWeight.bold),),
-
+                      title: Text(
+                        l[index].name,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       subtitle: new Column(
                         children: <Widget>[
                           new Row(
                             children: <Widget>[
                               Expanded(
-                                child: Text("price=" + "\$${int.parse(l[index].price)*defaultValue[index]}" , style: TextStyle(fontWeight: FontWeight.bold),),
+                                child: Text(
+                                  "price=" +
+                                      "\$${int.parse(l[index].price) * defaultValue[index]}",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
                               ),
                               Expanded(
                                 /*
@@ -443,46 +574,35 @@ else {
                                 ),
 
                                  */
-  child:
+                                child: Counter(
+                                    initialValue: defaultValue[index],
+                                    minValue: 0,
+                                    maxValue: 100,
+                                    step: 1,
+                                    decimalPlaces: 0,
+                                    color: Colors.blueGrey,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        if (defaultValue[index] < value)
+                                          total += int.parse(l[index].price);
 
-  Counter(
-    initialValue: defaultValue[index],
-    minValue: 0,
-    maxValue: 100,
-    step: 1,
-    decimalPlaces: 0,
-    color: Colors.blueGrey,
-    onChanged: (value) {
+                                        if (defaultValue[index] > value)
+                                          total -= int.parse(l[index].price);
 
-      setState(() {
-
-if( defaultValue[index] < value)
-  total+=int.parse(l[index].price);
-if( defaultValue[index] > value)
-  total-=int.parse(l[index].price);
-
-
-
-        defaultValue[index] = value;
-        print(defaultValue[index]);
-
-      });
-    }                     ),
-
-
+                                        defaultValue[index] = value;
+                                        print(defaultValue[index]);
+                                      });
+                                    }),
                               ),
                             ],
                           )
                         ],
                       ),
-
                     ),
                   ),
                 );
               },
             ),
-
-
           ),
 
 //Text('Scan more:'),
@@ -492,7 +612,7 @@ if( defaultValue[index] > value)
 
               ),*/
           Padding(
-            padding: const EdgeInsets.only( left: 10),
+            padding: const EdgeInsets.only(left: 10),
             child: Row(
               children: <Widget>[
                 Container(
@@ -503,7 +623,7 @@ if( defaultValue[index] > value)
                         borderRadius: new BorderRadius.circular(8.0),
                         side: BorderSide(color: Colors.black38)),
                     onPressed: () {
-                     _scan();
+                      _scan();
                       getUserTaskList(qrResult);
                     },
                     label: Text(
@@ -524,8 +644,7 @@ if( defaultValue[index] > value)
                     width: MediaQuery.of(context).size.width / 2 - 16,
                     child: RaisedButton.icon(
                       shape: RoundedRectangleBorder(
-                          borderRadius:
-                          new BorderRadius.circular(8.0),
+                          borderRadius: new BorderRadius.circular(8.0),
                           side: BorderSide(color: Colors.black38)),
                       onPressed: () async {
                         _EnterId();
@@ -637,16 +756,61 @@ if( defaultValue[index] > value)
     );
   }
 
-
-
-   clear() {
-     print('jod');
+  clear() {
+    print('jod');
     l.clear();
-    total=0;
-      defaultValue =[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-    setState(() {
-
-    });
+    total = 0;
+    defaultValue = [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ];
+    setState(() {});
   }
 }
 /*
