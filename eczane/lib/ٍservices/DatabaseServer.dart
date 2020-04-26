@@ -113,6 +113,27 @@ class DatabaseServer {
   }
 
   ///////////////////////////////////////////////////////////////////////////////
+  //
+  // ///////////////////////////////////////////////////////////////////////////
+
+  List<Medicine> _sold(QuerySnapshot snap) {
+    return snap.documents.map((doc) {
+      return Medicine(quantity: doc.data['quantity'] ?? '',
+          profits: doc.data['profits'] ?? '',
+          price: doc.data['price'] ?? '0',
+          ID: doc.data['ID'] ?? '',
+          Exp: doc.data['Exp'] ?? 'unknow',
+          name: doc.data['name'] ?? '');
+    }).toList();
+  }
+
+  Stream<List<Medicine>> get sold {
+    return data.document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('SoldMed').snapshots().map(_sold);
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////
+
+
   Stream<List<Medicine>> get medicines {
     return data
         .document("iEB5rRlXZpdEfwahBJNBCfATQci2")

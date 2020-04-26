@@ -206,20 +206,18 @@ class SellState extends State<Sell> {
       Exp: "23/2",
       name: "dawa");
   static List<Medicine> s = new List<Medicine>();
-  SetSoldMed()async {
-      x=0;
-      bool flag;
+  SetSoldMed() async {
+    x = 0;
+    bool flag;
     l.forEach((i) async {
-
-
       Medicine post = new Medicine(
-         // quantity:i.quantity, name: i.name, profits:  i.profits ,ID: i.ID );
-         quantity: defaultValue[x], name: i.name, profits:" ${ int.parse(i.profits)*defaultValue[x] }",ID: i.ID );
-
+          // quantity:i.quantity, name: i.name, profits:  i.profits ,ID: i.ID );
+          quantity: defaultValue[x],
+          name: i.name,
+          profits: " ${int.parse(i.profits) * defaultValue[x]}",
+          ID: i.ID);
 
       Map<String, dynamic> postData = post.toJson();
-
-
 
       DocumentSnapshot snapshot = await Firestore.instance
           .collection('data')
@@ -229,13 +227,16 @@ class SellState extends State<Sell> {
           .get();
 
       Medicine obj = new Medicine(
-          quantity: snapshot["quantity"]+postData["quantity"],
-          profits: snapshot["profits"]+postData["profits"],
-          );
+        name: postData["name"],
+        ID: postData["ID"],
+        quantity: snapshot["quantity"] + postData["quantity"],
+        profits:
+            ("${int.parse(snapshot["profits"]) + int.parse(postData["profits"])}"),
+      );
 
       Map<String, dynamic> dada = obj.toJson();
 
-
+/*
  Firestore.instance
     .collection('data')
     .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
@@ -251,12 +252,38 @@ class SellState extends State<Sell> {
 
 
 
-});
+});*/
 
+      Firestore.instance
+          .collection('data')
+          .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+          .collection('SoldMed')
+          .document(i.ID)
+          .get()
+          .then((docSnapshot) => {
+                if (docSnapshot.exists)
+                  {
+                    print('a77'),
+                    Firestore.instance
+                        .collection('data')
+                        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+                        .collection('SoldMed')
+                        .document(i.ID)
+                        .updateData(dada),
+                  }
+                else
+                  {
+                    print('ayyyy'),
+                    Firestore.instance
+                        .collection('data')
+                        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+                        .collection('SoldMed')
+                        .document(i.ID)
+                        .setData(postData)
+                  }
+              });
 
-
-
-
+/*
 if(false) {
   Firestore.instance
       .collection('data')
@@ -273,21 +300,11 @@ if(false) {
           .collection('SoldMed')
           .document(i.ID)
           .setData(postData);}
-
-
-
-
-
-
-
-
-
+*/
 
       x++;
     });
   }
-
-
 
   updateqantiti() async {
 //cvLM57EPwYeYoiOGycxHF6WyWlC2   iEB5rRlXZpdEfwahBJNBCfATQci2

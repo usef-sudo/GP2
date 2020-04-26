@@ -191,7 +191,7 @@ class _MedicineStoreState extends State<MedicineStore> {
 
     Firestore.instance
         .collection('data')
-        .document("iEB5rRlXZpdEfwahBJNBCfATQci2")
+        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
         .collection('medicines')
         .document(i)
         .setData(postData);
