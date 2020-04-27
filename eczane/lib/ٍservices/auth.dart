@@ -47,8 +47,9 @@ class authser {
           email: email, password: pass);
       FirebaseUser user = result.user;
       //create a doc for user with his uid
-
-      await DatabaseServer.instance.updatedata(name, PharmacyName);
+      DatabaseServer.get(user.uid);
+      print(user.uid);
+      await DatabaseServer.get(user.uid).updatedata(name, PharmacyName);
 
       return _userfromfirebase(user);
     } catch (e) {

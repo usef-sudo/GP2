@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
 import 'package:eczane/models/Medicine.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,10 +15,9 @@ class _MedicineCardsState extends State<MedicineCards> {
   done(int x, od) async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseUser _result = await _auth.currentUser();
-
     Firestore.instance
         .collection('data')
-        .document("iEB5rRlXZpdEfwahBJNBCfATQci2")
+        .document(DatabaseServer.instance.uid)
         .collection('medicines')
         .document(od)
         .updateData({'quantity': (x - int.parse(next))});
@@ -27,13 +27,11 @@ class _MedicineCardsState extends State<MedicineCards> {
 
   TextEditingController _Count = TextEditingController();
   String next = "";
-
   @override
   Widget build(BuildContext context) {
+
     List<Medicine> medicenee = Provider.of<List<Medicine>>(context);
-
     var items = List<Medicine>();
-
     medicenee.forEach((i) {
       items.add(i);
     });

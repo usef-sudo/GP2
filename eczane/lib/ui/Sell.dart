@@ -218,23 +218,31 @@ class SellState extends State<Sell> {
           ID: i.ID);
 
       Map<String, dynamic> postData = post.toJson();
-
+/*
       DocumentSnapshot snapshot = await Firestore.instance
           .collection('data')
-          .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+          .document(DatabaseServer.instance.uid)
           .collection('SoldMed')
           .document(i.ID)
           .get();
-
+*/
       Medicine obj = new Medicine(
         name: postData["name"],
         ID: postData["ID"],
-        quantity: snapshot["quantity"] + postData["quantity"],
+        quantity: postData["quantity"] + postData["quantity"],//snapshot bdl postdata
         profits:
-            ("${int.parse(snapshot["profits"]) + int.parse(postData["profits"])}"),
+            ("${int.parse(postData["profits"]) + int.parse(postData["profits"])}"),
       );
 
       Map<String, dynamic> dada = obj.toJson();
+/*
+      Firestore.instance
+          .collection('data')
+          .document(DatabaseServer.instance.uid)
+          .collection('SoldMed')
+          .document(i.ID)
+          .setData(postData);
+          */
 
 /*
  Firestore.instance
@@ -256,7 +264,7 @@ class SellState extends State<Sell> {
 
       Firestore.instance
           .collection('data')
-          .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+          .document(DatabaseServer.instance.uid)
           .collection('SoldMed')
           .document(i.ID)
           .get()
@@ -266,7 +274,7 @@ class SellState extends State<Sell> {
                     print('a77'),
                     Firestore.instance
                         .collection('data')
-                        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+                        .document(DatabaseServer.instance.uid)
                         .collection('SoldMed')
                         .document(i.ID)
                         .updateData(dada),
@@ -276,7 +284,7 @@ class SellState extends State<Sell> {
                     print('ayyyy'),
                     Firestore.instance
                         .collection('data')
-                        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+                        .document(DatabaseServer.instance.uid)
                         .collection('SoldMed')
                         .document(i.ID)
                         .setData(postData)
@@ -315,7 +323,7 @@ if(false) {
     l.forEach((i) {
       Firestore.instance
           .collection('data')
-          .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+          .document(DatabaseServer.instance.uid)
           .collection('medicines')
           .document(i.ID)
           .updateData({"quantity": i.quantity - defaultValue[t]});
@@ -326,9 +334,13 @@ if(false) {
   getUserTaskList(String id) async {
 //cvLM57EPwYeYoiOGycxHF6WyWlC2   iEB5rRlXZpdEfwahBJNBCfATQci2
 /**/
+
+
+    print(DatabaseServer.instance.uid);
+
     DocumentSnapshot snapshot = await Firestore.instance
         .collection('data')
-        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+        .document(DatabaseServer.instance.uid)
         .collection('medicines')
         .document(id)
         .get();

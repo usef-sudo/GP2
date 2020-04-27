@@ -16,7 +16,7 @@ class DatabaseServer {
 
   static DatabaseServer get(var uu) {
     if (instance == null) {
-      instance =DatabaseServer(uu);
+      instance = DatabaseServer(uu);
     }
     return instance;
   }
@@ -36,8 +36,10 @@ class DatabaseServer {
     });
   }
 
+
+
   Future addStore(String name, String phone) async {
-    return await data.document("iEB5rRlXZpdEfwahBJNBCfATQci2").setData({
+    return await data.document(uid).setData({
       'name': name,
       'phon': phone,
     });
@@ -97,7 +99,9 @@ class DatabaseServer {
   }
 
   Stream<List<Store>> get stores {
-    return data.document("iEB5rRlXZpdEfwahBJNBCfATQci2").collection('store').snapshots().map(_storelist);
+
+   // return data.document("iEB5rRlXZpdEfwahBJNBCfATQci2").collection('store').snapshots().map(_storelist);
+    return data.document(uid).collection('store').snapshots().map(_storelist);
   }
   ///////////////////////////////////////////////////////////////////////////////
 
@@ -109,7 +113,7 @@ class DatabaseServer {
   }
 
   Stream<List<MEmployee>> get emploies {
-    return data.document("iEB5rRlXZpdEfwahBJNBCfATQci2").collection('employee').snapshots().map(_emplist);
+    return data.document(uid).collection('employee').snapshots().map(_emplist);
   }
 
   ///////////////////////////////////////////////////////////////////////////////
@@ -128,7 +132,8 @@ class DatabaseServer {
   }
 
   Stream<List<Medicine>> get sold {
-    return data.document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('SoldMed').snapshots().map(_sold);
+    //return data.document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('SoldMed').snapshots().map(_sold);
+    return data.document(uid).collection('SoldMed').snapshots().map(_sold);
   }
 
   ///////////////////////////////////////////////////////////////////////////////
@@ -136,7 +141,7 @@ class DatabaseServer {
 
   Stream<List<Medicine>> get medicines {
     return data
-        .document("iEB5rRlXZpdEfwahBJNBCfATQci2")
+        .document(uid)
         .collection('medicines')
         .snapshots()
         .map(medicinelist);

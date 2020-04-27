@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
 import 'package:eczane/models/Medicine.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -191,7 +192,7 @@ class _MedicineStoreState extends State<MedicineStore> {
 
     Firestore.instance
         .collection('data')
-        .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
+        .document(DatabaseServer.instance.uid)
         .collection('medicines')
         .document(i)
         .setData(postData);
@@ -207,7 +208,7 @@ class _MedicineStoreState extends State<MedicineStore> {
 
     Firestore.instance
         .collection('data')
-        .document("iEB5rRlXZpdEfwahBJNBCfATQci2")
+        .document(DatabaseServer.instance.uid)
         .collection('medicines')
         .document(ID)
         .delete();

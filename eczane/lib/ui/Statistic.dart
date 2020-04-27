@@ -153,7 +153,6 @@ class _statisState extends State<statis> {
   Widget build(BuildContext context) {
 
 
-
     return StreamProvider<List<Medicine>>.value(
       value: DatabaseServer.instance.sold,
       child:  new Scaffold(
@@ -163,28 +162,26 @@ class _statisState extends State<statis> {
           backgroundColor: Color.fromRGBO(66, 160, 206, 1),
           title: new Text("Statistics"),
         ),
-        drawer: MyDrawer(),
-        body: SingleChildScrollView(
-          /* child: Container(
-              child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child:*/
+         drawer: MyDrawer(),
+        body:
 
-          child:SizedBox(
-            height: 700,
-            width: 500,
 
-            child: Column(
+        SizedBox(
+          height: 700,
+          width: 500,
 
-              children: <Widget>[
+          child: Column(
 
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Statistics:',
-                    style: TextStyle(fontSize: 30.0),
-                  ),
+            children: <Widget>[
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Statistics:',
+                  style: TextStyle(fontSize: 30.0),
                 ),
+              ),
+
                 InkWell(
                   child: Card(
                     child: Container(
@@ -208,17 +205,19 @@ class _statisState extends State<statis> {
                   }),
                 ),
 
+
+
                 SingleChildScrollView(
                   child: Container(height: 420, child: SoldCards()),
                 ),
 
 
-              ],
-            ),
+            ],
           ),
+        ),
 
-          // )),
-        )),
+        // )),
+      ),
     );
 
 

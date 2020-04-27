@@ -214,7 +214,7 @@ class _AddStoreState extends State<AddStore> {
     print(_result.uid);
     Firestore.instance
         .collection('data')
-        .document("iEB5rRlXZpdEfwahBJNBCfATQci2")
+        .document(DatabaseServer.instance.uid)
         .collection('store')
         .document(p)
         .setData(postData);
@@ -228,7 +228,7 @@ class _AddStoreState extends State<AddStore> {
 
     Firestore.instance
         .collection('data')
-        .document("iEB5rRlXZpdEfwahBJNBCfATQci2")
+        .document(DatabaseServer.instance.uid)
         .collection('store')
         .document(num)
         .delete();

@@ -16,8 +16,6 @@ class SoldCards extends StatefulWidget {
 class _SoldCardsState extends State<SoldCards> {
   @override
   Widget build(BuildContext context) {
-
-
     final sales = Provider.of<List<Medicine>>(context);
 
     return ListView.builder(
@@ -26,6 +24,7 @@ class _SoldCardsState extends State<SoldCards> {
         return Padding(
           padding: const EdgeInsets.only(top: 8.0),//sales[index].name
           child: Card(
+
             margin: EdgeInsets.fromLTRB(10, 6, 10, 0),
             child: ListTile(
               leading: CircleAvatar(

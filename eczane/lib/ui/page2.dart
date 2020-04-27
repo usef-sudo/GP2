@@ -194,19 +194,10 @@ class _Page2State extends State<Page2> {
 
                                       dynamic result = await _auth.registemail(
                                           email, password, name, Pharmacyname);
+
                                       if (result == null) {
-                                        setState(() {
-                                          error =
-                                              'plesee regist with valid email';
-                                          loading = false;
-                                        });
-                                      } else {
                                         _formkey.currentState.reset();
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Page1()),
-                                        );
+                                        Navigator.of(context).pop();
                                       }
                                     }
                                   },
