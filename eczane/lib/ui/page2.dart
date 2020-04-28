@@ -195,10 +195,10 @@ class _Page2State extends State<Page2> {
                                       dynamic result = await _auth.registemail(
                                           email, password, name, Pharmacyname);
 
-                                      if (result == null) {
+
                                         _formkey.currentState.reset();
                                         Navigator.of(context).pop();
-                                      }
+
                                     }
                                   },
                                   color: Colors.white,

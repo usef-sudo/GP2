@@ -81,10 +81,13 @@ class SellState extends State<Sell> {
                       child: RaisedButton(
                         onPressed: () {
                           Navigator.of(context).pop();
+                          updateqantiti();
+
+
 
                           _bye();
 
-                          updateqantiti();
+
 
                           SetSoldMed();
                         },
@@ -206,6 +209,7 @@ class SellState extends State<Sell> {
       Exp: "23/2",
       name: "dawa");
   static List<Medicine> s = new List<Medicine>();
+  Map<String, dynamic> dada;
   SetSoldMed() async {
     x = 0;
     bool flag;
@@ -214,27 +218,129 @@ class SellState extends State<Sell> {
           // quantity:i.quantity, name: i.name, profits:  i.profits ,ID: i.ID );
           quantity: defaultValue[x],
           name: i.name,
-          profits: " ${int.parse(i.profits) * defaultValue[x]}",
+          profits: i.profits* defaultValue[x],
           ID: i.ID);
 
       Map<String, dynamic> postData = post.toJson();
+
+
+
+
+      DocumentSnapshot snapshot;
+
+
+
+
+      Medicine obj;
 /*
-      DocumentSnapshot snapshot = await Firestore.instance
+so()async{
+  obj = new Medicine(
+      name: postData["name"],
+      ID: postData["ID"],
+      quantity: snapshot["quantity"] + postData["quantity"],
+      //snapshot bdl postdata
+      profits:
+      ("${int.parse(snapshot["profits"]) + int.parse(postData["profits"])}"));
+
+}
+      go()async{
+        snapshot = await Firestore.instance
+            .collection('data')
+            .document(DatabaseServer.instance.uid)
+            .collection('SoldMed')
+            .document(i.ID)
+            .get();
+
+       await so();
+
+      }
+
+ *//*
+      snapshot = await Firestore.instance
           .collection('data')
           .document(DatabaseServer.instance.uid)
           .collection('SoldMed')
           .document(i.ID)
           .get();
-*/
-      Medicine obj = new Medicine(
-        name: postData["name"],
-        ID: postData["ID"],
-        quantity: postData["quantity"] + postData["quantity"],//snapshot bdl postdata
-        profits:
-            ("${int.parse(postData["profits"]) + int.parse(postData["profits"])}"),
-      );
+      obj = new Medicine(
+          name: postData["name"],
+          ID: postData["ID"],
+          quantity: snapshot["quantity"] + postData["quantity"],
+          //snapshot bdl postdata
+          profits:
+          ("${int.parse(snapshot["profits"]) + int.parse(postData["profits"])}"));
 
-      Map<String, dynamic> dada = obj.toJson();
+*/
+      Firestore.instance
+          .collection('data')
+          .document(DatabaseServer.instance.uid)
+          .collection('SoldMed')
+          .document(i.ID)
+          .get()
+          .then((docSnapshot) => {
+      if (docSnapshot.exists) {
+          print(docSnapshot.exists),
+      print('1'),
+
+
+
+
+
+
+
+        obj = new Medicine(
+            name: postData["name"],
+            ID: postData["ID"],
+            quantity: dada["quantity"] + postData["quantity"],//snapshot bdl postdata
+            profits:
+            ("${int.parse(dada["profits"]) + int.parse(postData["profits"])}")),
+
+
+
+  dada = obj.toJson(),
+        print('a77'),
+        Firestore.instance
+            .collection('data')
+            .document(DatabaseServer.instance.uid)
+            .collection('SoldMed')
+            .document(i.ID)
+            .updateData(dada),
+}
+  else
+{
+  print(docSnapshot.exists),
+          print('2'),
+ obj = new Medicine(
+name: postData["name"],
+ID: postData["ID"],
+quantity: postData["quantity"] + postData["quantity"],//snapshot bdl postdata
+profits:
+("${int.parse(postData["profits"]) + int.parse(postData["profits"])}")),
+
+
+    dada=postData,
+  print('ayyyy'),
+  Firestore.instance
+      .collection('data')
+      .document(DatabaseServer.instance.uid)
+      .collection('SoldMed')
+      .document(i.ID)
+      .setData(postData)
+
+}
+
+      });
+
+
+
+
+
+
+
+
+
+
+
 /*
       Firestore.instance
           .collection('data')
@@ -261,7 +367,7 @@ class SellState extends State<Sell> {
 
 
 });*/
-
+/*
       Firestore.instance
           .collection('data')
           .document(DatabaseServer.instance.uid)
@@ -269,28 +375,17 @@ class SellState extends State<Sell> {
           .document(i.ID)
           .get()
           .then((docSnapshot) => {
+      print(docSnapshot.exists),
                 if (docSnapshot.exists)
                   {
-                    print('a77'),
-                    Firestore.instance
-                        .collection('data')
-                        .document(DatabaseServer.instance.uid)
-                        .collection('SoldMed')
-                        .document(i.ID)
-                        .updateData(dada),
+
                   }
                 else
                   {
-                    print('ayyyy'),
-                    Firestore.instance
-                        .collection('data')
-                        .document(DatabaseServer.instance.uid)
-                        .collection('SoldMed')
-                        .document(i.ID)
-                        .setData(postData)
+
                   }
               });
-
+*/
 /*
 if(false) {
   Firestore.instance
@@ -354,6 +449,7 @@ if(false) {
         name: snapshot["name"]);
 
     if (snapshot["quantity"] <= 0) {
+      print('done');
       obj = new Medicine(
           quantity: snapshot["quantity"],
           profits: snapshot["profits"],
