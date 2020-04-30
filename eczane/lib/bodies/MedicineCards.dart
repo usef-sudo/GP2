@@ -20,13 +20,31 @@ class _MedicineCardsState extends State<MedicineCards> {
         .document(DatabaseServer.instance.uid)
         .collection('medicines')
         .document(od)
-        .updateData({'quantity': (x - int.parse(next))});
+        .updateData({'quantity': (x + int.parse(next))});
+
+
+    Firestore.instance
+        .collection('data')
+        .document(DatabaseServer.instance.uid)
+        .collection('medicines')
+        .document(od)
+        .updateData({'Exp': NewExp});
+
+
+
+
+
+
+
+
 
     setState(() {});
   }
 
   TextEditingController _Count = TextEditingController();
+  TextEditingController _EXP = TextEditingController();
   String next = "";
+  String NewExp = "";
   @override
   Widget build(BuildContext context) {
 
@@ -225,7 +243,7 @@ class _MedicineCardsState extends State<MedicineCards> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)),
               child: Container(
-                height: 200,
+                height: 350,
                 width: 350,
                 child: Center(
                   child: Column(
@@ -235,7 +253,7 @@ class _MedicineCardsState extends State<MedicineCards> {
                       ),
                       Center(
                         child: Text(
-                          '     Enter removed quantity  ',
+                          '     Enter number of pecies to add or remove  ',
                           style: TextStyle(
                             fontSize: 20,
                           ),
@@ -256,6 +274,35 @@ class _MedicineCardsState extends State<MedicineCards> {
                         ),
                         controller: _Count,
                       ),
+                       SizedBox(
+                        height: 30,
+                      ),
+                      Center(
+                        child: Text(
+                          '     Enter nearest expire date   ',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        onChanged: (val) {
+                          setState(() {
+                            NewExp = val;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: '  date',
+                          border: InputBorder.none,
+                        ),
+                        controller: _EXP,
+                      ),
+
+
+
                       SizedBox(
                         width: 100.0,
                         child: RaisedButton(
@@ -267,7 +314,7 @@ class _MedicineCardsState extends State<MedicineCards> {
                             Navigator.of(context).pop();
                           },
                           child: Text(
-                            "remove",
+                            "done",
                             style: TextStyle(color: Colors.white),
                           ),
                           color: const Color(0xFF1BC0C5),

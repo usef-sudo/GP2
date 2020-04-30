@@ -209,7 +209,7 @@ class SellState extends State<Sell> {
       Exp: "23/2",
       name: "dawa");
   static List<Medicine> s = new List<Medicine>();
-  Map<String, dynamic> dada;
+   Map<String, dynamic> dada;
   SetSoldMed() async {
     x = 0;
     bool flag;
@@ -291,13 +291,19 @@ so()async{
         obj = new Medicine(
             name: postData["name"],
             ID: postData["ID"],
-            quantity: dada["quantity"] + postData["quantity"],//snapshot bdl postdata
+            quantity: dada["quantity"]+ postData["quantity"],//snapshot bdl postdata
             profits:
-            ("${int.parse(dada["profits"]) + int.parse(postData["profits"])}")),
+            ("${int.parse(dada["profits"])+ int.parse(postData["profits"])}")),
 
 
 
   dada = obj.toJson(),
+
+
+
+
+
+
         print('a77'),
         Firestore.instance
             .collection('data')
@@ -319,6 +325,7 @@ profits:
 
 
     dada=postData,
+
   print('ayyyy'),
   Firestore.instance
       .collection('data')
@@ -327,9 +334,9 @@ profits:
       .document(i.ID)
       .setData(postData)
 
-}
+} });
 
-      });
+
 
 
 
