@@ -68,6 +68,8 @@ class _HomeState extends State<Home> {
                             setState(() {
                               DatabaseServer.set();
                             });
+                            
+
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(builder: (context) => MyApp()),

@@ -16,8 +16,13 @@ class SoldCards extends StatefulWidget {
 class _SoldCardsState extends State<SoldCards> {
   @override
   Widget build(BuildContext context) {
-    final sales = Provider.of<List<Medicine>>(context);
 
+    final sales2 = Provider.of<List<Medicine>>(context);
+    List<Medicine>sales= sales2;
+   /*
+sales.sort((a, b) =>
+    a.quantity.compareTo(b.quantity));
+    */
     return ListView.builder(
       itemCount: sales.length,
       itemBuilder: (context, index) {

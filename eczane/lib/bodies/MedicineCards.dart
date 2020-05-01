@@ -80,6 +80,8 @@ class _MedicineCardsState extends State<MedicineCards> {
       // medicenee=medicenee.where(medicenee[0].name.contains(val));
     }
 
+
+
     TextEditingController editingController = TextEditingController();
     List<String> _locations = ['A-Z', 'QTY']; // Option 2
     String _selectedLocation; // Option 2

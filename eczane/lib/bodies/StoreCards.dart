@@ -26,6 +26,7 @@ class _StoreCardsState extends State<StoreCards> {
 
     final Storee = Provider.of<List<Store>>(context);
 
+
     print('l ${Storee.length}'); //test
     Storee.forEach((d) {
       print('n ${d.name}');

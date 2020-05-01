@@ -1,8 +1,10 @@
+import 'package:eczane/push_nofitications/PushNotificationManage.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'page1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
   runApp(splash());
@@ -51,11 +53,22 @@ class _MyAppState extends State<MyApp> {
   @override
   VideoPlayerController _controller;
 
+
+
+
   @override
   void initState() {
+
+    print('Rooooooh');
+
+    PushNotificationsManager().init();
+
+    print('taa3aaa');
+
     super.initState();
+
     _controller = VideoPlayerController.network(
-        'http://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4')
+          ' https://youtu.be/KbSb2V3qUcg')
       ..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
