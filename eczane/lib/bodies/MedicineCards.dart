@@ -22,7 +22,6 @@ class _MedicineCardsState extends State<MedicineCards> {
         .document(od)
         .updateData({'quantity': (x + int.parse(next))});
 
-
     Firestore.instance
         .collection('data')
         .document(DatabaseServer.instance.uid)
@@ -30,24 +29,27 @@ class _MedicineCardsState extends State<MedicineCards> {
         .document(od)
         .updateData({'Exp': NewExp});
 
+    setState(() {});
+  }
 
-
-
-
-
-
-
+  save(od) async {
+    Firestore.instance
+        .collection('data')
+        .document(DatabaseServer.instance.uid)
+        .collection('medicines')
+        .document(od)
+        .updateData({'note': _text.text});
 
     setState(() {});
   }
 
   TextEditingController _Count = TextEditingController();
   TextEditingController _EXP = TextEditingController();
+  TextEditingController _text = TextEditingController();
   String next = "";
   String NewExp = "";
   @override
   Widget build(BuildContext context) {
-
     List<Medicine> medicenee = Provider.of<List<Medicine>>(context);
     var items = List<Medicine>();
     medicenee.forEach((i) {
@@ -80,13 +82,11 @@ class _MedicineCardsState extends State<MedicineCards> {
       // medicenee=medicenee.where(medicenee[0].name.contains(val));
     }
 
-
-
     TextEditingController editingController = TextEditingController();
     List<String> _locations = ['A-Z', 'QTY']; // Option 2
     String _selectedLocation; // Option 2
 
-   ; //iii
+    ; //iii
 
     return Container(
       child: Column(
@@ -181,6 +181,12 @@ class _MedicineCardsState extends State<MedicineCards> {
                           title: Text(medicenee[index].name),
                           subtitle: Text(
                               'sell price is  ${medicenee[index].price} Dinar'),
+                          trailing: Icon(Icons.note_add),
+                      /* onTap: () {
+                            savenote(
+                                medicenee[index].note ,
+                                medicenee[index].ID);
+                          },*/
                         ),
                       ),
                       onTap: () {
@@ -194,6 +200,49 @@ class _MedicineCardsState extends State<MedicineCards> {
         ],
       ),
     );
+  }
+
+  void savenote(String note, String od) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+              backgroundColor: Colors.white.withOpacity(0.80),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
+              child: Container(
+                height: 150,
+                width: 300,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TextFormField(
+
+                      controller: _text,
+                    ),
+                    Divider(),
+                    SizedBox(
+                      width: 100.0,
+                      child: RaisedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          save(od);
+
+                          setState(() {});
+                        },
+                        child: Text(
+                          "save note",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: const Color(0xFF1BC0C5),
+                      ),
+                    ),
+                  ],
+                ),
+              ));
+        });
   }
 
   void INFO(String date, int q, String od) {
@@ -276,7 +325,7 @@ class _MedicineCardsState extends State<MedicineCards> {
                         ),
                         controller: _Count,
                       ),
-                       SizedBox(
+                      SizedBox(
                         height: 30,
                       ),
                       Center(
@@ -302,9 +351,6 @@ class _MedicineCardsState extends State<MedicineCards> {
                         ),
                         controller: _EXP,
                       ),
-
-
-
                       SizedBox(
                         width: 100.0,
                         child: RaisedButton(
@@ -312,7 +358,8 @@ class _MedicineCardsState extends State<MedicineCards> {
                             done(q, od);
 
                             setState(() {});
-
+                            _EXP.clear();
+                            _Count.clear();
                             Navigator.of(context).pop();
                           },
                           child: Text(

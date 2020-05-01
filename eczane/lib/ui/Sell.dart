@@ -88,8 +88,10 @@ class SellState extends State<Sell> {
                           _bye();
 
 
-
                           SetSoldMed();
+                        // _cash.clear();
+
+
                         },
                         child: Text(
                           "calculate",

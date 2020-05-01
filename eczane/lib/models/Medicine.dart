@@ -5,6 +5,7 @@ class Medicine {
   String Exp;
   String ID;
   String profits;
+  String note;
 
   Medicine(
       {this.name, this.price, this.Exp, this.ID, this.profits, this.quantity});
