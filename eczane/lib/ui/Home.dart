@@ -1,4 +1,5 @@
 import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
+import 'package:eczane/push_nofitications/PushNotificationManage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
@@ -32,7 +33,17 @@ class _HomeState extends State<Home> {
   }
 
   initState() {
+
+
     _getUser();
+
+      print('Rooooooh');
+
+      PushNotificationsManager().init();
+
+
+      print('taa3aaa');
+
   }
 
   Future _log() async {

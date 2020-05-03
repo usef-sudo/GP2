@@ -181,12 +181,12 @@ class _MedicineCardsState extends State<MedicineCards> {
                           title: Text(medicenee[index].name),
                           subtitle: Text(
                               'sell price is  ${medicenee[index].price} Dinar'),
-                          trailing: Icon(Icons.note_add),
-                      /* onTap: () {
+                          trailing: InkWell(child: Icon(Icons.note_add) , onTap: () {
                             savenote(
                                 medicenee[index].note ,
                                 medicenee[index].ID);
-                          },*/
+                          },),
+
                         ),
                       ),
                       onTap: () {

@@ -59,11 +59,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
 
-    print('Rooooooh');
 
-    PushNotificationsManager().init();
-
-    print('taa3aaa');
 
     super.initState();
 
