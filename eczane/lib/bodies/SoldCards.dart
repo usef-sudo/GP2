@@ -1,12 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:eczane/models/Medicine.dart';
-import 'package:eczane/models/Store.dart';
-import 'package:eczane/models/Store.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:eczane/models/Store.dart';
 
 class SoldCards extends StatefulWidget {
   @override
@@ -16,42 +12,27 @@ class SoldCards extends StatefulWidget {
 class _SoldCardsState extends State<SoldCards> {
   @override
   Widget build(BuildContext context) {
+    final sales = Provider.of<List<Medicine>>(context);
 
-    final sales2 = Provider.of<List<Medicine>>(context);
-    List<Medicine>sales= sales2;
-   /*
-sales.sort((a, b) =>
-    a.quantity.compareTo(b.quantity));
-    */
     return ListView.builder(
       itemCount: sales.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.only(top: 8.0),//sales[index].name
+          padding: const EdgeInsets.only(top: 8.0), //sales[index].name
           child: Card(
-
             margin: EdgeInsets.fromLTRB(10, 6, 10, 0),
             child: ListTile(
               leading: CircleAvatar(
                 child: Text(sales[index].profits),
                 radius: 25,
-                backgroundColor: Colors
-                    .green[sales[index].quantity % 9 * 100],
+                backgroundColor: Colors.green[sales[index].quantity % 9 * 100],
               ),
               title: Text(sales[index].name),
-              subtitle: Text(
-                  'Total Sold pecies are ${sales[index].quantity} '),
+              subtitle: Text('Total Sold pecies are ${sales[index].quantity} '),
             ),
           ),
         );
       },
     );
-
   }
 }
-
-
-
-
-
-

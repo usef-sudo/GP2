@@ -3,7 +3,6 @@ import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
 import 'package:eczane/models/Medicine.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'MyDrawer.dart';
 
 class MedicineStore extends StatefulWidget {
@@ -177,12 +176,6 @@ class _MedicineStoreState extends State<MedicineStore> {
   String ID = "";
 
   getpackage() async {
-    /*
-    final CollectionReference postsRef = Firestore.instance.collection('/posts');
-
-
-    await postsRef.document(postID).setData(postData);
-*/
     final FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseUser _result = await _auth.currentUser();
 

@@ -1,8 +1,6 @@
-import 'package:eczane/%D9%8Dservices/auth.dart'; //give error
+import 'package:eczane/%D9%8Dservices/auth.dart';
 import 'package:eczane/shared/Loading.dart';
 import 'package:flutter/material.dart';
-
-import 'Page1.dart';
 
 class Page2 extends StatefulWidget {
   @override
@@ -33,13 +31,6 @@ class _Page2State extends State<Page2> {
             backgroundColor: Color.fromRGBO(123, 189, 221, 1),
             body: Stack(
               children: <Widget>[
-                /* Image.asset(
-      'images/m.jpg',
-        fit: BoxFit.fill,
-        width: double.infinity,
-        height: double.infinity,
-      ),
-          */
                 Container(
                   child: new Form(
                     key: _formkey,
@@ -191,14 +182,11 @@ class _Page2State extends State<Page2> {
                                   child: new Text('Done'),
                                   onPressed: () async {
                                     if (_formkey.currentState.validate()) {
-
                                       dynamic result = await _auth.registemail(
                                           email, password, name, Pharmacyname);
 
-
-                                        _formkey.currentState.reset();
-                                        Navigator.of(context).pop();
-
+                                      _formkey.currentState.reset();
+                                      Navigator.of(context).pop();
                                     }
                                   },
                                   color: Colors.white,

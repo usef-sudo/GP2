@@ -3,18 +3,12 @@ import 'package:eczane/push_nofitications/PushNotificationManage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
-import 'page2.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'Sell.dart';
-
-import 'package:eczane/models/user.dart';
 import 'AddStore.dart';
 import 'MyMedicine.dart';
 import 'MedicineStore.dart';
-import 'Statistic.dart';
-import 'Employee.dart';
 import 'MyDrawer.dart';
-import 'page1.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -26,24 +20,16 @@ class _HomeState extends State<Home> {
   Future _getUser() async {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     DatabaseServer.get(mCurrentUser.uid);
-    print("THIS IS USER ID ");
-    print(mCurrentUser.uid);
-    print(DatabaseServer.get(1));
-
   }
 
   initState() {
-
-
     _getUser();
 
-      print('Rooooooh');
+    print('Rooooooh');
 
-      PushNotificationsManager().init();
+    PushNotificationsManager().init();
 
-
-      print('taa3aaa');
-
+    print('taa3aaa');
   }
 
   Future _log() async {
@@ -79,7 +65,6 @@ class _HomeState extends State<Home> {
                             setState(() {
                               DatabaseServer.set();
                             });
-                            
 
                             Navigator.pushReplacement(
                               context,

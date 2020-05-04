@@ -1,12 +1,9 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class PushNotificationsManager {
-
   PushNotificationsManager._();
 
   factory PushNotificationsManager() => _instance;
@@ -18,11 +15,8 @@ class PushNotificationsManager {
   bool _initialized = false;
 
   Future<void> init() async {
-
-
     String token;
     if (!_initialized) {
-      // For testing purposes print the Firebase Messaging token
       String token = await _firebaseMessaging.getToken();
       print('COPY THIS TO MESSAGES');
       print("FirebaseMessaging token: $token");
@@ -35,8 +29,8 @@ class PushNotificationsManager {
   }
 
   void SaveDeviceToken() async {
-    print('we are in');
-    String uid = DatabaseServer.instance.uid;//return current uid
+
+    String uid = DatabaseServer.instance.uid; //return current uid
     String token = await _firebaseMessaging.getToken();
 
     if (token != null) {
@@ -49,9 +43,8 @@ class PushNotificationsManager {
       await tokenRef.setData({
         'token': token,
         'createDate': FieldValue.serverTimestamp(),
-        // 'system':Platform.operatingSystem;
       });
-      print('we are out');
+
     }
   }
 }

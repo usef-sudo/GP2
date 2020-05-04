@@ -1,9 +1,7 @@
-import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
-import 'package:eczane/%D9%8Dservices/auth.dart'; //give error
-import 'package:eczane/push_nofitications/PushNotificationManage.dart';
+import 'package:eczane/%D9%8Dservices/auth.dart';
+
 import 'package:eczane/shared/Loading.dart';
-import 'package:eczane/ui/main.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 import 'Home.dart';
@@ -18,8 +16,6 @@ class _Page1State extends State<Page1> {
   final authser _auth = authser();
 
   void initState() {
-
-
     setState(() {
       bool loading = false;
     });
@@ -34,20 +30,12 @@ class _Page1State extends State<Page1> {
 
   @override
   Widget build(BuildContext context) {
-
-    return loading ? Loading() : Scaffold(
-            //  backgroundColor: Color.fromRGBO(66  ,160, 206, 1),
-
+    return loading
+        ? Loading()
+        : Scaffold(
             backgroundColor: Color.fromRGBO(123, 189, 221, 1),
-            //  backgroundColor: Color.fromRGBO(222, 234, 247, 1),
             body: Stack(
               children: <Widget>[
-                /*  Image.asset(
-              'images/m.jpg',
-              fit: BoxFit.fill,
-              width: double.infinity,
-              height: double.infinity,
-            ),*/
                 new Form(
                     key: _formkey,
                     child: SingleChildScrollView(
@@ -85,10 +73,7 @@ class _Page1State extends State<Page1> {
                                   // hintText: "ID",
                                   icon: new Icon(Icons.email),
                                   border: InputBorder.none,
-                                  /*  border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                        borderSide: new BorderSide(),
-                      ),*/
+
                                   //fillColor: Colors.green
                                 ),
                               ),
@@ -186,15 +171,14 @@ class _Page1State extends State<Page1> {
                                   color: Colors.white,
                                   textColor: Colors.black,
                                 ),
-
-                              ]
-                          ),
-                             ),
+                              ]),
+                        ),
                       ),
-                          Text(error , style: TextStyle(color: Colors.redAccent),)
-                    ]
-                        )
-                    )),
+                      Text(
+                        error,
+                        style: TextStyle(color: Colors.redAccent),
+                      )
+                    ]))),
               ],
             ));
   }

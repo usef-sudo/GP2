@@ -6,16 +6,12 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Color.fromRGBO(200, 45, 56, 0),
-
       child: Center(
         child: SpinKitChasingDots(
           color: Colors.black,
           size: 50.5,
         ),
       ),
-
-
-
     );
   }
 }

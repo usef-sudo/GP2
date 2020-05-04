@@ -1,32 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
-import 'package:eczane/bodies/StoreCards.dart';
 import 'package:eczane/models/Medicine.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter_counter/flutter_counter.dart';
-import 'package:provider/provider.dart';
 import 'MyDrawer.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
-
-import '../bodies/cartcomponent.dart';
 
 class Sell extends StatefulWidget {
   @override
   SellState createState() => SellState();
 }
 
-//thtfhfdgtrdg
 class SellState extends State<Sell> {
   int total = 0;
   TextEditingController _id = TextEditingController();
   TextEditingController _cash = TextEditingController(text: '0');
 
-//List<String> result = ['choose selling type'];
   Future _bye() async {
     showDialog(
         context: context,
@@ -83,15 +75,10 @@ class SellState extends State<Sell> {
                           Navigator.of(context).pop();
                           updateqantiti();
 
-
-
                           _bye();
 
-
                           SetSoldMed();
-                        // _cash.clear();
-
-
+                          // _cash.clear();
                         },
                         child: Text(
                           "calculate",
@@ -180,29 +167,13 @@ class SellState extends State<Sell> {
       setState(() {
         // result.add(qrResult);
       });
-    } /*on PlatformException catch (ex) {
-      if (ex.code == BarcodeScanner.CameraAccessDenied) {
-        setState(() {
-          result = "Camera permission was denied";
-        });
-      } else {
-        setState(() {
-          result = "Unknown Error $ex";
-        });
-      }
-    } on FormatException {
-      setState(() {
-        result = "You pressed the back button before scanning anything";
-      });
-    } */
-    catch (ex) {
+    } catch (ex) {
       setState(() {
         //  result.add("Unknown Error $ex");
       });
     }
   }
 
-//List<Medicine> litems = new List<Medicine>();
   Medicine m = new Medicine(
       quantity: 1,
       profits: "1",
@@ -211,7 +182,7 @@ class SellState extends State<Sell> {
       Exp: "23/2",
       name: "dawa");
   static List<Medicine> s = new List<Medicine>();
-   Map<String, dynamic> dada;
+  Map<String, dynamic> dada;
   SetSoldMed() async {
     x = 0;
     bool flag;
@@ -220,59 +191,15 @@ class SellState extends State<Sell> {
           // quantity:i.quantity, name: i.name, profits:  i.profits ,ID: i.ID );
           quantity: defaultValue[x],
           name: i.name,
-          profits: i.profits* defaultValue[x],
+          profits: i.profits * defaultValue[x],
           ID: i.ID);
 
       Map<String, dynamic> postData = post.toJson();
 
-
-
-
       DocumentSnapshot snapshot;
 
-
-
-
       Medicine obj;
-/*
-so()async{
-  obj = new Medicine(
-      name: postData["name"],
-      ID: postData["ID"],
-      quantity: snapshot["quantity"] + postData["quantity"],
-      //snapshot bdl postdata
-      profits:
-      ("${int.parse(snapshot["profits"]) + int.parse(postData["profits"])}"));
 
-}
-      go()async{
-        snapshot = await Firestore.instance
-            .collection('data')
-            .document(DatabaseServer.instance.uid)
-            .collection('SoldMed')
-            .document(i.ID)
-            .get();
-
-       await so();
-
-      }
-
- *//*
-      snapshot = await Firestore.instance
-          .collection('data')
-          .document(DatabaseServer.instance.uid)
-          .collection('SoldMed')
-          .document(i.ID)
-          .get();
-      obj = new Medicine(
-          name: postData["name"],
-          ID: postData["ID"],
-          quantity: snapshot["quantity"] + postData["quantity"],
-          //snapshot bdl postdata
-          profits:
-          ("${int.parse(snapshot["profits"]) + int.parse(postData["profits"])}"));
-
-*/
       Firestore.instance
           .collection('data')
           .document(DatabaseServer.instance.uid)
@@ -280,148 +207,53 @@ so()async{
           .document(i.ID)
           .get()
           .then((docSnapshot) => {
-      if (docSnapshot.exists) {
-          print(docSnapshot.exists),
-      print('1'),
-
-
-
-
-
-
-
-        obj = new Medicine(
-            name: postData["name"],
-            ID: postData["ID"],
-            quantity: dada["quantity"]+ postData["quantity"],//snapshot bdl postdata
-            profits:
-            ("${int.parse(dada["profits"])+ int.parse(postData["profits"])}")),
-
-
-
-  dada = obj.toJson(),
-
-
-
-
-
-
-        print('a77'),
-        Firestore.instance
-            .collection('data')
-            .document(DatabaseServer.instance.uid)
-            .collection('SoldMed')
-            .document(i.ID)
-            .updateData(dada),
-}
-  else
-{
-  print(docSnapshot.exists),
-          print('2'),
- obj = new Medicine(
-name: postData["name"],
-ID: postData["ID"],
-quantity: postData["quantity"] + postData["quantity"],//snapshot bdl postdata
-profits:
-("${int.parse(postData["profits"]) + int.parse(postData["profits"])}")),
-
-
-    dada=postData,
-
-  print('ayyyy'),
-  Firestore.instance
-      .collection('data')
-      .document(DatabaseServer.instance.uid)
-      .collection('SoldMed')
-      .document(i.ID)
-      .setData(postData)
-
-} });
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-      Firestore.instance
-          .collection('data')
-          .document(DatabaseServer.instance.uid)
-          .collection('SoldMed')
-          .document(i.ID)
-          .setData(postData);
-          */
-
-/*
- Firestore.instance
-    .collection('data')
-    .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
-    .collection('SoldMed').getDocuments().then((snapshot){
-
-      snapshot.documents.forEach((f)async{
-      if(f.data.keys==i.ID)
-
-  flag=true;
-
-
-      });
-
-
-
-});*/
-/*
-      Firestore.instance
-          .collection('data')
-          .document(DatabaseServer.instance.uid)
-          .collection('SoldMed')
-          .document(i.ID)
-          .get()
-          .then((docSnapshot) => {
-      print(docSnapshot.exists),
                 if (docSnapshot.exists)
                   {
-
+                    print(docSnapshot.exists),
+                    print('1'),
+                    obj = new Medicine(
+                        name: postData["name"],
+                        ID: postData["ID"],
+                        quantity: dada["quantity"] +
+                            postData["quantity"], //snapshot bdl postdata
+                        profits:
+                            ("${int.parse(dada["profits"]) + int.parse(postData["profits"])}")),
+                    dada = obj.toJson(),
+                    print('a77'),
+                    Firestore.instance
+                        .collection('data')
+                        .document(DatabaseServer.instance.uid)
+                        .collection('SoldMed')
+                        .document(i.ID)
+                        .updateData(dada),
                   }
                 else
                   {
-
+                    print(docSnapshot.exists),
+                    print('2'),
+                    obj = new Medicine(
+                        name: postData["name"],
+                        ID: postData["ID"],
+                        quantity: postData["quantity"] +
+                            postData["quantity"], //snapshot bdl postdata
+                        profits:
+                            ("${int.parse(postData["profits"]) + int.parse(postData["profits"])}")),
+                    dada = postData,
+                    print('ayyyy'),
+                    Firestore.instance
+                        .collection('data')
+                        .document(DatabaseServer.instance.uid)
+                        .collection('SoldMed')
+                        .document(i.ID)
+                        .setData(postData)
                   }
               });
-*/
-/*
-if(false) {
-  Firestore.instance
-      .collection('data')
-      .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
-      .collection('SoldMed')
-      .document(i.ID)
-      .updateData(dada);
-}
-        //  {  "QTY":post.quantity/*+obj.quantity*/,"Profit":"${int.parse(post.profits)/*+int.parse(obj.profits)*/}",});}
-      else{
-      Firestore.instance
-          .collection('data')
-          .document("cvLM57EPwYeYoiOGycxHF6WyWlC2")
-          .collection('SoldMed')
-          .document(i.ID)
-          .setData(postData);}
-*/
 
       x++;
     });
   }
 
   updateqantiti() async {
-//cvLM57EPwYeYoiOGycxHF6WyWlC2   iEB5rRlXZpdEfwahBJNBCfATQci2
-/**/
-
     t = 0;
 
     l.forEach((i) {
@@ -436,10 +268,6 @@ if(false) {
   }
 
   getUserTaskList(String id) async {
-//cvLM57EPwYeYoiOGycxHF6WyWlC2   iEB5rRlXZpdEfwahBJNBCfATQci2
-/**/
-
-
     print(DatabaseServer.instance.uid);
 
     DocumentSnapshot snapshot = await Firestore.instance
@@ -471,64 +299,9 @@ if(false) {
       l.add(obj);
       total += (int.parse(obj.price));
     }
-    /*
-    total=0;
 
-    l.forEach((i) {
-
-      total+=(int.parse(i.price));
-
-    });*/
-
-/*
-      DocumentSnapshot snapshot = await Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('medicines')
-    .document(id).get();
-
-
-
-      await Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection('SellMdes')
-          .document(id).setData({
-
-              "name" : snapshot.data["name"] ,
-
-
-
-      });
-*/
-
-//       r = await Firestore.instance
-//        .collection('data')
-//       .document(DatabaseServer.get("uu").toString()).collection('medicines')
-//    .document(_id.text).get();
-
-    //l.add(newMed);
     setState(() {});
 
-    // print(r.data["name"]);
-    //  print(r.data);
-    //  print(r.toString());
-    // print("بروووح عليييهااا....");
-
-    /*return r.documents.map(
-            (doc) => Medicine(
-              ID: doc.data['ID'],
-              name:  doc.data['name'],
-              price:  doc.data['price'],
-              Exp:  doc.data['Exp'],
-              profits: doc.data['profits'],
-              quantity: doc.data['quantity'],
-
-           )
-    ).toList();*/
-
-    // List<Medicine> l =  DatabaseServer.get("haneen").medicinelist(r) ;
-    // print(l.length);
-    // print(l);
-//       print('gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaag');
-//       print(r['name']);
-//       print(r.data['name']);
-
-    // l.add(r.data);
     _id.clear();
   }
 
@@ -537,20 +310,11 @@ if(false) {
     s = l;
     clear();
   }
-/*
-  main() async {
-    l = await getUserTaskList();
-    useTasklist(tasks); // yay, the list is here
-  }
-  */
 
   List<Medicine> l = new List<Medicine>();
-  //DocumentSnapshot   r;
+
   @override
   void initState() {
-    // l.add(m);
-    //print(l.length);
-    //print(l);
     super.initState();
   }
 
@@ -603,11 +367,8 @@ if(false) {
     1,
     1,
     1,
-    1
+    1,
   ];
-
-  //var bb =defaultValue;
-  //[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
   final _controller = FabCircularMenuController();
   Widget build(BuildContext context) {
@@ -630,32 +391,6 @@ if(false) {
           SizedBox(height: 10),
           SizedBox(
             height: MediaQuery.of(context).size.height / 1.55,
-
-/*
-            child:StreamBuilder(
-              stream: Firestore.instance.collection('data').document("cvLM57EPwYeYoiOGycxHF6WyWlC2").collection("SellMeds")
-                .snapshots() ,
-              builder: (BuildContext context , AsyncSnapshot snapshot){
-
-              if(!snapshot.hasData){
-                return CupertinoActivityIndicator();
-              }
-              else
-{
-  print(snapshot.data.documents.length);
-               return ListView.builder(
-
-                 itemCount: snapshot.data.documents.length,
-               itemBuilder: (_,index){
-                    return Card(
-                     child: Text(snapshot.data.documents[index].name),
-                   );
-                 },
-               );
-              }
-              },
-            )
-*/
             child: ListView.builder(
               itemCount: l.length,
               itemBuilder: (_, index) {
@@ -679,36 +414,6 @@ if(false) {
                                 ),
                               ),
                               Expanded(
-                                /*
-                                child: new Row(
-                                  children: <Widget>[
-                                    new IconButton(
-                                        icon: Icon(
-                                          Icons.arrow_drop_up,
-                                          color: Colors.green,
-                                        ),
-                                        onPressed: () {
-                                          /* setState(() {
-
-                              });*/
-                                        }),
-                                //    new Text("${l[index].quantity}"),
-                                    new Text("1"),
-                                    new IconButton(
-                                        icon: Icon(
-                                          Icons.arrow_drop_down,
-                                          color: Colors.red,
-                                        ),
-                                        onPressed: () {
-                                          /*  setState(() {
-
-                               });
-                               */
-                                        }),
-                                  ],
-                                ),
-
-                                 */
                                 child: Counter(
                                     initialValue: defaultValue[index],
                                     minValue: 0,
@@ -739,13 +444,6 @@ if(false) {
               },
             ),
           ),
-
-//Text('Scan more:'),
-          /*build((context) =>  cartproduct())
-              Text(
-                result,
-
-              ),*/
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Row(
@@ -799,56 +497,6 @@ if(false) {
               ],
             ),
           ),
-          /*
-          FabCircularMenu(
-            fabColor: Colors.black,
-            child: SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height / 1.65,
-                // color: Color.fromRGBO(222, 234, 247, 1),
-                //
-                //color: Colors.amberAccent,
-                child: Center(
-                    child: Padding(
-                  padding: const EdgeInsets.only(bottom: 300.0),
-                )),
-              ),
-            ),
-            ringColor: Colors.black,
-            controller: _controller,
-            options: <Widget>[
-              IconButton(
-                  tooltip: 'test',
-                  icon: Icon(Icons.widgets),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => cartproduct()),
-                    );
-                  },
-                  iconSize: 30.0,
-                  color: Colors.white),
-              IconButton(
-                  tooltip: 'Scan ID',
-                  icon: Icon(Icons.settings_overscan),
-                  onPressed: () {
-                    _scan();
-                  },
-                  iconSize: 40.0,
-                  color: Colors.white),
-              IconButton(
-                  tooltip: 'Add manuel',
-                  icon: Icon(Icons.keyboard),
-                  onPressed: (() => {
-                        _EnterId(),
-                      }),
-                  iconSize: 40.0,
-                  color: Colors.white),
-              //  IconButton(icon: Icon(Icons.done_outline), onPressed: () {_bye();}, iconSize: 40.0, color: Colors.black),
-            ],
-          ),
-
-           */
         ],
       ),
 
@@ -881,13 +529,6 @@ if(false) {
           ],
         ),
       ),
-
-      /*floatingActionButton: FloatingActionButton(
-
-        onPressed: _scan,
-        tooltip: 'scan',
-        child: Icon(Icons.settings_overscan),
-      ),*/
     );
   }
 
@@ -948,59 +589,3 @@ if(false) {
     setState(() {});
   }
 }
-/*
-
-Widget HI(Medicine data) {
-  return Container(
-    color: Colors.black38,
-    child: Card(
-      child: ListTile(
-        title: Text(data.name),
-        subtitle: new Column(
-          children: <Widget>[
-
-            new Row(
-              children: <Widget>[
-                Expanded(
-                  child: Text("price=" + "\$${data.price}"),
-                ),
-
-
-                      new IconButton(
-                          icon: Icon(
-                            Icons.add_circle_outline,
-                            color: Colors.green,
-                          ),
-                          onPressed: () {
-                            data.quantity++;
-                            /* setState(() {
-
-                              });*/
-                          }),
-                      new Text("${data.quantity}"),
-                      new IconButton(
-                          icon: Icon(
-                            Icons.remove_circle_outline,
-                            color: Colors.red,
-                          ),
-                          onPressed: () {
-                            data.quantity--;
-                            /*  setState(() {
-
-                               });
-                               */
-                          }),
-                    ],
-                  ),
-
-
-                ]
-
-            ),
-
-        ),
-      ),
-    );
-
-}
-*/

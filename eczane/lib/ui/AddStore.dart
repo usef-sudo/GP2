@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
-import 'package:eczane/%D9%8Dservices/auth.dart';
+
 import 'package:eczane/models/Store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
+
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 import 'MyDrawer.dart';
 import 'package:eczane/bodies/StoreCards.dart';
 
@@ -200,12 +200,6 @@ class _AddStoreState extends State<AddStore> {
   String num = "";
 
   getStore() async {
-    /*
-    final CollectionReference postsRef = Firestore.instance.collection('/posts');
-
-
-    await postsRef.document(postID).setData(postData);
-*/
     final FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseUser _result = await _auth.currentUser();
 
@@ -236,7 +230,6 @@ class _AddStoreState extends State<AddStore> {
 
   @override
   Widget build(BuildContext context) {
-
     return StreamProvider<List<Store>>.value(
       value: DatabaseServer.instance.stores,
       child: Scaffold(
@@ -249,9 +242,6 @@ class _AddStoreState extends State<AddStore> {
           body: SingleChildScrollView(
             child: Container(height: 420, child: StoreCards()),
           ),
-
-          // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: Padding(
@@ -279,7 +269,5 @@ class _AddStoreState extends State<AddStore> {
             ),
           )),
     );
-
-
   }
 }

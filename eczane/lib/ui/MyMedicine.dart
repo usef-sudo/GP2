@@ -24,9 +24,6 @@ class _MyMedicineState extends State<MyMedicine> {
           title: new Text("MyMedicine"),
         ),
         drawer: MyDrawer(),
-
-        //********************************//To-DO//**********************************
-
         body: MedicineCards(),
       ),
     );

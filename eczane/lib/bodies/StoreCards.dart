@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eczane/models/Store.dart';
 import 'package:eczane/models/Store.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:eczane/models/Store.dart';
 
 class StoreCards extends StatefulWidget {
   @override
@@ -25,12 +22,6 @@ class _StoreCardsState extends State<StoreCards> {
     }
 
     final Storee = Provider.of<List<Store>>(context);
-
-
-    print('l ${Storee.length}'); //test
-    Storee.forEach((d) {
-      print('n ${d.name}');
-    }); //iiiiiiiiiiiiiiiiiiiiiiiiitest
 
     return ListView.builder(
       itemCount: Storee.length,

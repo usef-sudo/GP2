@@ -1,10 +1,7 @@
-import 'package:eczane/push_nofitications/PushNotificationManage.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'page1.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
   runApp(splash());
@@ -30,7 +27,7 @@ class _splashState extends State<splash> {
             children: <Widget>[
               Center(
                 child: new SplashScreen(
-                    seconds: 3,
+                    seconds: 4,
                     navigateAfterSeconds: MyApp(),
                     image: new Image.asset(
                       'images/splash.gif',
@@ -53,18 +50,11 @@ class _MyAppState extends State<MyApp> {
   @override
   VideoPlayerController _controller;
 
-
-
-
   @override
   void initState() {
-
-
-
     super.initState();
 
-    _controller = VideoPlayerController.network(
-          ' https://youtu.be/KbSb2V3qUcg')
+    _controller = VideoPlayerController.network(' https://youtu.be/KbSb2V3qUcg')
       ..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
@@ -94,7 +84,7 @@ class _MyAppState extends State<MyApp> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      ' Eczane is a point of sale mobile application to be used by pharmacies instead of using the traditional computer-based software system that currently used in the pharmacies. Eczane enables the pharmacists to electronically manage/control all pharmacy staff, In addition, Eczane has the mobility feature that enable controlling/reporting everything remotely, which make it more comfortable for pharmacist, and give the manager the ability of viewing the details of the pharmacy and controlling it as well as the auto push notification alert system that will remind the users with all important Information about the stocks, Eczane contains all the needs from warehouses, statistical reports, sales, and a lot more. ',
+                      ' Eczane is a point of sale mobile application to be used by pharmacies instead of using the traditional computer-based software system that currently used in the pharmacies. Eczane enables the pharmacists to electronically manage/control all pharmacy staff, In addition, Eczane has the mobility feature that enable controlling/reporting everything remotely, which make it more comfortable for pharmacist, and give the manager the ability of viewing the details of the pharmacy and controlling it as well as the auto push notification alert system that will remind the users with all important Information about the stocks, Eczane contains all the needs from warehouses, statistical reports, sales, and a lot more. made by Mohanad Ashour and Yousef Alnajjar from Applied science university. ',
                       style: TextStyle(
                         fontSize: 15,
                       ),

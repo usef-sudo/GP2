@@ -74,19 +74,14 @@ class _MedicineCardsState extends State<MedicineCards> {
         medicenee.addAll(items);
       }
 
-      setState(() {
-        // medicenee.clear();
-        //  medicenee.addAll(items);
-      });
-
-      // medicenee=medicenee.where(medicenee[0].name.contains(val));
+      setState(() {});
     }
 
     TextEditingController editingController = TextEditingController();
     List<String> _locations = ['A-Z', 'QTY']; // Option 2
     String _selectedLocation; // Option 2
 
-    ; //iii
+    ;
 
     return Container(
       child: Column(
@@ -132,7 +127,7 @@ class _MedicineCardsState extends State<MedicineCards> {
                                 setState(() {
                                   medicenee.clear();
                                   medicenee.addAll(items);
-//someObjects.sort((a, b) => a.someProperty.compareTo(b.someProperty));
+
                                   medicenee.sort((a, b) =>
                                       a.quantity.compareTo(b.quantity));
                                 });
@@ -140,7 +135,7 @@ class _MedicineCardsState extends State<MedicineCards> {
                                 setState(() {
                                   medicenee.clear();
                                   medicenee.addAll(items);
-//someObjects.sort((a, b) => a.someProperty.compareTo(b.someProperty));
+
                                   medicenee
                                       .sort((a, b) => a.name.compareTo(b.name));
                                 });
@@ -181,12 +176,13 @@ class _MedicineCardsState extends State<MedicineCards> {
                           title: Text(medicenee[index].name),
                           subtitle: Text(
                               'sell price is  ${medicenee[index].price} Dinar'),
-                          trailing: InkWell(child: Icon(Icons.note_add) , onTap: () {
-                            savenote(
-                                medicenee[index].note ,
-                                medicenee[index].ID);
-                          },),
-
+                          trailing: InkWell(
+                            child: Icon(Icons.note_add),
+                            onTap: () {
+                              savenote(
+                                  medicenee[index].note, medicenee[index].ID);
+                            },
+                          ),
                         ),
                       ),
                       onTap: () {
@@ -219,7 +215,6 @@ class _MedicineCardsState extends State<MedicineCards> {
                       height: 30,
                     ),
                     TextFormField(
-
                       controller: _text,
                     ),
                     Divider(),
