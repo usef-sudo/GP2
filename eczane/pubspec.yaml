@@ -66,6 +66,7 @@ flutter:
      - images/arrow.gif
      - images/r.jpg
      - images/m.jpg
+     - images/tator.mp4
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

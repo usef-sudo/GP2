@@ -286,7 +286,6 @@ class SellState extends State<Sell> {
         name: snapshot["name"]);
 
     if (snapshot["quantity"] <= 0) {
-      print('done');
       obj = new Medicine(
           quantity: snapshot["quantity"],
           profits: snapshot["profits"],

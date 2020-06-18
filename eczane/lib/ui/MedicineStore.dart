@@ -215,7 +215,7 @@ class _MedicineStoreState extends State<MedicineStore> {
         backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(66, 160, 206, 1),
-          title: new Text("MedicineStore"),
+          title: new Text(" Add product"),
         ),
         drawer: MyDrawer(),
         body: Center(
@@ -229,7 +229,7 @@ class _MedicineStoreState extends State<MedicineStore> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Medicine Name:",
+                        "product Name:",
                         style: TextStyle(fontSize: 20),
                       ),
                     ),

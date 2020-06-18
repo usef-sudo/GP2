@@ -21,7 +21,7 @@ class _MyMedicineState extends State<MyMedicine> {
 
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(66, 160, 206, 1),
-          title: new Text("MyMedicine"),
+          title: new Text("My Products"),
         ),
         drawer: MyDrawer(),
         body: MedicineCards(),

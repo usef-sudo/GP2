@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    _controller = VideoPlayerController.network(' https://youtu.be/KbSb2V3qUcg')
+    _controller = VideoPlayerController.asset("images/tator.mp4")
       ..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
@@ -108,7 +108,7 @@ class _MyAppState extends State<MyApp> {
             child: InkWell(
               // onTap: _controller.puse();,
               child: Container(
-                height: 500,
+                height: 600,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
