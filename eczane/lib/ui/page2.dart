@@ -1,6 +1,7 @@
 import 'package:eczane/%D9%8Dservices/auth.dart';
 import 'package:eczane/shared/Loading.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
@@ -193,8 +194,12 @@ class _Page2State extends State<Page2> {
 
 
                                     }
-                                    else
-                                      AlertDialog(backgroundColor: Colors.blue,title: Text('please check your information'),);
+                                    else {
+
+                                      showDialog(context: context,
+                                      builder: (_)=> CupertinoAlertDialog(title: Text( 'please check your information'),));
+
+                                    }  //backgroundColor: Colors.blue,title: Text('please check your information'),);
                                   },
                                   color: Colors.white,
                                   textColor: Colors.black,
