@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final _scaffoldKey2 = GlobalKey<ScaffoldState>();
+
   Future _getUser() async {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     DatabaseServer.get(mCurrentUser.uid);
@@ -133,7 +133,7 @@ class _HomeState extends State<Home> {
               options: <Widget>[
                 //IconButton(icon: Icon(Icons.widgets), onPressed: () { controller.isOpen = false;}, iconSize: 48.0, color: Colors.black),
                 IconButton(
-                    tooltip: 'Medicine Store',
+                    tooltip: 'product Store',
                     icon: Icon(
                       Icons.store,
                       color: Colors.white,
@@ -175,7 +175,7 @@ class _HomeState extends State<Home> {
                     iconSize: 48.0,
                     color: Colors.white),
                 IconButton(
-                    tooltip: 'My Medicine',
+                    tooltip: 'My products',
                     icon: Icon(
                       Icons.local_pharmacy,
                       color: Colors.white,

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
 import 'package:eczane/models/Medicine.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'MyDrawer.dart';
 
@@ -176,8 +175,8 @@ class _MedicineStoreState extends State<MedicineStore> {
   String ID = "";
 
   getpackage() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    FirebaseUser _result = await _auth.currentUser();
+
+
 
     Medicine post = new Medicine(
         name: n, Exp: e, ID: i, price: p, profits: pr, quantity: int.parse(q));
@@ -196,8 +195,8 @@ class _MedicineStoreState extends State<MedicineStore> {
   }
 
   UpdateMedicine() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    FirebaseUser _result = await _auth.currentUser();
+
+
 
     Firestore.instance
         .collection('data')
@@ -282,6 +281,7 @@ class _MedicineStoreState extends State<MedicineStore> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 12.0),
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             onChanged: (val) {
                               setState(() => {p = val});
                             },
@@ -319,6 +319,7 @@ class _MedicineStoreState extends State<MedicineStore> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 12.0),
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             onChanged: (val) {
                               setState(() => {q = val});
                             },
@@ -428,6 +429,7 @@ class _MedicineStoreState extends State<MedicineStore> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 12.0),
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             onChanged: (val) {
                               setState(() => {pr = val});
                             },

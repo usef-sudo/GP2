@@ -44,6 +44,8 @@ class _AddStoreState extends State<AddStore> {
                       ),
                     ),
                     TextField(
+                      keyboardType: TextInputType.number,
+
                       onChanged: (val) {
                         setState(() => {num = val});
                       },
@@ -139,6 +141,8 @@ class _AddStoreState extends State<AddStore> {
                         ),
                       ),
                       TextField(
+                        keyboardType: TextInputType.number,
+
                         onChanged: (val) {
                           setState(() => {p = val});
                         },
@@ -217,8 +221,8 @@ class _AddStoreState extends State<AddStore> {
   }
 
   DeleteStore() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    FirebaseUser _result = await _auth.currentUser();
+
+
 
     Firestore.instance
         .collection('data')

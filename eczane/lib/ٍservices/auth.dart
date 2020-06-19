@@ -50,7 +50,6 @@ class authser {
       DatabaseServer.get(user.uid);
       print(user.uid);
       await DatabaseServer.get(user.uid).updatedata(name, PharmacyName);
-
       return _userfromfirebase(user);
     } catch (e) {
       print(e.toString());

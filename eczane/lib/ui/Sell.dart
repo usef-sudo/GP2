@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter_counter/flutter_counter.dart';
 import 'MyDrawer.dart';
-import 'package:fab_circular_menu/fab_circular_menu.dart';
+
 
 class Sell extends StatefulWidget {
   @override
@@ -56,6 +56,8 @@ class SellState extends State<Sell> {
                       child: Text('Enter cash recived:'),
                     ),
                     TextField(
+                      keyboardType: TextInputType.number,
+
                       controller: _cash,
                       decoration: InputDecoration(
                         hintText: 'Cash Recived',
@@ -185,7 +187,7 @@ class SellState extends State<Sell> {
   Map<String, dynamic> dada;
   SetSoldMed() async {
     x = 0;
-    bool flag;
+
     l.forEach((i) async {
       Medicine post = new Medicine(
           // quantity:i.quantity, name: i.name, profits:  i.profits ,ID: i.ID );
@@ -195,8 +197,6 @@ class SellState extends State<Sell> {
           ID: i.ID);
 
       Map<String, dynamic> postData = post.toJson();
-
-      DocumentSnapshot snapshot;
 
       Medicine obj;
 
@@ -219,7 +219,7 @@ class SellState extends State<Sell> {
                         profits:
                             ("${int.parse(dada["profits"]) + int.parse(postData["profits"])}")),
                     dada = obj.toJson(),
-                    print('a77'),
+
                     Firestore.instance
                         .collection('data')
                         .document(DatabaseServer.instance.uid)
@@ -317,7 +317,6 @@ class SellState extends State<Sell> {
     super.initState();
   }
 
-  num _counter = 0;
   var defaultValue = [
     1,
     1,
@@ -369,7 +368,6 @@ class SellState extends State<Sell> {
     1,
   ];
 
-  final _controller = FabCircularMenuController();
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(123, 189, 221, 1), //back
