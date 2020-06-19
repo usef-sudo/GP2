@@ -1,6 +1,8 @@
 import 'package:eczane/%D9%8Dservices/auth.dart';
 import 'package:eczane/shared/Loading.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+
 
 class Page2 extends StatefulWidget {
   @override
@@ -123,7 +125,7 @@ class _Page2State extends State<Page2> {
                                         setState(() => email = val);
                                       },
                                       validator: (value) {
-                                        if (value.isEmpty)
+                                        if (!EmailValidator.validate(email))
                                           return "please enter a valid Email";
                                         else
                                           print("all is  good");
@@ -182,12 +184,17 @@ class _Page2State extends State<Page2> {
                                   child: new Text('Done'),
                                   onPressed: () async {
                                     if (_formkey.currentState.validate()) {
-                                      dynamic result = await _auth.registemail(
-                                          email, password, name, Pharmacyname);
+
+
+                                    await _auth.registemail( email, password, name, Pharmacyname);
 
                                       _formkey.currentState.reset();
                                       Navigator.of(context).pop();
+
+
                                     }
+                                    else
+                                      AlertDialog(backgroundColor: Colors.blue,title: Text('please check your information'),);
                                   },
                                   color: Colors.white,
                                   textColor: Colors.black,
