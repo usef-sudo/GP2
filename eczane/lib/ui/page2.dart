@@ -4,7 +4,6 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class Page2 extends StatefulWidget {
   @override
   _Page2State createState() => _Page2State();
@@ -185,21 +184,19 @@ class _Page2State extends State<Page2> {
                                   child: new Text('Done'),
                                   onPressed: () async {
                                     if (_formkey.currentState.validate()) {
-
-
-                                    await _auth.registemail( email, password, name, Pharmacyname);
+                                      await _auth.registemail(
+                                          email, password, name, Pharmacyname);
 
                                       _formkey.currentState.reset();
                                       Navigator.of(context).pop();
-
-
-                                    }
-                                    else {
-
-                                      showDialog(context: context,
-                                      builder: (_)=> CupertinoAlertDialog(title: Text( 'please check your information'),));
-
-                                    }  //backgroundColor: Colors.blue,title: Text('please check your information'),);
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (_) => CupertinoAlertDialog(
+                                                title: Text(
+                                                    'please check your information'),
+                                              ));
+                                    } //backgroundColor: Colors.blue,title: Text('please check your information'),);
                                   },
                                   color: Colors.white,
                                   textColor: Colors.black,

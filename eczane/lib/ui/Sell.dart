@@ -8,7 +8,6 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter_counter/flutter_counter.dart';
 import 'MyDrawer.dart';
 
-
 class Sell extends StatefulWidget {
   @override
   SellState createState() => SellState();
@@ -57,7 +56,6 @@ class SellState extends State<Sell> {
                     ),
                     TextField(
                       keyboardType: TextInputType.number,
-
                       controller: _cash,
                       decoration: InputDecoration(
                         hintText: 'Cash Recived',
@@ -219,7 +217,6 @@ class SellState extends State<Sell> {
                         profits:
                             ("${int.parse(dada["profits"]) + int.parse(postData["profits"])}")),
                     dada = obj.toJson(),
-
                     Firestore.instance
                         .collection('data')
                         .document(DatabaseServer.instance.uid)

@@ -45,7 +45,6 @@ class _AddStoreState extends State<AddStore> {
                     ),
                     TextField(
                       keyboardType: TextInputType.number,
-
                       onChanged: (val) {
                         setState(() => {num = val});
                       },
@@ -142,7 +141,6 @@ class _AddStoreState extends State<AddStore> {
                       ),
                       TextField(
                         keyboardType: TextInputType.number,
-
                         onChanged: (val) {
                           setState(() => {p = val});
                         },
@@ -221,9 +219,6 @@ class _AddStoreState extends State<AddStore> {
   }
 
   DeleteStore() async {
-
-
-
     Firestore.instance
         .collection('data')
         .document(DatabaseServer.instance.uid)

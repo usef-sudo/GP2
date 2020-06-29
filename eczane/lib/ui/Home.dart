@@ -16,7 +16,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   Future _getUser() async {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     DatabaseServer.get(mCurrentUser.uid);

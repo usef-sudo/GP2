@@ -143,9 +143,7 @@ class _MyAppState extends State<MyApp> {
                                 }
                               });
 
-                              setState(() {
-
-                              });
+                              setState(() {});
                             },
 
                             // Display the correct icon depending on the state of the player.
@@ -181,7 +179,6 @@ class _MyAppState extends State<MyApp> {
                   child: DrawerHeader(
                       decoration: BoxDecoration(
                     color: Color.fromRGBO(66, 160, 206, 1),
-
                   ))),
               Column(
                 children: <Widget>[
