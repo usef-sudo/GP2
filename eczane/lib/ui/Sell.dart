@@ -176,7 +176,7 @@ class SellState extends State<Sell> {
 
   Medicine m = new Medicine(
       quantity: 1,
-      profits: "1",
+      profits: 1,
       price: "10",
       ID: "12345679",
       Exp: "23/2",
@@ -215,7 +215,7 @@ class SellState extends State<Sell> {
                         quantity: dada["quantity"] +
                             postData["quantity"], //snapshot bdl postdata
                         profits:
-                            ("${int.parse(dada["profits"]) + int.parse(postData["profits"])}")),
+                            dada["profits"] + postData["profits"]),
                     dada = obj.toJson(),
                     Firestore.instance
                         .collection('data')
@@ -234,7 +234,7 @@ class SellState extends State<Sell> {
                         quantity: postData["quantity"] +
                             postData["quantity"], //snapshot bdl postdata
                         profits:
-                            ("${int.parse(postData["profits"]) + int.parse(postData["profits"])}")),
+      postData["profits"] + postData["profits"]),
                     dada = postData,
                     print('ayyyy'),
                     Firestore.instance

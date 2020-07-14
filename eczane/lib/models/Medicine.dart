@@ -4,7 +4,7 @@ class Medicine {
   int quantity;
   String Exp;
   String ID;
-  String profits;
+  int profits;
   String note;
 
   Medicine(

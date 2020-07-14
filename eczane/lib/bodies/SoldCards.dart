@@ -22,7 +22,7 @@ class _SoldCardsState extends State<SoldCards> {
             margin: EdgeInsets.fromLTRB(10, 6, 10, 0),
             child: ListTile(
               leading: CircleAvatar(
-                child: Text(sales[index].profits),
+                child: Text("${sales[index].profits}"),
                 radius: 25,
                 backgroundColor: Colors.green[sales[index].quantity % 9 * 100],
               ),

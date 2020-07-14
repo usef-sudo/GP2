@@ -1,3 +1,4 @@
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eczane/%D9%8Dservices/DatabaseServer.dart';
 import 'package:eczane/models/Medicine.dart';
@@ -168,10 +169,10 @@ class _MedicineStoreState extends State<MedicineStore> {
 
   String n = "";
   String p = "";
-  String q = "";
+  int q = 0;
   String i = "";
   String e = "";
-  String pr = "";
+  int pr = 0;
   String ID = "";
 
   getpackage() async {
@@ -179,7 +180,7 @@ class _MedicineStoreState extends State<MedicineStore> {
 
 
     Medicine post = new Medicine(
-        name: n, Exp: e, ID: i, price: p, profits: pr, quantity: int.parse(q));
+        name: n, Exp: e, ID: i, price: p, profits: pr, quantity: q);
     Map<String, dynamic> postData = post.toJson();
 
     Firestore.instance
@@ -321,7 +322,7 @@ class _MedicineStoreState extends State<MedicineStore> {
                           child: TextFormField(
                             keyboardType: TextInputType.number,
                             onChanged: (val) {
-                              setState(() => {q = val});
+                              setState(() => {q = int.parse(val)});
                             },
                             controller: _Qcontroller,
                             validator: (value) {
@@ -345,34 +346,46 @@ class _MedicineStoreState extends State<MedicineStore> {
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(),
-                      height: MediaQuery.of(context).size.height / 13,
-                      width: MediaQuery.of(context).size.width,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Colors.white.withOpacity(0.7),
-                        elevation: 0.0,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 12.0),
-                          child: new TextFormField(
-                            onChanged: (val) {
-                              setState(() => {i = val});
-                            },
-                            controller: _IDcontroller,
-                            validator: (value) {
-                              if (value.isEmpty)
-                                return "please enter ID";
-                              else
-                                print("All is Good");
-                            },
-                            decoration: InputDecoration(
-                                border: InputBorder.none, hintText: 'ID'),
+                    Stack(
+                      alignment: Alignment.centerRight,
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(),
+                          height: MediaQuery.of(context).size.height / 13,
+                          width: MediaQuery.of(context).size.width,
+                          child: Material(
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Colors.white.withOpacity(0.7),
+                            elevation: 0.0,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: new TextFormField(
+                                onChanged: (val) {
+                                  setState(() => {i = val});
+                                },
+                                controller: _IDcontroller,
+                                validator: (value) {
+                                  if (value.isEmpty)
+                                    return "please enter ID";
+                                  else
+                                    print("All is Good");
+                                },
+                                decoration: InputDecoration(
+                                    border: InputBorder.none, hintText: 'ID'),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        IconButton(
+                          icon: Icon(Icons.settings_overscan, color: Colors.grey),
+                          onPressed: () {
+                            _scan(); // Your codes...
+                          },
+                        ),
+                      ],
                     ),
+
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
@@ -431,7 +444,7 @@ class _MedicineStoreState extends State<MedicineStore> {
                           child: TextFormField(
                             keyboardType: TextInputType.number,
                             onChanged: (val) {
-                              setState(() => {pr = val});
+                              setState(() => {pr = int.parse(val)});
                             },
                             controller: _PROcontroller,
                             validator: (value) {
@@ -517,4 +530,21 @@ class _MedicineStoreState extends State<MedicineStore> {
       ),
     );
   }
+  void _scan()async {
+
+    try {
+      i = await BarcodeScanner
+          .scan(); ////////////////////////////////////////////////////////////////////////////////////
+      setState(() {
+        // result.add(qrResult);
+      });
+    } catch (ex) {
+      setState(() {
+        //  result.add("Unknown Error $ex");
+      });
+    }
+
+  }
 }
+
+
