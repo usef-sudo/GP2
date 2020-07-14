@@ -11,6 +11,8 @@ class StoreCards extends StatefulWidget {
 
 class _StoreCardsState extends State<StoreCards> {
   @override
+  TextEditingController _text = TextEditingController();
+
   Widget build(BuildContext context) {
     _launchCaller(String num) async {
       String url = "tel:${num}";
@@ -37,13 +39,20 @@ class _StoreCardsState extends State<StoreCards> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Expanded(
                     child: Text(
                       Storee[index].name, //name only
                       style: TextStyle(color: Colors.black, fontSize: 30.0),
+                    ),
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      child: Icon(Icons.note_add),
+                      onTap: () {
+                        savenote(_text.text,_text.text);
+                      },
                     ),
                   ),
                   new FlatButton(
@@ -58,5 +67,44 @@ class _StoreCardsState extends State<StoreCards> {
         );
       },
     );
+  }void savenote(String note, String od) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+              backgroundColor: Colors.white.withOpacity(0.80),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
+              child: Container(
+                height: 150,
+                width: 300,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TextFormField(
+                      controller: _text,
+                    ),
+                    Divider(),
+                    SizedBox(
+                      width: 100.0,
+                      child: RaisedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+
+                          setState(() {});
+                        },
+                        child: Text(
+                          "save ",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: const Color(0xFF1BC0C5),
+                      ),
+                    ),
+                  ],
+                ),
+              ));
+        });
   }
 }
